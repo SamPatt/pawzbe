@@ -1,4 +1,4 @@
-const Recipe = require ('../models/recipe')
+const Recipe = require ('../models/post')
 
 module.exports = {
   create,
