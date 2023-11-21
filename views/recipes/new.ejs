@@ -1,0 +1,15 @@
+<%- include('../partials/header') %>
+<form action="/recipes" method="POST">
+  <div class="form-group">
+    <h2>NEW RECIPES HERE</h2>
+    <label for="recipe">Please Add a Recipe Here</label>
+    <input type="text" name="name" id="recipe" class="form-control" />
+    <label for="ingredients">Ingredients List (comma separate items)</label>
+    <input type="text" name="ingredients" id="ingredients" class="form-control" />
+    <label for="image">Image Link:</label>
+    <input type="text" name="image" id="image" class="form-control" />
+    <button type="submit" class="btn btn-primary m-3">Save Recipe</button>
+  </div>
+</form>
+
+<%- include('../partials/footer') %>
