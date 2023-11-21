@@ -1,18 +1,16 @@
-const Recipe = require ('../models/post')
+const User = require("../models/user");
 
 module.exports = {
   create,
-}
+};
 
 async function create(req, res) {
-  try{
-    const recipe = await Recipe.findById(req.params.id)
-    recipe.steps.push(req.body)
-    await recipe.save()
-    
-    res.redirect(`/recipes/${req.params.id}`)
-
-  }catch(err){
-      console.log(err)
+  try {
+    const newUser = await User.create(req.body);
+    await user.save();
+    // Make sure OAuth work here before redirecting to new profile
+    res.redirect("/profiles/new");
+  } catch (err) {
+    console.log(err);
   }
 }
