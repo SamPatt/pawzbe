@@ -1,11 +1,16 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<%- include('./partials/header') %>
+
+<div class="container center-container">
+    <div class="circular-image">
+      <img src="" alt="Profile Image" class="img-fluid">
+    </div>
+  
+    <div class="login-options">
+      <h2>Login/Registration Options</h2>
+      <button type="button" class="btn btn-primary login-btn">Login with Google</button>
+      <button type="button" class="btn btn-dark login-btn">Login with Github</button>
+      <button type="button" class="btn btn-secondary login-btn">Login with Apple</button>
+    </div>
+  </div>
+
+<%- include('./partials/footer') %>

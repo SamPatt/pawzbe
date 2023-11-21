@@ -25,3 +25,27 @@ a {
 li {
   list-style: none;
 }
+
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login-options {
+  text-align: center;
+}
+
+.circular-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.login-btn {
+  margin-top: 10px;
+}
