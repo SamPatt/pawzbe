@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,7 +10,27 @@
   <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
-  <nav>
-    <a href="/recipes">All Recipes</a> |
-    <a href="/recipes/new">Add new recipe</a>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid d-flex align-items-center">
+      <div class="login-circle header-logo">
+        <img src="/images/ducky.svg" alt="Profile Image" class="img-fluid">
+      </div>
+      <a class="navbar-brand" href="#">&nbsp;&nbsp;&nbsp;Fuzzy Rubber Ducks</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="ms-auto navbar-nav d-flex align-items-center">
+          <a class="nav-link" aria-current="page" href="#">Add Pet</a>
+          <a class="nav-link" href="#">Add Post</a>
+          <a class="nav-link" href="#">Log Out</a>
+          <a class="nav-link" href="#">
+            <div class="login-circle user-icon">
+              <img src="/images/anon.svg" alt="Profile Image" class="img-fluid">
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
   </nav>
