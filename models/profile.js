@@ -7,7 +7,7 @@ const profileSchema = new Schema(
       type: String,
       required: true,
     },
-    humanName: {
+    humanNames: {
       type: [String],
       required: true,
     },
@@ -18,12 +18,14 @@ const profileSchema = new Schema(
     },
     petDetails: {
       bio: String,
-      favoriteToys: String,
+      favoriteToys: [String],
       breed: String,
       animalType: String,
       dob: Date,
     },
-    owners: [String],
+    images: {
+      type: [String],
+    }
   },
   { timestamps: true }
 );

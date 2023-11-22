@@ -55,9 +55,25 @@ function newProfile(req, res) {
 
 
 async function create(req, res) {
+  let pet = {}
+  let petDetails = {}
   try {
-    const profile = await Profile.create(req.body);
-    res.redirect(`/profiles/${req.params.id}`);
+    with (req.body) {
+      pet.petName = petName
+      pet.humanNames = owners.split(',').map(i => i.trim())
+      pet.petPhoto = profilePhoto
+      pet.petDetails = {
+        bio: bio,
+        favoriteToys: favoriteToys.split(',').map(i => i.trim()),
+        breed: breed,
+        animalType: animalType,
+        dob: dob,
+      }
+      pet.images = images.split(',').map(i => i.trim())
+    }
+
+    const profile = await Profile.create(pet);
+    res.redirect(`/profiles/${profile._id}`);
   } catch (err) {
     console.log(err);
   }
