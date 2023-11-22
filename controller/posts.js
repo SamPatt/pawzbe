@@ -1,82 +1,78 @@
-const Recipe = require ('../models/recipe')
+const Post = require ('../models/post')
 
 module.exports = {
-  new: newRecipe,
-  create,
-  index,
-  show,
-  delete: deleteRecipe,
-  edit,
-  update: updateRecipe
+    index,
+    show,
+    delete: deletePost,
+    addComment,
+    create
+  
 };
-
-async function edit(req, res) {
-    const recipe = await Recipe.findById(req.params.id)
-    res.render('recipes/edit', { title: 'Editing', recipe })
-}
 
 async function index(req, res) {
     
     try {
-        const recipes = await Recipe.find()
+        const posts = await Post.find()
         
-        res.render('recipes/index', {title: "All Recipes", recipes})
+        res.render('fuzzies/posts/index', {
+            title: "All Posts", 
+            posts: posts    
+        })
     } catch (err) {
         console.log(err)
     }
 
 }
 
-function newRecipe(req, res) {
-  res.render("recipes/new", {title: 'Editing'});
-  //res.send('new')
-}
-
 async function create(req, res) {
-    try{
-        req.body.ingredients = req.body.ingredients.split(',').map(i => i.trim())
-        const newRecipe = await Recipe.create(req.body);
-        res.redirect('/recipes/')
+    try {
+        req.body.profile = req.params.id
+        const post = await Post.create(req.body)
 
-    }catch(err){
+        res.render("fuzzies/posts/show", {
+            title: post.petName,
+            post: post,
+          })
+    } catch (err) {
         console.log(err)
+    }
+    
+}
 
+async function show(req, res){
+    try{
+        const post = await Post.findById(req.params.id)
+        res.render('fuzzies/posts/show', {
+            title: post.petName,
+            post: post,
+        })
+    } catch(err) {
+        console.log(err)
     }
 }
 
-async function show(req, res) {
-try {
-
-    const recipe = await Recipe.findById(req.params.id)
-    console.log(recipe.steps)
-
-    res.render('recipes/show', {
-        title: 'Recipe',
-        recipe
+async function addComment(req, res) {
+    try{
+       const post = await Post.findById(req.params.id)
+       post.postComments.push(req.body)
+       await post.save()
+       res.render('fuzzies/posts/show', {
+        title: post.petName,
+        post: post,
     })
-} catch (err){
-    console.log(err)
-}
 
-}
-
-async function deleteRecipe(req, res){
-    try{
-        await Recipe.deleteOne({_id: req.params.id})
-        res.redirect('/recipes')
     }catch(err){
         console.log(err)
+
     }
 }
 
-async function updateRecipe(req, res){
-    console.log(req.params.id)
-    console.log(req.body)
-    try{
-        const recipe = await Recipe.findOneAndUpdate({_id: req.params.id}, {$set: req.body})
-        res.redirect(`/recipes/${req.params.id}`)
 
-    } catch(err){
+async function deletePost(req, res){
+    try{
+        const post = await Post.deleteOne({_id: req.params.id})
+        res.redirect(`/profile/${post.profile}`)
+    }catch(err){
         console.log(err)
     }
 }

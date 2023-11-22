@@ -1,3 +1,15 @@
 <%- include('../partials/header') %>
-  
-<%- include('../partials/footer') %>
+  <h2><%= title %></h2>
+  <section class="m-2">
+    <% recipes.forEach((r) => { %>
+      <div class="card">
+        <div class="container">
+          <h4><b><%= r.name %></b></h4>
+          <p><%= r.ingredients.join(', ') %></p>
+          <img class="img-fluid" src="<%= r.image %>" alt="">
+          <a href="/recipes/<%= r._id %>">Details</a>
+        </div>
+      </div>
+    <% }) %>
+  </section>
+  <%- include('../partials/footer') %>
