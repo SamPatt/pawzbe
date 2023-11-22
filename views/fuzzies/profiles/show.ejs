@@ -1,3 +1,57 @@
 <%- include('../partials/header') %>
   
 <%- include('../partials/footer') %>
+
+<%- include('../partials/header') %>
+<img class="img-fluid" src="<%=recipe.image%>" alt="">
+
+<form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
+    <button class="btn btn-secondary m-2" type="submit"> Delete Recipe</button>
+</form>
+<form action="/recipes/<%= recipe._id %>/edit" method="GET">
+    <button class="btn btn-secondary m-2" type="submit"> Edit Recipe</button>
+</form>
+</section>
+
+
+
+<section>
+    <h2>Instruction</h2>
+    <form action="/recipes/<%= recipe._id%>/instructions" method="POST">
+        <div class="form-group">
+            <label>The Instruction</label>
+            <textarea class="form-control" name="steps" id="steps"></textarea>
+            <button class="btn btn-primary m-2" type="submit"> Save Your Instruction</button>
+        </div>
+    </form>
+</section>
+
+
+
+
+
+
+<section> 
+  <table>
+    <thead>
+      <tr>
+        <th>Food</th>
+        <th>Ingredients</th>
+        <th>Instructions</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><%= recipe.name %></td>
+          <td><%= recipe.ingredients %></td>
+          <td>
+          <ul>
+              <% recipe.steps.forEach((s) => { %>
+                <li><%= s.steps %></li>
+              <% }) %>
+            </ul>
+          </td> 
+        </tr>
+    </tbody>
+  </table>
+  <%- include('../partials/footer') %>
