@@ -23,7 +23,7 @@ li {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  top: 50%;
+  top: calc(50% - 100px);
   left: 50%;
   transform: translate(-50%, -50%);
   height: 60%;
@@ -76,7 +76,6 @@ li {
   justify-content: center;
 }
 
-.profile-form textarea,
 .profile-form input {
   margin: 10px 0;
 }
@@ -85,11 +84,14 @@ li {
 }
 
 
+@media (max-width: 700px) {
+  .center-container {
+    width: 80%;
+  }
+}
 
 
-
-
-
+/* Feed Side Bar */
 
 .feed {
   display: block;
@@ -139,8 +141,7 @@ li {
   background: #7b94c7;
   color: #fff;
 }
-
-@media (max-width: 992px) {
+@media (max-width: 700px) {
   .feed {
     display: none;
   }
