@@ -12,7 +12,7 @@ const profileSchema = new Schema(
       required: true,
     },
     petPhoto: {
-      profile: String,
+      profilePhoto: String,
       images: [String],
       banner: String,
     },
@@ -21,8 +21,9 @@ const profileSchema = new Schema(
       favoriteToys: String,
       breed: String,
       animalType: String,
-      DOB: Date,
+      dob: Date,
     },
+    owners: [String],
   },
   { timestamps: true }
 );

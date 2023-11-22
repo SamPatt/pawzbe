@@ -11,10 +11,13 @@ module.exports = {
 
 async function show(req, res) {
   try {
-    const profile = await Profile.findById(req.params.id);
+    //const profile = await Profile.findById(req.params.id);
+    console.log("test show fn in profiles controller")
+    //res.send(" this is profile show view")
     res.render("fuzzies/profiles/show", {
-      title: profile.petName,
-      profile: profile,
+      //title: profile.petName,
+      title: "profile.petName",
+      //profile: profile,
     });
   } catch (err) {
     console.log(err);
@@ -46,8 +49,11 @@ async function update(res, req) {
 }
 
 function newProfile(req, res) {
-  res.render("fuzzies/profile/new", { title: "Make Profile" });
+  console.log("testing newProfile fn in controller")
+  res.render("fuzzies/profiles/new", { title: "Make Profile" });
 }
+
+
 async function create(req, res) {
   try {
     const profile = await Profile.create(req.body);
