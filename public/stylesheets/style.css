@@ -67,6 +67,9 @@ li {
 .login-btn {
   margin-top: 10px;
 }
+.login-description {
+  text-align: center;
+}
 
 .feed {
   display: block;
@@ -74,14 +77,13 @@ li {
   right: 3%;
   top: 50%;
   transform: translateY(-50%);
-  height: 75%;
+  height: 58%;
   width: 22%;
   background: rgb(85, 85, 148);
   padding: 2%;
   text-align: center;
   overflow-y: auto;
 }
-
 .feed-item {
   height: 80px;
   background: #b2c8f5;
@@ -90,8 +92,6 @@ li {
   justify-content: space-around;
   align-items: center;
 }
-
-
 .feed-pic {
   width: 60px;
   height: 60px;
@@ -123,5 +123,11 @@ li {
 @media (max-width: 992px) {
   .feed {
     display: none;
+  }
+}
+
+@media (max-width: 992px) {
+  .login-container {
+    width: 70%;
   }
 }
