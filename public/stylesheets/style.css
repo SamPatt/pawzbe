@@ -3,6 +3,7 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: #57647e;
   height: 100vh;
+  margin-top: 100px;
 }
 .login-container {
   background: #8da2cc;
@@ -68,6 +69,28 @@ li {
   margin-top: 10px;
 }
 
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-form textarea,
+.profile-form input {
+  margin: 10px 0;
+}
+.profile-form button {
+  width: 100%;
+}
+
+
+
+
+
+
+
+
 .feed {
   display: block;
   position: absolute;
@@ -81,7 +104,6 @@ li {
   text-align: center;
   overflow-y: auto;
 }
-
 .feed-item {
   height: 80px;
   background: #b2c8f5;
@@ -90,8 +112,6 @@ li {
   justify-content: space-around;
   align-items: center;
 }
-
-
 .feed-pic {
   width: 60px;
   height: 60px;
