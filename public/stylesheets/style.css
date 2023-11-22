@@ -141,6 +141,12 @@ li {
   background: #7b94c7;
   color: #fff;
 }
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  object-position: center center
+}
 @media (max-width: 700px) {
   .feed {
     display: none;

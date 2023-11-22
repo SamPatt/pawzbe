@@ -1,3 +1,137 @@
 <%- include('../../partials/header') %>
-  
-<%- include('../../partials/footer') %>
+
+<!-- <div class="conrainer">
+    <div class="row">
+      <div class="col jumbotron"> 
+        <label for="banner">
+          Banner Image
+        </label>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-4">Pet Name</div>
+      <div class="col-sm-12 col-md-8">Bio</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-4">Type</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-4">Breed</div>
+      </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-4">DOB</div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-5">Photo</div>
+      <div class="col-sm-12 col-md-5">Photo</div>
+    </div>
+    <div class="row">
+      <div class="col">Posts</div>
+    </div>
+
+</div> -->
+
+<main>
+  <div class="container col-md-6 py-2 mt-3">
+    <div class="bg-body-tertiary rounded-3 mt-4" id="banner">
+      <div class="container-fluid p-0">
+        <img
+          src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg"
+          alt="Kitty"
+          class="img-fluid banner-image"
+        />
+      </div>
+    </div>
+    <div class="mt-4 mb-4 row align-items-md-stretch" id="pet-detail-bio">
+      <div class="col-md-4">
+        <div class="h-1 p-1 mb-3 text-center text-bg-dark rounded-3">
+          <h2>Pet Name</h2>
+        </div>
+        <div class="h-20 p-1 mb-3 text-center text-bg-dark rounded-3">
+          <h2>Type</h2>
+        </div>
+        <div class="h-1 p-1 mb-3 text-center text-bg-dark rounded-3">
+          <h2>Breed</h2>
+        </div>
+        <div class="h-1 p-1 mb-3 text-center text-bg-dark rounded-3">
+          <h2>DOB</h2>
+        </div>
+      </div>
+      <div class="col-md-8" id="bio-section" style="color: black">
+        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+          <h2>Bio</h2>
+          <p>
+            Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem
+            Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row align-items-md-stretch mt-4" id="photo">
+      <div class="col-md-6" id="left-photo">
+        <div class="h-100 w-80 p-5 py-5 text-center text-bg-dark rounded-3">
+          <h2>Left Pet Photo</h2>
+        </div>
+      </div>
+      <div class="col-md-6" id="right-photo">
+        <div class="h-100 w-80 p-5 py-5 text-center text-bg-dark rounded-3">
+          <h2>Right Pet Photo</h2>
+        </div>
+      </div>
+    </div>
+    <div
+      class="row align-items-md-stretch mt-4"
+      id="pet-post"
+      style="color: black"
+    >
+      <div class=" ">
+        <div class="h-100 p-100 bg-body-tertiary border rounded-3">
+          <!-- add custom height in css file "class="custom-height -->
+          <h2>Pet Posts</h2>
+          <p>
+            Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem
+            Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="row align-items-md-stretch mt-4"
+      id="pet-post"
+      style="color: black"
+    >
+      <div class=" ">
+        <div class="h-100 p-100 bg-body-tertiary border rounded-3">
+          <!-- add custom height in css file "class="custom-height -->
+          <h2>Pet Posts</h2>
+          <p>
+            Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem
+            Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="row align-items-md-stretch mt-4"
+      id="pet-post"
+      style="color: black"
+    >
+      <div class=" ">
+        <div class="h-100 p-100 bg-body-tertiary border rounded-3">
+          <!-- add custom height in css file "class="custom-height -->
+          <h2>Pet Posts</h2>
+          <p>
+            Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem
+            Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('../../partials/side-feed') %> <%- include('../../partials/footer')
+%>
