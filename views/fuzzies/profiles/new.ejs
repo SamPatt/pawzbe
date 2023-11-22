@@ -1,64 +1,67 @@
 <%- include('../../partials/header') %>
 
-<form action="/profiles/" method="POST">
-  <!-- <label for="petName"></label> -->
-  <input
-    type="text"
-    name="petName"
-    class="petName"
-    placeholder="Your Pet Name Here"
-    required
-  />
-  <br />
-  <input
-    type="text"
-    name="animalType"
-    class="animalType"
-    placeholder="Your Animal Type"
-    required
-  />
-  <br />
-  <input type="text" name="breed" class="breed" placeholder="Your Pet Breed" />
-  <br />
-  <input
-    type="text"
-    name="dob"
-    class="dob"
-    placeholder="Your Pet DOB"
-    required
-  />
-  <br />
-  <textarea name="bio" id="bio" cols="30" rows="10"></textarea>
-  <br />
-  <input
-    type="text"
-    name="favoriteToys"
-    class="favoriteToys"
-    placeholder="Your Pet Favorite Toys"
-  />
-  <br />
-  <input
-    type="text"
-    name="images"
-    class="images"
-    placeholder="Pet Images (comma seperated)"
-  />
-  <br />
-  <input
-    type="text"
-    name="owners"
-    class="owners"
-    placeholder="Pet Owners (comma seperated)"
-  />
-  <br />
+<form class="profile-form" action="/profiles/" method="POST">
+  <div class="form-group">
+    <!-- <label for="petName"></label> -->
+    <input
+      type="text"
+      name="petName"
+      class="petName form-control"
+      placeholder="Your Pet Name Here"
+      required
+    />
+    
+    <input
+      type="text"
+      name="animalType"
+      class="animalType form-control"
+      placeholder="Your Animal Type"
+      required
+    />
+    
+    <input type="text" name="breed" class="breed form-control" placeholder="Your Pet Breed" />
+    
+    <input
+      type="text"
+      name="dob"
+      class="dob form-control"
+      placeholder="Your Pet DOB"
+      required
+    />
+    
+    <textarea name="bio" id="bio" cols="30" rows="5"></textarea>
+    
+    <input
+      type="text"
+      name="favoriteToys"
+      class="favoriteToys form-control"
+      placeholder="Your Pet Favorite Toys"
+    />
+    
+    <input
+      type="text"
+      name="images"
+      class="images form-control"
+      placeholder="Pet Images (comma seperated)"
+    />
+    
+    <input
+      type="text"
+      name="owners"
+      class="owners form-control"
+      placeholder="Pet Owners (comma seperated)"
+    />
+    
 
-  <input
-    type="text"
-    name="profilePhoto"
-    id="profilePhoto"
-    placeholder="Add Profile Photo"
-  />
-  <br />
-  <button type="submit">Submit</button>
+    <input
+      class="form-control"
+      type="text"
+      name="profilePhoto"
+      id="profilePhoto"
+      placeholder="Add Profile Photo"
+    />
+    
+    <button class="btn-primary btn" type="submit">Submit</button>
+  </div>
 </form>
 <%- include('../../partials/footer') %>
