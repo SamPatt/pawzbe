@@ -1,12 +1,12 @@
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %></title>
   <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <script src="/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
@@ -17,19 +17,37 @@
         <img src="/images/ducky.svg" alt="Profile Image" class="img-fluid">
       </div>
       <a class="navbar-brand" href="/">&nbsp;&nbsp;&nbsp;Fuzzy Rubber Ducks</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="ms-auto navbar-nav d-flex align-items-center">
           <a class="nav-link" aria-current="page" href="./profiles/new">Add Pet</a>
           <a class="nav-link" href="#">Add Post</a>
-          <a class="nav-link" href="#">Log Out</a>
-          <a class="nav-link" href="#">
-            <div class="login-circle user-icon">
-              <img src="/images/anon.svg" alt="Profile Image" class="img-fluid">
+          <!-- <a class="nav-link" href="#">Log Out</a> -->
+          
+          <!--
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div> 
+          -->
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="login-circle user-icon">
+                <img src="/images/anon.svg" alt="Profile Image">
+              </div>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Log In</a>
+              <a class="dropdown-item" href="#">Log Out</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Delete User</a>
             </div>
-          </a>
+          </div>
+
         </div>
       </div>
     </div>

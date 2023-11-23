@@ -58,6 +58,21 @@ li {
   height: 40px;
   margin: 0;
 }
+.navbar-nav {
+  margin-left: auto;
+}
+.dropdown .dropdown-menu {
+  right: 0;
+  left: auto;
+  position: absolute;
+  background: #222;
+}
+.dropdown-menu a {
+  color: #fff;
+}
+.nav-item.dropdown .dropdown-toggle::after {
+  display: none;
+}
 
 .user-icon {
   width: 40px;
