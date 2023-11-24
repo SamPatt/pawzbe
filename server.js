@@ -1,18 +1,24 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var methodOverride = require("method-override");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const methodOverride = require("method-override");
+const session = require('express-session')
+const passport = require('passport')
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const User = require('../models/user')
+
 require("dotenv").config();
 require("./config/database");
+require("./config/passport")
 
-var indexRouter = require("./routes/index");
-var postsRouter = require("./routes/posts");
-var profilesRouter = require("./routes/profiles");
-var usersRouter = require("./routes/users");
+const indexRouter = require("./routes/index");
+const postsRouter = require("./routes/posts");
+const profilesRouter = require("./routes/profiles");
+const usersRouter = require("./routes/users");
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -25,6 +31,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static("public"));
 app.use(methodOverride("_method"));
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true,
+}))
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use("/", indexRouter);
 app.use("/posts", postsRouter);
