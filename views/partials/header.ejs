@@ -16,8 +16,8 @@
       <div class="login-circle header-logo">
         <img src="/images/ducky.svg" alt="Profile Image" class="img-fluid">
       </div>
-      
-      <a class="navbar-brand" href="/">&nbsp;&nbsp;&nbsp;Fuzzy Rubber Ducks</a>
+      <% const headerLink = (user) ? "/profiles" : "/" %>
+      <a class="navbar-brand" href="<%= headerLink %>">&nbsp;&nbsp;&nbsp;Fuzzy Rubber Ducks</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -44,10 +44,7 @@
                 <small>Welcome, <%= user.name %>!</small>
                   <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/logout">Log Out</a>
-                <form id="deleteUserForm" action="/users?_method=DELETE" method="POST" style="display: none;">
-                  <input type="hidden" name="_method">
-                </form>
-                <a class="dropdown-item" href="#" onclick="document.getElementById('deleteUserForm').submit();">Delete User</a>
+                <a class="dropdown-item" href="/users/<%= user._id %>">User Settings</a>
               <% } else { %>
                 <a class="dropdown-item" href="/auth/google">Log In - Google</a>
                 <a class="dropdown-item" href="/auth/github">Log In - GitHub</a>

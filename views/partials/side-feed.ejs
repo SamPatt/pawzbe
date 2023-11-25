@@ -3,7 +3,8 @@
   <div class="feed-header">
     <p>Top Pets</p>
   </div>
-  <div class="row feed-content">
+  <% const disabled = (user) ? '' : 'disabled' %>
+  <div class="row feed-content <%= disabled %>">
     
     <a href="#">
       <div class="col-12 feed-item rounded">

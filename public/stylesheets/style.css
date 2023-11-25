@@ -65,7 +65,7 @@ li {
   right: 0;
   left: auto;
   position: absolute;
-  background: #222;
+  background: #444;
 }
 
 .dropdown-menu small {
@@ -101,15 +101,28 @@ li {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
 }
 
+.profile-form textarea,
 .profile-form input {
-  margin: 10px 0;
+  margin: 10px auto;
+  width: 100%;
 }
 .profile-form button {
   width: 100%;
+  margin: 10px 0;
 }
 
+.disabled {
+  user-select: none;
+  pointer-events: none;
+}
+
+.enlarge img {
+  width: 120%;
+  height: 100%;
+}
 
 @media (max-width: 700px) {
   .center-container {

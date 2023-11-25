@@ -3,7 +3,15 @@ const User = require("../models/user");
 module.exports = {
   create,
   delete: deleteUser,
+  show,
 };
+
+function show(req, res) {
+  res.render('fuzzies/users/show', { 
+    title: 'User Settings', 
+    user: req.user,
+  })
+}
 
 async function deleteUser(req, res) {
   const output = await User.findByIdAndDelete(req.user._id)

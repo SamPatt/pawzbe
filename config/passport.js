@@ -40,7 +40,7 @@ passport.use(
     },
     async function (accessToken, refreshToken, profile, cb) {
       try {
-        let user = await User.findOne({ githubId: profile.id })
+        let user = await User.findOne({ authId: profile.id })
         if (user) return cb(null, user)
 
         user = await User.create({
