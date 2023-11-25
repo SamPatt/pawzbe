@@ -4,7 +4,26 @@ module.exports = {
   create,
   delete: deleteUser,
   show,
+  update,
 };
+
+async function update(req, res) {
+  try {
+      const updatedData = {}
+    updatedData.name = req.body.name || req.user.name
+    updatedData.email = req.body.email || req.user.email
+    updatedData.avatar = req.body.avatar || req.user.avatar
+
+    await User.findOneAndUpdate(
+      { _id: req.user._id },
+      { $set: updatedData }
+    )
+
+    res.redirect(`/users/${ req.user._id }`)
+  } catch (err) {
+    console.log(err)
+  }
+}
 
 function show(req, res) {
   res.render('fuzzies/users/show', { 
@@ -14,13 +33,14 @@ function show(req, res) {
 }
 
 async function deleteUser(req, res) {
-  const output = await User.findByIdAndDelete(req.user._id)
-  console.log('REQ:', req.user)
-  console.log('REQ ID:', req.user.id)
-  console.log('OUT:', output)
-  req.logout(function() {
-    res.redirect('/')
-  })
+  try {
+    const output = await User.findByIdAndDelete(req.user._id)
+    req.logout(function() {
+      res.redirect('/')
+    })
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 async function create(req, res) {

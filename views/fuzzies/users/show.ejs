@@ -1,11 +1,17 @@
 
 <%- include('../../partials/header') %>
+<% const authBy = (user.avatar.includes('google')) ? 'Google' : 'GitHub' %>
 
-<form class="profile-form" action="/users/" method="POST">
+<form class="profile-form" action="/users/<%= user._id %>" method="POST">
   <div class="form-group d-flex flex-column align-items-center">
-    
+
     <div class="login-circle enlarge">
       <img src="<%= user.avatar %>" alt="Profile Image" class="img-fluid">
+    </div>
+
+    <div class="user-details">
+      <small><%= authBy %> ID: <%= user.authId %></small>
+      <small>Fuzzy ID: <%= user._id %></small>
     </div>
 
     <label>User Name
@@ -49,5 +55,6 @@
   </div>
 </form>
 
-<%- include('../../partials/side-feed') %>
+<!-- // <%- include('../../partials/side-feed') %> -->
+
 <%- include('../../partials/footer') %>
