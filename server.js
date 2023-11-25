@@ -7,7 +7,7 @@ const methodOverride = require("method-override");
 const session = require('express-session')
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const User = require('../models/user')
+const User = require('./models/user')
 
 require("dotenv").config();
 require("./config/database");
@@ -38,6 +38,11 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
+
+app.use(function(req, res, next) {
+  res.locals.user = req.user
+  next()
+})
 
 app.use("/", indexRouter);
 app.use("/posts", postsRouter);

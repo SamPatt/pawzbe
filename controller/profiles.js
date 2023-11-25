@@ -49,8 +49,7 @@ async function update(res, req) {
 }
 
 function newProfile(req, res) {
-  console.log("testing newProfile fn in controller")
-  res.render("fuzzies/profiles/new", { title: "Make Profile" });
+  res.render("fuzzies/profiles/new", { title: "Make Profile", user: req.user });
 }
 
 
