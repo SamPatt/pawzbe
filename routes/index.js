@@ -7,6 +7,22 @@ router.get('/', function(req, res, next) {
   res.render('index', {title: 'Welcome'});
 });
 
+
+router.get('/auth/github', passport.authenticate(
+  'github',
+  {
+    scope: ['profile', 'email'],
+  }
+))
+
+router.get('/github/oauth2callback', passport.authenticate(
+  'github',
+  {
+    successRedirect: '/profiles/new',
+    failureRedirect: '/',
+  }
+))
+
 router.get('/auth/google', passport.authenticate(
   'google',
   {
@@ -14,7 +30,7 @@ router.get('/auth/google', passport.authenticate(
   }
 ))
 
-router.get('/oauth2callback', passport.authenticate(
+router.get('/google/oauth2callback', passport.authenticate(
   'google',
   {
     successRedirect: '/profiles/new',
