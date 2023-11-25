@@ -6,9 +6,10 @@ module.exports = {
 };
 
 async function deleteUser(req, res) {
-  const user = await User.find({googleId: req.user.googleId})
-  await User.findOneAndDelete({ googleId: user.googleId })
-  res.redirect('/')
+  await User.findByIdAndDelete(req.user._id)
+  req.logout(function() {
+    res.redirect('/')
+  })
 }
 
 async function create(req, res) {
