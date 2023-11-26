@@ -11,6 +11,10 @@ const userSchema = new Schema(
     },
     email: String,
     avatar: String,
+    profiles: [{
+      type: Schema.Types.ObjectId,
+      ref: "Profile"
+    }],
   },
   {
     timestamps: true,

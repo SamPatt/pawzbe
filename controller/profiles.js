@@ -1,4 +1,5 @@
 const Profile = require("../models/profile");
+const User = require("../models/user");
 
 module.exports = {
   show,
@@ -55,7 +56,8 @@ function newProfile(req, res) {
 
 async function create(req, res) {
   let pet = {}
-  let petDetails = {}
+  const user = await User.findById(req.user._id)
+  
   try {
     with (req.body) {
       pet.petName = petName
@@ -71,8 +73,10 @@ async function create(req, res) {
       pet.images = images.split(',').map(i => i.trim())
     }
 
-    const profile = await Profile.create(pet);
-    res.redirect(`/profiles/${profile._id}`);
+    const profile = await Profile.create(pet)
+    user.profiles.push(profile._id)
+    await user.save()
+    res.redirect(`/profiles/${req.params.id}`)
   } catch (err) {
     console.log(err);
   }
