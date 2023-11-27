@@ -165,13 +165,18 @@ li {
 }
 
 #profile-image {
-  max-width: 150px;
+  /* max-width: 150px;
+  max-height: 150px;
+  width: auto;
+  height: auto; */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 50%;
-  margin-bottom: 160px;
+  /* margin-bottom: 100px; */
 }
-
-.add-images-btn {
-  max-width: 50px;
+#pet-detail-bio {
+  margin-top: 100px;
 }
 
 @media (max-width: 700px) {
@@ -255,11 +260,35 @@ li {
   overflow-y: auto;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 767px) {
   .feed {
     display: none;
   }
   .post-partial {
     display: none;
   }
+  #profile-image {
+    display: none;
+  }
+  #pet-detail-bio {
+    margin-top: 50px;
+  }
 }
+/* @media (min-width: 250px) and (max-width: 700px) {
+  .banner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  #profile-image {
+    max-width: 200px;
+    height: auto;
+    border-radius: 50%;
+    /* margin-bottom: 50px; */
+/* }
+  #pet-detail-bio{
+    margin-top: 150px
+  }
+}  */

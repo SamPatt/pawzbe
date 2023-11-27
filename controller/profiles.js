@@ -64,7 +64,7 @@ async function update(req, res) {
     }
 
 
-    res.render(`fuzzies/profiles/show`, {
+    res.render('fuzzies/profiles/show', {
       title: 'Pet Added',
       profile: profile,
       posts: posts

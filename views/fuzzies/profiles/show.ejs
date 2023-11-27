@@ -11,18 +11,18 @@
         />
         <div class="profile-container" id="profile-image">
           <div class="row">
-            <div class="col-md-1 p-0">
+            <div class="col-md-12">
               <img
                 src="<%= profile.petPhoto.profilePhoto %>"
                 alt="Profile Image"
-                class="rounded-circle"
+                class="img-fluid rounded-circle max-profile-image"
               />
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="mt-4 mb-4 row align-items-md-stretch" id="pet-detail-bio">
+    <div class="mb-4 row align-items-md-stretch" id="pet-detail-bio">
       <div class="col-md-4">
         <div class="h-1 p-1 mb-3 text-center text-bg-dark rounded-3">
           <h2><%= profile.petName %></h2>
