@@ -30,30 +30,104 @@
     <div class="mt-4 mb-4 row align-items-md-stretch" id="pet-detail-bio">
       <div class="col-md-4">
         <div class="h-1 p-1 mb-3 text-center text-bg-dark rounded-3">
-          <h2>Pet Name</h2>
+          <h2><%= profiles.petName %></h2>
         </div>
         <div class="h-20 p-1 mb-3 text-center text-bg-dark rounded-3">
-          <h2>Type</h2>
+          <h2><%= profiles.petDetails.animalType %></h2>
         </div>
         <div class="h-1 p-1 mb-3 text-center text-bg-dark rounded-3">
-          <h2>Breed</h2>
+          <h2><%= profiles.petDetails.breed %></h2>
         </div>
         <div class="h-1 p-1 mb-3 text-center text-bg-dark rounded-3">
-          <h2>DOB</h2>
+          <h2><%= new Date(profiles.petDetails.dob).toDateString() %></h2>
         </div>
       </div>
       <div class="col-md-8" id="bio-section" style="color: black">
         <div class="h-100 p-5 bg-body-tertiary border rounded-3">
           <h2>Bio</h2>
           <p>
-            Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem
-            Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+            <%= profiles.petDetails.bio %>
           </p>
         </div>
       </div>
     </div>
-    <!-- -------------------------------------------------------------------------------------------------------------- -->
-    <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+
+    <!---------------------------------------------------------------------------------------------------------------- -->
+    <!-- New Carousel Attempt -->
+    <div class="container">
+      <h2>Gallery</h2>
+      <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+          <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+          <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+        </ol>
+  
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://t3.ftcdn.net/jpg/02/33/11/86/360_F_233118616_WElVq2Sajc1swjWTAj1IsBRFMGNm0vzN.jpg" alt="Los Angeles" class="d-block w-100">
+            <div class="carousel-caption">
+              <h3>Title Here</h3>
+              <p>Caption Here</p>
+            </div>
+          </div>
+  
+          <div class="carousel-item">
+            <img src="https://t3.ftcdn.net/jpg/02/33/11/86/360_F_233118616_WElVq2Sajc1swjWTAj1IsBRFMGNm0vzN.jpg" alt="Los Angeles" class="d-block w-100">
+            <div class="carousel-caption">
+              <h3>Title Here</h3>
+              <p>Caption Here</p>
+            </div>
+          </div>
+  
+          <div class="carousel-item">
+            <img src="https://t3.ftcdn.net/jpg/02/33/11/86/360_F_233118616_WElVq2Sajc1swjWTAj1IsBRFMGNm0vzN.jpg" alt="Los Angeles" class="d-block w-100">
+            <div class="carousel-caption">
+              <h3>Title Here</h3>
+              <p>Caption Here</p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Left and right controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="container">
+      <form class="profile-form" action="/profiles/<%= user._id %>?_method=PUT" method="POST">
+        <div class="row">
+          <div class="col">
+            <input
+              type="text"
+              name="images"
+              class="form-control"
+              placeholder="Image URL (comma separated)"
+            >
+          </div>
+          <div class="col-auto">
+            <button class="btn btn-primary">+</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    
+
+
+    <!---------------------------------------------------------------------------------------------------------------- -->
+    <!-- First Carousel Attempt -->
+
+    <!-- <div id="imageCarousel" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img
@@ -88,28 +162,18 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
-    </div>
+    </div> -->
+
     <!-- -------------------------------------------------------------------------------------------------------------- -->
 
-    <div class="row align-items-md-stretch mt-4" id="photo">
-      <div class="col-md-6" id="left-photo">
-        <div class="h-100 w-80 p-5 py-5 text-center text-bg-dark rounded-3">
-          <h2>Left Pet Photo</h2>
-        </div>
-      </div>
-      <div class="col-md-6" id="right-photo">
-        <div class="h-100 w-80 p-5 py-5 text-center text-bg-dark rounded-3">
-          <h2>Right Pet Photo</h2>
-        </div>
-      </div>
-    </div>
+   
     <div
       class="row align-items-md-stretch mt-4"
       id="pet-post"
       style="color: black"
     >
       <div class=" ">
-        <div class="h-100 p-100 bg-body-tertiary border rounded-3">
+        <div class="p-2 bg-body-tertiary border rounded-3">
           <!-- add custom height in css file "class="custom-height -->
           <h2>Pet Posts</h2>
           <p>
@@ -119,41 +183,7 @@
         </div>
       </div>
     </div>
-    <div
-      class="row align-items-md-stretch mt-4"
-      id="pet-post"
-      style="color: black"
-    >
-      <div class=" ">
-        <div class="h-100 p-100 bg-body-tertiary border rounded-3">
-          <!-- add custom height in css file "class="custom-height -->
-          <h2>Pet Posts</h2>
-          <p>
-            Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem
-            Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="row align-items-md-stretch mt-4"
-      id="pet-post"
-      style="color: black"
-    >
-      <div class=" ">
-        <div class="h-100 p-100 bg-body-tertiary border rounded-3">
-          <!-- add custom height in css file "class="custom-height -->
-          <h2>Pet Posts</h2>
-          <p>
-            Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem
-            Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
+    
 
 <%- include('../../partials/side-feed') %> 
 

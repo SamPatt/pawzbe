@@ -5,7 +5,7 @@ var usersCtrl = require('../controller/users')
 
 // router.get('/', usersCtrl.index)
 router.post('/', usersCtrl.create)
-router.post('/:id', usersCtrl.update)
+router.put('/:id', usersCtrl.update)
 router.delete('/', usersCtrl.delete)
 router.get('/:id', usersCtrl.show)
 

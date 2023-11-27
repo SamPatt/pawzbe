@@ -12,13 +12,12 @@ module.exports = {
 
 async function show(req, res) {
   try {
-    //const profile = await Profile.findById(req.params.id);
-    console.log("test show fn in profiles controller")
-    //res.send(" this is profile show view")
+    const user = await User.findOne({ _id: req.user._id });
+    const profiles = await Profile.findById(user.profiles[0]);
+    
     res.render("fuzzies/profiles/show", {
-      //title: profile.petName,
-      title: "profile.petName",
-      //profile: profile,
+      title: profiles.petName + "'s Page",
+      profiles: profiles,
     });
   } catch (err) {
     console.log(err);
@@ -37,13 +36,29 @@ async function edit(req, res) {
   }
 }
 
-async function update(res, req) {
+async function update(req, res) {
   try {
-    const profile = await Profile.findOneAndUpdate(
-      { _id: req.params.id },
-      { $set: req.body }
-    );
-    res.redirect(`/profiles/${req.params.id}`);
+    const user = await User.findById(req.user._id)
+    const profile = await Profile.findById(user.profiles[0])
+    
+    if (req.body.images) {
+      profile.images.push(req.body.images.split(',').map(i => i.trim()))
+      console.log(profile)
+      // await Profile.findOneAndUpdate(
+      //   { _id: profile._id },
+      //   { $set: profile }
+      // );
+    } else {
+      // update profile
+
+      // const profile = await Profile.findOneAndUpdate(
+      //   { _id: req.params.id },
+      //   { $set: req.body }
+      // );
+    }
+
+
+    // res.redirect(`/profiles/${req.user._id}`);
   } catch (err) {
     console.log(err);
   }

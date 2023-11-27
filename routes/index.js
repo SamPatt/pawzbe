@@ -22,8 +22,6 @@ router.get('/github/oauth2callback',
     try {
       // Check if user profile exists
       const user = await User.findOne({ _id: req.user._id });
-      console.log(user)
-      console.log(user.profiles[0])
       
       if (user.profiles.length > 0) {
         // Profile exists, redirect to profile page
@@ -53,8 +51,6 @@ router.get('/google/oauth2callback',
     try {
       // Check if user profile exists
       const user = await User.findOne({ _id: req.user._id });
-      console.log(user);
-      console.log(user.profiles[0]);
 
       if (user.profiles.length > 0) {
         // Profile exists, redirect to profile page
