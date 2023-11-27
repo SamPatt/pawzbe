@@ -14,12 +14,11 @@ const commentSchema = new Schema(
 
 const postSchema = new Schema(
   {
-    profile: [
+    profile: 
       {
         type: Schema.Types.ObjectId,
         ref: "Profile",
       },
-    ],
     postDescription: String,
     postPhotoLink: String,
     likes: {
@@ -27,7 +26,6 @@ const postSchema = new Schema(
       default: 0,
     },
     postComments: [commentSchema],
-    petName: String,
   },
   { timestamps: true }
 );

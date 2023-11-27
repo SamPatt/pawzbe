@@ -1,5 +1,6 @@
 const Profile = require("../models/profile");
 const User = require("../models/user");
+const Post = require("../models/post");
 
 module.exports = {
   show,
@@ -13,11 +14,13 @@ module.exports = {
 async function show(req, res) {
   try {
     const user = await User.findOne({ _id: req.user._id });
-    const profiles = await Profile.findById(user.profiles[0]);
+    const profile = await Profile.findById(user.profiles[0]);
+    const posts = await Post.find({ profile: profile._id })
     
     res.render("fuzzies/profiles/show", {
-      title: profiles.petName + "'s Page",
-      profiles: profiles,
+      title: profile.petName + "'s Page",
+      profile: profile,
+      posts: posts,
     });
   } catch (err) {
     console.log(err);
@@ -38,6 +41,7 @@ async function edit(req, res) {
 
 async function update(req, res) {
   try {
+    
     const user = await User.findById(req.user._id)
     const profile = await Profile.findById(user.profiles[0])
     
@@ -49,7 +53,7 @@ async function update(req, res) {
         { _id: profile._id },
         { $set: profile }
       );
-
+      
     } else {
       // update profile
 
@@ -60,7 +64,12 @@ async function update(req, res) {
     }
 
 
-    // res.redirect(`/profiles/${req.user._id}`);
+    res.render(`fuzzies/profiles/show`, {
+      title: 'Pet Added',
+      profile: profile,
+      posts: posts
+    });
+
   } catch (err) {
     console.log(err);
   }

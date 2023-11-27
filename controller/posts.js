@@ -26,13 +26,16 @@ async function index(req, res) {
 
 async function create(req, res) {
     try {
-        req.body.profile = req.params.id
+        
+        req.body.profile = req.user.profiles[0]._id
         const post = await Post.create(req.body)
+        
 
         res.render("fuzzies/posts/show", {
             title: post.petName,
             post: post,
-          })
+        })
+
     } catch (err) {
         console.log(err)
     }
