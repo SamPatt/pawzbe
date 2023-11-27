@@ -58,44 +58,11 @@ li {
   height: 40px;
   margin: 0;
 }
-.header-left {
-  display: flex;
-}
-.navbar-nav {
-  margin-left: auto;
-}
-.nav-items {
-  gap: 10px;
-}
-.dropdown .dropdown-menu {
-  right: 0;
-  left: auto;
-  position: absolute;
-  background: #444;
-}
-
-.dropdown-menu small {
-  color: #ccc;
-  width: 100%;
-  padding-left: 10px;
-}
-
-.dropdown-menu a {
-  color: #fff;
-  width: 100%;
-  text-align: right;
-}
-.nav-item.dropdown .dropdown-toggle::after {
-  display: none;
-}
 
 .user-icon {
   width: 40px;
   height: 40px;
   margin: 0;
-}
-.user-icon img {
-  width: 120%;
 }
 
 .login-btn {
@@ -107,58 +74,20 @@ li {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
 }
 
-.profile-form textarea,
 .profile-form input {
-  margin: 10px auto;
-  width: 100%;
+  margin: 10px 0;
 }
 .profile-form button {
   width: 100%;
-  margin: 10px 0;
-}
-.profile-form small {
-  /* margin: 10px 0; */
-  color: #222;
-}
-.user-details {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 0 40px 0;
-}
-
-.disabled {
-  user-select: none;
-  pointer-events: none;
-}
-
-.enlarge img {
-  width: 120%;
-  height: 100%;
-}
-
-.user-pets-list {
-  width: 50%;
-  min-width: 300px;
-  max-width: 700px;
-}
-.user-pets-list > div > div{
-  border: 1px solid #222;
 }
 
 @media (max-width: 700px) {
   .center-container {
     width: 80%;
   }
-
-  .navbar-brand {
-    display: none;
-  }
 }
-
 
 /* Feed Side Bar */
 
@@ -213,8 +142,21 @@ li {
 .banner-image {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
-  object-position: center center
+  object-fit: cover;
+  object-position: center center;
+}
+
+.profile-container {
+  text-align: left;
+  margin-top: -230px;
+  padding-left: 30px;
+}
+
+#profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 160px;
 }
 @media (max-width: 700px) {
   .feed {
