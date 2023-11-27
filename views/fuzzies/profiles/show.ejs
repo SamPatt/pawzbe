@@ -128,75 +128,60 @@
     </div>
 
     <% for (post of posts) { %>
-
-    <div
-      class="row align-items-md-stretch mt-3"
-      id="pet-post"
-      style="color: black"
-    >
-      <div class="col-md-12">
-        <div class="pet-post mb-2">
-          <div class="h-100 p-2 bg-body-tertiary border rounded-3">
-            <p><%= post.postDescription %></p>
-            <img src="<%= post.postPhotoLink %>" />
+      <div class="row align-items-md-stretch mt-3" id="pet-post">
+        <div class="col-md-12">
+          <div class="pet-post mb-3">
+            <div class="p-3 bg-body-tertiary border rounded-3">
+              <p class="fw-bold text-dark mb-2"><%= post.postDescription %></p>
+              <img src="<%= post.postPhotoLink %>" class="img-fluid rounded mb-2" />
+            </div>
           </div>
         </div>
+        <div class="col-md-12 d-flex justify-content-start mb-2">
+          <button class="btn btn-outline-dark me-2">
+            <%= post.likes %> Likes
+          </button>
+          <button class="btn btn-outline-primary" onclick="toggleComments('<%= post._id %>')">
+            <%= post.postComments.length %> Comments
+          </button>
+        </div>
+        
+        <!-- Comments Section (Initially Hidden) -->
+        <div id="comments-section-<%= post._id %>" class="col-md-12 mb-3" style="display: none;">
+          <% post.postComments.forEach(comment => { %>
+            <div class="comment mb-2">
+              <strong class="d-block"><%= comment.petName %></strong>
+              <p class="mb-0"><%= comment.commentText %></p>
+            </div>
+          <% }); %>
+        </div>
+    
+        <!-- Comment Form (Initially Hidden) -->
+        <div id="comment-form-<%= post._id %>" class="col-md-12" style="display: none;">
+          <form action="/posts/<%= post._id %>/comments" method="POST">
+            <textarea class="form-control mb-2" name="commentText" placeholder="Write a comment..." rows="3"></textarea>
+            <button type="submit" class="btn btn-success">Submit Comment</button>
+          </form>
+        </div>
       </div>
-    </div>
-    <div class="col-md-12">
-      <button
-        class="col-md-2 like-btn text-center text-bg-dark rounded-3"
-        data-like-count="0"
-      >
-        <span class="like-count">0 Likes</span>
-      </button>
-      <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          const likeButton = document.querySelector(".like-btn");
-
-          likeButton.addEventListener("click", function () {
-            let likeCount = parseInt(likeButton.dataset.likeCount) || 0;
-            likeCount++;
-
-            // Update the like count in the data attribute
-            likeButton.dataset.likeCount = likeCount;
-
-            // Update the like count in the UI
-            const likeCountElement = likeButton.querySelector(".like-count");
-            likeCountElement.textContent = `${likeCount} Likes`;
-          });
-        });
-      </script>
-
-      <button
-        class="col-md-3 comment-btn text-center text-bg-dark rounded-3"
-        type="submit"
-        data-comment-count="0"
-      >
-        <span class="comment-count">0 Comments</span>
-      </button>
-
-      <!-- <script>
-              document.addEventListener('DOMContentLoaded', function () {
-                const commentButton = document.querySelector('.comment-btn');
-            
-                commentButton.addEventListener('click', function () {
-                  let commentCount = parseInt(commentButton.dataset.commentCount) || 0;
-                  commentCount++;
-            
-                  // Update the like count in the data attribute
-                  commentButton.dataset.commentCount = commentCount;
-            
-                  // Update the like count in the UI
-                  const commentCountElement = commentButton.querySelector('.comment-count');
-                  commentCountElement.textContent = `${commentCount} Comments`;
-                });
-              });
-            </script> -->
-    </div>
     <% } %>
+    
+    
+    
   </div>
 
   <%- include('../../partials/side-feed') %> <%-
   include('../../partials/footer') %>
 </main>
+
+<script>
+  function toggleComments(postId) {
+    const commentsSection = document.getElementById('comments-section-' + postId);
+    const commentForm = document.getElementById('comment-form-' + postId);
+    const isHidden = commentsSection.style.display === 'none';
+    
+    commentsSection.style.display = isHidden ? 'block' : 'none';
+    commentForm.style.display = isHidden ? 'block' : 'none';
+  }
+</script>
+
