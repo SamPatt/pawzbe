@@ -42,12 +42,14 @@ async function update(req, res) {
     const profile = await Profile.findById(user.profiles[0])
     
     if (req.body.images) {
-      profile.images.push(req.body.images.split(',').map(i => i.trim()))
-      console.log(profile)
-      // await Profile.findOneAndUpdate(
-      //   { _id: profile._id },
-      //   { $set: profile }
-      // );
+      
+      const links = req.body.images.split(',').map(i => i.trim())
+      profile.images.push(...links)
+      await Profile.findOneAndUpdate(
+        { _id: profile._id },
+        { $set: profile }
+      );
+
     } else {
       // update profile
 

@@ -169,6 +169,10 @@ li {
   margin-bottom: 160px;
 }
 
+.add-images-btn {
+  max-width: 50px;
+}
+
 @media (max-width: 700px) {
   .center-container {
     width: 80%;

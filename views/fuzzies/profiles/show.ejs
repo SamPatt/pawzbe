@@ -14,9 +14,7 @@
           
         >
           <div class="row" >
-            <div
-              class="col-md-1 p-0"
-            >
+            <div class="col-md-1 p-0" >
               <img
                 src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg"
                 alt="Profile Image"
@@ -104,20 +102,14 @@
     </div>
     
     <div class="container">
-      <form class="profile-form" action="/profiles/<%= user._id %>?_method=PUT" method="POST">
-        <div class="row">
-          <div class="col">
+      <form class="profile-form d-flex flex-row" action="/profiles/<%= user._id %>?_method=PUT" method="POST">
             <input
               type="text"
               name="images"
-              class="form-control"
+              class="form-control m-2"
               placeholder="Image URL (comma separated)"
             >
-          </div>
-          <div class="col-auto">
-            <button class="btn btn-primary">+</button>
-          </div>
-        </div>
+            <button class="add-images-btn btn btn-primary">+</button>
       </form>
     </div>
 
