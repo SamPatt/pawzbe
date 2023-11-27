@@ -1,40 +1,53 @@
 <%- include('./partials/header') %>
 
-<div class="container center-container login-container rounded m-1">
-  
-  <div class="login-circle">
-    <img src="/images/ducky.svg" alt="Profile Image" class="img-fluid">
+<div
+  class="container center-container login-container rounded m-1 d-flex flex-column align-items-center justify-content-center"
+>
+  <div class="login-circle mb-4">
+    <img src="/images/ducky.svg" alt="Profile Image" class="img-fluid" />
   </div>
 
-  <div class="login-options">
-    <div class="row">
-      <div class="col">
-        <div class="container">
-          <a href="/auth/google">
-            <button type="button" class="btn btn-primary login-btn">Login with Google</button>
-          </a>
-        </div>
+  <main class="login-options row justify-content-center">
+    <div class="card col-sm-4 col-md-12 mb-2">
+      <div class="card-body">
+        <a
+          href="/auth/google"
+          class="btn btn-block btn-social btn-google"
+          role="button"
+        >
+          <i class="fab fa-google"></i>
+          Login with Google
+        </a>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <div class="container"> 
-          <a href="/auth/github">
-            <button type="button" class="btn btn-dark login-btn">Login with Github</button>
-          </a>
-        </div>
+
+    <div class="card col-sm-4 col-md-12 mb-2">
+      <div class="card-body">
+        <a
+          href="/auth/github"
+          class="btn btn-block btn-social btn-github"
+          role="button"
+        >
+          <i class="fab fa-github"></i>
+          Login with Github
+        </a>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <div class="container">
-          <button type="button" class="disabled btn btn-secondary login-btn">Login with Apple</button>
-        </div>
+
+    <div class="card col-sm-4 col-md-12 mb-2">
+      <div class="card-body">
+        <a
+          href="/auth/apple"
+          class="btn btn-block btn-social btn-apple"
+          role="button"
+          style="background-color: lightgray"
+        >
+          <i class="fab fa-apple"></i>
+          Login with Apple
+        </a>
       </div>
     </div>
-  </div>
+  </main>
 </div>
 
-<%- include('./partials/side-feed') %>
-
-<%- include('./partials/footer') %>
+<%- include('./partials/side-feed') %> <%- include('./partials/footer') %>

@@ -159,7 +159,15 @@ li {
   margin-bottom: 160px;
 }
 
+.login-options .card {
+  background-color: transparent;
+  border: none;
+}
 
+.card {
+  background-color: transparent;
+  border: none;
+}
 
 @media (max-width: 700px) {
   .feed {
