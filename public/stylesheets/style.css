@@ -158,6 +158,9 @@ li {
   border-radius: 50%;
   margin-bottom: 160px;
 }
+
+
+
 @media (max-width: 700px) {
   .feed {
     display: none;
