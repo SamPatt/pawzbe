@@ -31,13 +31,11 @@ async function create(req, res) {
         req.body.profile = req.user.profiles[0]._id
         const profile = await Profile.findById(req.user.profiles[0]._id)
         req.body.petName = profile.petName
+        req.body.profilePhoto = profile.petPhoto.profilePhoto
         const post = await Post.create(req.body)
         console.log(post)
 
-        res.render("fuzzies/posts/show", {
-            title: post.petName,
-            post: post,
-        })
+        res.redirect("/posts/")
 
     } catch (err) {
         console.log(err)

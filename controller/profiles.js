@@ -81,14 +81,18 @@ function newProfile(req, res) {
 
 
 async function create(req, res) {
-  let pet = {}
+  let pet = {
+    petPhoto: {},
+    // images:[],
+  }
   const user = await User.findById(req.user._id)
   
   try {
     with (req.body) {
       pet.petName = petName
       pet.humanNames = owners.split(',').map(i => i.trim())
-      pet.petPhoto = profilePhoto
+      pet.petPhoto.banner = banner
+      pet.petPhoto.profilePhoto = profilePhoto
       pet.petDetails = {
         bio: bio,
         favoriteToys: favoriteToys.split(',').map(i => i.trim()),
@@ -96,7 +100,7 @@ async function create(req, res) {
         animalType: animalType,
         dob: dob,
       }
-      pet.images = images.split(',').map(i => i.trim())
+      // pet.images = [...images.split(',').map(i => i.trim())]
     }
 
     const profile = await Profile.create(pet)

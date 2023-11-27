@@ -13,7 +13,6 @@ const profileSchema = new Schema(
     },
     petPhoto: {
       profilePhoto: String,
-      images: [String],
       banner: String,
     },
     petDetails: {

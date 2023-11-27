@@ -2,7 +2,6 @@
 
 <form class="profile-form" action="/profiles/" method="POST">
   <div class="form-group">
-
     <input
       type="text"
       name="petName"
@@ -10,7 +9,7 @@
       placeholder="Your Pet Name Here"
       required
     />
-    
+
     <input
       type="text"
       name="animalType"
@@ -18,9 +17,14 @@
       placeholder="Animal Type"
       required
     />
-    
-    <input type="text" name="breed" class="breed form-control" placeholder="Your Pet Breed" />
-    
+
+    <input
+      type="text"
+      name="breed"
+      class="breed form-control"
+      placeholder="Your Pet Breed"
+    />
+
     <input
       type="date"
       name="dob"
@@ -28,30 +32,37 @@
       placeholder="DOB"
       required
     />
-    
-    <textarea name="bio" id="bio" placeholder="Pet Bio"cols="30" rows="5" class="rounded"></textarea>
-    
+
+    <textarea
+      name="bio"
+      id="bio"
+      placeholder="Pet Bio"
+      cols="30"
+      rows="5"
+      class="rounded"
+    ></textarea>
+
     <input
       type="text"
       name="favoriteToys"
       class="favoriteToys form-control"
       placeholder="Favorite Toys (comma separated)"
     />
-    
+
     <input
       type="text"
-      name="images"
-      class="images form-control"
-      placeholder="Pet Images (comma separated)"
+      name="banner"
+      class="banner form-control"
+      placeholder="Banner URL"
     />
-    
+
     <input
       type="text"
       name="owners"
       class="owners form-control"
       placeholder="Pet Owners (comma separated)"
     />
-    
+
     <input
       class="form-control"
       type="text"
@@ -59,11 +70,10 @@
       id="profilePhoto"
       placeholder="Add Profile Photo"
     />
-    
+
     <button class="btn-primary btn" type="submit">Submit</button>
   </div>
 </form>
 
-<%- include('../../partials/side-feed') %>
-
-<%- include('../../partials/footer') %>
+<%- include('../../partials/side-feed') %> <%- include('../../partials/footer')
+%>

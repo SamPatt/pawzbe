@@ -26,7 +26,8 @@ const postSchema = new Schema(
       default: 0,
     },
     postComments: [commentSchema],
-    petName: String
+    petName: String,
+    profilePhoto: String
   },
   { timestamps: true }
 );

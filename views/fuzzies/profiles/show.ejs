@@ -1,24 +1,19 @@
-<%- include('../../partials/header') %>
-
-<%- include('../../partials/post-form') %> 
+<%- include('../../partials/header') %> <%- include('../../partials/post-form')
+%>
 <main>
   <div class="container col-md-6 py-2 mt-3">
     <div class="bg-body-tertiary rounded-3 mt-4" id="banner">
       <div class="container-fluid p-0">
         <img
-          src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg"
+          src="<%= profile.petPhoto.banner %>"
           alt="Kitty"
           class="img-fluid banner-image"
         />
-        <div
-          class="profile-container"
-          id="profile-image"
-          
-        >
-          <div class="row" >
-            <div class="col-md-1 p-0" >
+        <div class="profile-container" id="profile-image">
+          <div class="row">
+            <div class="col-md-1 p-0">
               <img
-                src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg"
+                src="<%= profile.petPhoto.profilePhoto %>"
                 alt="Profile Image"
                 class="rounded-circle"
               />
@@ -45,9 +40,7 @@
       <div class="col-md-8" id="bio-section" style="color: black">
         <div class="h-100 p-5 bg-body-tertiary border rounded-3">
           <h2>Bio</h2>
-          <p>
-            <%= profile.petDetails.bio %>
-          </p>
+          <p><%= profile.petDetails.bio %></p>
         </div>
       </div>
     </div>
@@ -59,97 +52,131 @@
       <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
-          <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+          <li
+            data-bs-target="#myCarousel"
+            data-bs-slide-to="0"
+            class="active"
+          ></li>
           <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
           <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
         </ol>
-  
+
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
-          <% for (let index in profile.images) { %>
-            <% const isActive = (index == 0) ? 'active' : '' %>
-            <% console.log(index, isActive) %>
-            <div class="carousel-item <%= isActive %>">
-              <img src="<%= profile.images[index] %>" alt="Los Angeles" class="d-block w-100">
-              <div class="carousel-caption">
-                <!-- add caption here -->
-              </div>
+          <% for (let index in profile.images) { %> <% const isActive = (index
+          == 0) ? 'active' : '' %> <% console.log(index, isActive) %>
+          <div class="carousel-item <%= isActive %>">
+            <img
+              src="<%= profile.images[index] %>"
+              alt="Los Angeles"
+              class="d-block w-100"
+            />
+            <div class="carousel-caption">
+              <!-- add caption here -->
             </div>
+          </div>
           <% } %>
-          
-  
         </div>
-  
+
         <!-- Left and right controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#myCarousel"
+          data-bs-slide="prev"
+        >
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#myCarousel"
+          data-bs-slide="next"
+        >
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
       </div>
     </div>
-    
+
     <div class="container">
-      <form class="profile-form d-flex flex-row" action="/profiles/<%= user._id %>?_method=PUT" method="POST">
-            <input
-              type="text"
-              name="images"
-              class="form-control m-2"
-              placeholder="Image URL (comma separated)"
-            >
-            <button class="add-images-btn btn btn-primary">+</button>
+      <form
+        class="profile-form d-flex flex-row"
+        action="/profiles/<%= user._id %>?_method=PUT"
+        method="POST"
+      >
+        <input
+          type="text"
+          name="images"
+          class="form-control m-2"
+          placeholder="Image URL (comma separated)"
+        />
+        <button class="add-images-btn btn btn-primary">+</button>
       </form>
     </div>
 
     <!---------------------------------------------------------------------------------------------------------------- -->
     <div class="col-md-9 d-flex align-items-center">
       <div class="pet-name">
-          <div class="row">
-            <div class="col-md-12 p-0">
-              <h4><%= profile.petName %>'s Posts</h4>
-            </div>
+        <div class="row">
+          <div class="col-md-12 p-0">
+            <h4><%= profile.petName %>'s Posts</h4>
           </div>
         </div>
       </div>
+    </div>
 
     <% for (post of posts) { %>
-    
-      <div class="row align-items-md-stretch mt-3" id="pet-post" style="color: black">
-        <div class="col-md-12">
-          <div class="pet-post mb-2">
-            <div class="h-100 p-2 bg-body-tertiary border rounded-3">
-              <p><%= post.postDescription %></p>
-              <img src="<%= post.postPhotoLink %>">
-            </div>
+
+    <div
+      class="row align-items-md-stretch mt-3"
+      id="pet-post"
+      style="color: black"
+    >
+      <div class="col-md-12">
+        <div class="pet-post mb-2">
+          <div class="h-100 p-2 bg-body-tertiary border rounded-3">
+            <p><%= post.postDescription %></p>
+            <img src="<%= post.postPhotoLink %>" />
           </div>
         </div>
       </div>
-      <div class="col-md-12">
-        <button  class="col-md-2 like-btn text-center text-bg-dark rounded-3" data-like-count="0"><span class="like-count">0 Likes</span></button>
-          <script>
-              document.addEventListener('DOMContentLoaded', function () {
-                const likeButton = document.querySelector('.like-btn');
-            
-                likeButton.addEventListener('click', function () {
-                  let likeCount = parseInt(likeButton.dataset.likeCount) || 0;
-                  likeCount++;
-            
-                  // Update the like count in the data attribute
-                  likeButton.dataset.likeCount = likeCount;
-            
-                  // Update the like count in the UI
-                  const likeCountElement = likeButton.querySelector('.like-count');
-                  likeCountElement.textContent = `${likeCount} Likes`;
-                });
-              });
-            </script>
-          
-        <button  class="col-md-3 comment-btn text-center text-bg-dark rounded-3" type="submit"  data-comment-count="0"><span class="comment-count">0 Comments</span></button>
-        
-        <!-- <script>
+    </div>
+    <div class="col-md-12">
+      <button
+        class="col-md-2 like-btn text-center text-bg-dark rounded-3"
+        data-like-count="0"
+      >
+        <span class="like-count">0 Likes</span>
+      </button>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const likeButton = document.querySelector(".like-btn");
+
+          likeButton.addEventListener("click", function () {
+            let likeCount = parseInt(likeButton.dataset.likeCount) || 0;
+            likeCount++;
+
+            // Update the like count in the data attribute
+            likeButton.dataset.likeCount = likeCount;
+
+            // Update the like count in the UI
+            const likeCountElement = likeButton.querySelector(".like-count");
+            likeCountElement.textContent = `${likeCount} Likes`;
+          });
+        });
+      </script>
+
+      <button
+        class="col-md-3 comment-btn text-center text-bg-dark rounded-3"
+        type="submit"
+        data-comment-count="0"
+      >
+        <span class="comment-count">0 Comments</span>
+      </button>
+
+      <!-- <script>
               document.addEventListener('DOMContentLoaded', function () {
                 const commentButton = document.querySelector('.comment-btn');
             
@@ -166,10 +193,10 @@
                 });
               });
             </script> -->
-      </div>
-      <% } %>
     </div>
+    <% } %>
+  </div>
 
-<%- include('../../partials/side-feed') %> 
-
-<%- include('../../partials/footer') %>
+  <%- include('../../partials/side-feed') %> <%-
+  include('../../partials/footer') %>
+</main>
