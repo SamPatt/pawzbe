@@ -1,4 +1,5 @@
 const Post = require ('../models/post')
+const Profile = require ('../models/profile')
 
 module.exports = {
     index,
@@ -28,8 +29,10 @@ async function create(req, res) {
     try {
         
         req.body.profile = req.user.profiles[0]._id
+        const profile = await Profile.findById(req.user.profiles[0]._id)
+        req.body.petName = profile.petName
         const post = await Post.create(req.body)
-        
+        console.log(post)
 
         res.render("fuzzies/posts/show", {
             title: post.petName,

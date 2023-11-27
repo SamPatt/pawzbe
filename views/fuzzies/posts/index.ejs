@@ -3,6 +3,7 @@
 
 <main class="container col-md-6 py-2 mt-3">
   <div class="row">
+    <% for (post of posts) { %>
     <div class="col-md-2 d-flex align-items-center">
       <div class="profile-photo-main-feed mb-1">
         <div class="row">
@@ -21,64 +22,64 @@
       <div class="pet-name">
           <div class="row">
             <div class="col-md-1 p-0">
-              <h4>post.profile[0]</h4>
-              
+              <h4><%= post.petName %></h4>
             </div>
           </div>
         </div>
       </div>
-      <div class="row align-items-md-stretch mt-3" id="pet-post" style="color: black">
+      
+    
+        <div class="row align-items-md-stretch mt-3" id="pet-post" style="color: black">
+          <div class="col-md-12">
+            <div class="pet-post mb-2">
+              <div class="h-100 p-2 bg-body-tertiary border rounded-3">
+                <p><%= post.postDescription %></p>
+                <img src="<%= post.postPhotoLink %>">
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="col-md-12">
-          <div class="pet-post  mb-2">
-            <div class="h-100 p-2 bg-body-tertiary border rounded-3">
-              <!-- add custom height in css file "class="custom-height -->
-              <h2>Pet Posts</h2>
-              <p>
-              Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem
-              Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
-              </p>
-            </div>
-          </div>
-        </div>
-      <div class="col-md-12">
-        <button  class="col-md-2 like-btn text-center text-bg-dark rounded-3" data-like-count="0"><span class="like-count">0 Likes</span></button>
-          <script>
-              document.addEventListener('DOMContentLoaded', function () {
-                const likeButton = document.querySelector('.like-btn');
-            
-                likeButton.addEventListener('click', function () {
-                  let likeCount = parseInt(likeButton.dataset.likeCount) || 0;
-                  likeCount++;
-            
-                  // Update the like count in the data attribute
-                  likeButton.dataset.likeCount = likeCount;
-            
-                  // Update the like count in the UI
-                  const likeCountElement = likeButton.querySelector('.like-count');
-                  likeCountElement.textContent = `${likeCount} Likes`;
+          <button  class="col-md-2 like-btn text-center text-bg-dark rounded-3" data-like-count="0"><span class="like-count">0 Likes</span></button>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                  const likeButton = document.querySelector('.like-btn');
+              
+                  likeButton.addEventListener('click', function () {
+                    let likeCount = parseInt(likeButton.dataset.likeCount) || 0;
+                    likeCount++;
+              
+                    // Update the like count in the data attribute
+                    likeButton.dataset.likeCount = likeCount;
+              
+                    // Update the like count in the UI
+                    const likeCountElement = likeButton.querySelector('.like-count');
+                    likeCountElement.textContent = `${likeCount} Likes`;
+                  });
                 });
-              });
-            </script>
+              </script>
+            
+          <button  class="col-md-3 comment-btn text-center text-bg-dark rounded-3" type="submit"  data-comment-count="0"><span class="comment-count">0 Comments</span></button>
           
-        <button  class="col-md-3 comment-btn text-center text-bg-dark rounded-3" type="submit"  data-comment-count="0"><span class="comment-count">0 Comments</span></button>
-          <script>
-              document.addEventListener('DOMContentLoaded', function () {
-                const commentButton = document.querySelector('.comment-btn');
-            
-                commentButton.addEventListener('click', function () {
-                  let commentCount = parseInt(commentButton.dataset.commentCount) || 0;
-                  commentCount++;
-            
-                  // Update the like count in the data attribute
-                  commentButton.dataset.commentCount = commentCount;
-            
-                  // Update the like count in the UI
-                  const commentCountElement = commentButton.querySelector('.comment-count');
-                  commentCountElement.textContent = `${commentCount} Comments`;
+          <!-- <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                  const commentButton = document.querySelector('.comment-btn');
+              
+                  commentButton.addEventListener('click', function () {
+                    let commentCount = parseInt(commentButton.dataset.commentCount) || 0;
+                    commentCount++;
+              
+                    // Update the like count in the data attribute
+                    commentButton.dataset.commentCount = commentCount;
+              
+                    // Update the like count in the UI
+                    const commentCountElement = commentButton.querySelector('.comment-count');
+                    commentCountElement.textContent = `${commentCount} Comments`;
+                  });
                 });
-              });
-            </script>
-      </div>
+              </script> -->
+        </div>
+        <% } %>
 
 </main>
 
