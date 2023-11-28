@@ -16,7 +16,7 @@ async function show(req, res) {
     console.log("Called show function with ID:", req.params.id);
     const currentProfile = req.params.id;
     const profile = await Profile.findById(req.params.id);
-
+    
     const owner = (req.user.profiles[0]._id.toString() === req.params.id) ? true : false
     const profiles = res.locals.profiles
 

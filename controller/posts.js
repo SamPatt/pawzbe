@@ -45,9 +45,31 @@ async function show(req, res) {
   try {
     const currentProfile = req.user.profiles[0]._id;
     const post = await Post.findById(req.params.id);
+    const dogBreeds = res.locals.dogBreeds;
+    const catBreeds = res.locals.catBreeds;
+
+    let breedInfo = null;
+
+    if (profile.petDetails.breed) {
+      const breedName = profile.petDetails.breed;
+      const animalType = profile.petDetails.animalType;
+
+      if (animalType === "Dog") {
+        const breedData = dogBreeds.find(breed => breed.name === breedName);
+        if (breedData) {
+          breedInfo = breedData.temperament;
+        }
+      } else if (animalType === "Cat") {
+        const breedData = catBreeds.find(breed => breed.name === breedName);
+        if (breedData) {
+          breedInfo = breedData.description;
+        }
+      }
+    }
     res.render("fuzzies/posts/show", {
       title: post.petName,
       post: post,
+      breedInfo,
     });
   } catch (err) {
     console.log(err);
@@ -96,7 +118,27 @@ async function deleteComment(req, res) {
           post.postComments.splice(index, 1);
         }
       });
-      
+      const dogBreeds = res.locals.dogBreeds;
+    const catBreeds = res.locals.catBreeds;
+
+    let breedInfo = null;
+
+    if (profile.petDetails.breed) {
+      const breedName = profile.petDetails.breed;
+      const animalType = profile.petDetails.animalType;
+
+      if (animalType === "Dog") {
+        const breedData = dogBreeds.find(breed => breed.name === breedName);
+        if (breedData) {
+          breedInfo = breedData.temperament;
+        }
+      } else if (animalType === "Cat") {
+        const breedData = catBreeds.find(breed => breed.name === breedName);
+        if (breedData) {
+          breedInfo = breedData.description;
+        }
+      }
+    }
       await post.save();
       const posts = await Post.find({ profile: req.user.profiles[0] });
       res.render("fuzzies/profiles/show", {
@@ -105,6 +147,7 @@ async function deleteComment(req, res) {
         posts: posts,
         currentProfile: currentProfile,
         owner,
+        breedInfo,
       });
     }
   } catch (err) {
@@ -115,13 +158,37 @@ async function deleteComment(req, res) {
 
 async function deletePost(req, res) {
   try {
+    const owner = (req.user.profiles[0]._id.toString() === req.params.id) ? true : false
     const post = await Post.deleteOne({ _id: req.params.id });
     const profile = await Profile.findById(req.user.profiles[0]._id);
     const posts = await Post.find({ profile: profile._id });
+    const dogBreeds = res.locals.dogBreeds;
+    const catBreeds = res.locals.catBreeds;
+
+    let breedInfo = null;
+
+    if (profile.petDetails.breed) {
+      const breedName = profile.petDetails.breed;
+      const animalType = profile.petDetails.animalType;
+
+      if (animalType === "Dog") {
+        const breedData = dogBreeds.find(breed => breed.name === breedName);
+        if (breedData) {
+          breedInfo = breedData.temperament;
+        }
+      } else if (animalType === "Cat") {
+        const breedData = catBreeds.find(breed => breed.name === breedName);
+        if (breedData) {
+          breedInfo = breedData.description;
+        }
+      }
+    }
     res.render("fuzzies/profiles/show", {
       title: profile.petName + "'s Page",
       profile: profile,
       posts: posts,
+      breedInfo,
+      owner,
     });
   } catch (err) {
     console.log(err);
