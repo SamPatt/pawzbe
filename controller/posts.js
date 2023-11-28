@@ -34,7 +34,6 @@ async function create(req, res) {
         req.body.petName = profile.petName
         req.body.profilePhoto = profile.petPhoto.profilePhoto
         const post = await Post.create(req.body)
-        console.log(post)
 
         res.redirect("/posts/")
 
@@ -61,7 +60,6 @@ async function addComment(req, res) {
        const profile = await Profile.findById(req.user.profiles[0]._id)
        req.body.petName = profile.petName
        const post = await Post.findById(req.params.id)
-       console.log(post)
        console.log(req.body)
        post.postComments.push(req.body)
        await post.save()

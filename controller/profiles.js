@@ -14,28 +14,51 @@ async function show(req, res) {
   try {
     console.log("Called show function with ID:", req.params.id);
     const profile = await Profile.findById(req.params.id);
-    const owner = (req.user._id === req.params.id) ? true : false
-    const profiles = res.locals.profiles
-
     if (!profile) {
       console.log("Profile not found for ID:", req.params.id);
-      // Handle the not-found case here
       return res.status(404).send('Profile not found');
     }
-    
+
+    const owner = (req.user._id === req.params.id) ? true : false;
+    const profiles = res.locals.profiles;
+    const dogBreeds = res.locals.dogBreeds;
+    const catBreeds = res.locals.catBreeds;
+
+    let breedInfo = null;
+
+    if (profile.petDetails.breed) {
+      const breedName = profile.petDetails.breed;
+      const animalType = profile.petDetails.animalType;
+
+      if (animalType === "Dog") {
+        const breedData = dogBreeds.find(breed => breed.name === breedName);
+        if (breedData) {
+          breedInfo = breedData.temperament;
+        }
+      } else if (animalType === "Cat") {
+        const breedData = catBreeds.find(breed => breed.name === breedName);
+        if (breedData) {
+          breedInfo = breedData.description;
+        }
+      }
+    }
+
     const posts = await Post.find({ profile: profile._id });
 
     res.render("fuzzies/profiles/show", {
       title: profile.petName + "'s Page",
-      profile: profile,
-      posts: posts,
-      owner: owner,
+      profile,
+      posts,
+      owner,
       profiles,
+      breedInfo,
     });
   } catch (err) {
     console.log("Error in show function:", err);
+    res.status(500).send('Internal Server Error');
   }
 }
+
 
 
 async function edit(req, res) {
@@ -67,7 +90,6 @@ async function update(req, res) {
       const links = req.body.images.split(',').map(i => i.trim())
       profile.images.push(...links)
 
-      console.log(profile._id)
 
       await Profile.findOneAndUpdate(
         { _id: profile._id },
@@ -104,8 +126,6 @@ function newProfile(req, res) {
   // Extract only the names of the breeds
   const dogBreedNames = dogBreeds.map(breed => breed.name);
   const catBreedNames = catBreeds.map(breed => breed.name);
-  console.log(catBreedNames)
-  console.log(dogBreedNames)
 
   res.render("fuzzies/profiles/new", { 
     title: "Make Profile", 
