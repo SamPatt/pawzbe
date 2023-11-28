@@ -55,19 +55,22 @@ Structure
       router.post('/profiles', profilesCtrl.create)
 
 * views
-  * fuzzy
-    * user
-        new.ejs
-    * profile
-        new.ejs 
-        show.ejs
-        edit.ejs
-    * posts 
-        index.ejs
-        show.ejs
+  * user
+      new.ejs
+  * profile
+      new.ejs 
+      show.ejs
+      edit.ejs
+  * posts 
+      index.ejs
+      show.ejs
 
   * partials
       header.ejs
       footer.ejs
       pet-profiles.ejs
       add-comment.ejs
+
+  
+  users/pets/posts are own model
+  comments embedded to posts

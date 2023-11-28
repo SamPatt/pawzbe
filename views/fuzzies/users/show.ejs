@@ -1,0 +1,80 @@
+
+<%- include('../../partials/header') %>
+<% const authBy = (user.avatar.includes('google')) ? 'Google' : 'GitHub' %>
+
+<form class="profile-form" action="/users/<%= user._id %>?_method=PUT" method="POST">
+  <div class="form-group d-flex flex-column align-items-center">
+
+    <div class="login-circle enlarge">
+      <img src="<%= user.avatar %>" alt="Profile Image" class="img-fluid">
+    </div>
+
+    <div class="user-details">
+      <small><%= authBy %> ID: <%= user.authId %></small>
+      <small>Fuzzy ID: <%= user._id %></small>
+    </div>
+
+    <label>User Name
+      <input
+        class="form-control"
+        type="text"
+        name="name"
+        id="name"
+        placeholder="<%= user.name %>"
+      />
+    </label>
+
+    <label>User Email
+      <input
+        class="form-control"
+        type="text"
+        name="email"
+        id="email"
+        placeholder="<%= user.email %>"
+      />
+    </label>
+
+    <label>User Image
+      <input
+        class="form-control"
+        type="text"
+        name="avatar"
+        id="avatar"
+        placeholder="<%= user.avatar %>"
+      />
+    </label>
+
+    <button class="btn-primary btn" type="submit">Save Changes</button>
+
+  </div>
+</form>
+
+<form class="profile-form" id="deleteUserForm" action="/users?_method=DELETE" method="POST">
+  <div class="form-group">
+    <button class="btn-danger btn" type="submit">DELETE ACCOUNT</button>
+  </div>
+</form>
+
+<div class="user-pets-list container">
+  <div class="row text-center mt-5 align-items-center justify-content-center"><h2>Your Pets</h2></div>
+  <% for (let i of user.profiles) { %>
+    <div class="row text-center justify-content-center">
+      <div class="col-2">
+        <span><%= i.petName %></span>
+      </div>
+      <div class="col-3">
+        <span><%= i.petDetails.animalType %></span>
+      </div>
+      <div class="col-3">
+        <span><%= i.petDetails.breed %></span>
+      </div>
+      <div class="col-3">
+        <span><%= new Date(i.petDetails.dob).toDateString() %></span>
+      </div>
+    </div>
+  <% } %>
+</div>
+
+<!-- // <%- include('../../partials/side-feed', { profiles }) %> -->
+
+<%- include('../../partials/footer') %>

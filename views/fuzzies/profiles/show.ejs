@@ -1,0 +1,257 @@
+<%- include('../../partials/header') %> <%- include('../../partials/post-form')
+%>
+<main>
+  <div class="container col-md-6 py-2 mt-3">
+    <div class="rounded-3 mt-4" id="banner">
+      <div class="container-fluid bg-transparent p-0">
+        <img
+          src="<%= profile.petPhoto.banner %>"
+          class="img-fluid rounded-3 banner-image"
+        />
+        <div class="profile-info" id="profile-image">
+          <div class="row">
+            <div class="col-md-12">
+              <img
+                src="<%= profile.petPhoto.profilePhoto %>"
+                alt="Profile Image"
+                class="img-fluid rounded-circle"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="mb-4 row align-items-md-stretch" id="pet-detail-bio">
+      
+      <% if (owner) { %>
+        <div class="container d-flex justify-content-end m-2">
+          <a href="/profiles/<%= profile._id %>/edit">
+            <button class="btn btn-secondary">Edit Profile</button>
+          </a>
+        </div>
+      <% } %>
+
+      <div class="col-md-4 mt-4">
+        <div class="h-1 p-1 mb-3 text-center text-bg-dark rounded-3">
+          <h2><%= profile.petName %></h2>
+        </div>
+        <div class="h-20 p-1 mb-3 text-center text-bg-dark rounded-3">
+          <h2><%= profile.petDetails.animalType %></h2>
+        </div>
+        <div class="h-1 p-1 mb-3 text-center text-bg-dark rounded-3">
+          <h2><%= profile.petDetails.breed %></h2>
+        </div>
+        <div class="h-1 p-1 mb-3 text-center text-bg-dark rounded-3">
+          <h2><%= new Date(profile.petDetails.dob).toDateString() %></h2>
+        </div>
+      </div>
+      <div class="col-md-8" id="bio-section" style="color: black">
+        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+          <h2>Bio</h2>
+          <p><%= profile.petDetails.bio %></p>
+          <% if (breedInfo) { %>
+            <h3>Breed Information</h3>
+            <p><%= breedInfo %></p>
+          <% } %>
+        </div>
+      </div>
+      
+    </div>
+
+    <!---------------------------------------------------------------------------------------------------------------- -->
+
+    <div class="container mt-5">
+      <h2>Gallery</h2>
+      <% if (profile.images.length > 0) { %>
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <% for (let i = 0; i < profile.images.length; i++) { %>
+              <li
+                data-bs-target="#myCarousel"
+                data-bs-slide-to="<%= i %>"
+                <% if (i === 0) { %>class="active"<% } %>
+              ></li>
+            <% } %>
+          </ol>
+
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+            <% for (let index in profile.images) { %> 
+              <% const isActive = (parseInt(index) == 0) ? 'active' : '' %>
+            <div class="carousel-item <%= isActive %>">
+              <img
+                src="<%= profile.images[index] %>"
+                class="d-block w-100"
+              />
+              <div class="carousel-caption">
+                <!-- add caption here -->
+              </div>
+            </div>
+            <% } %>
+          </div>
+
+          <!-- Left and right controls -->
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#myCarousel"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button  
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#myCarousel"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    <% } else { %>
+      <p>No photos added yet!</p>
+    <% } %>
+
+    <div class="container">
+      <form
+        class="profile-form d-flex flex-row"
+        action="/profiles/<%= user._id %>?_method=PUT"
+        method="POST"
+      >
+        <div class="row w-100">
+          <div class="col-10">
+            <input
+              type="text"
+              name="images"
+              class="form-control m-2"
+              placeholder="Image URL (comma separated)"
+            />
+          </div>
+          <div class="col-2">
+            <button class="add-images-btn btn btn-primary">+</button>
+          </div>
+        </div>
+        
+      </form>
+    </div>
+
+    <!---------------------------------------------------------------------------------------------------------------- -->
+    <div class="col-md-9 mt-5 d-flex align-items-center">
+      <div class="pet-name">
+        <div class="row">
+          <div class="col-md-12 p-0">
+            <h4><%= profile.petName %>'s Posts</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% for (post of posts) { %>
+    <div class="row align-items-md-stretch mt-3" id="pet-post">
+      <div class="col-md-12">
+        <div class="pet-post mb-3">
+          <div class="p-3 bg-body-tertiary border rounded-3">
+            <p class="fw-bold text-dark mb-2"><%= post.postDescription %></p>
+            <img
+              src="<%= post.postPhotoLink %>"
+              class="img-fluid rounded mb-2"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 d-flex justify-content-start mb-2">
+        <button class="btn btn-outline-dark me-2">
+          <%= post.likes %> Likes
+        </button>
+        <button
+          class="btn btn-outline-primary"
+          onclick="toggleComments('<%= post._id %>')"
+        >
+          <%= post.postComments.length %> Comments
+        </button>
+        <form
+          action="/posts/<%=post._id%>?_method=DELETE"
+          method="POST"
+          class="ms-auto"
+        >
+          <button type="submit" class="btn btn-outline-dark me-2 ml-auto">
+            X
+          </button>
+        </form>
+      </div>
+
+      <!-- Comments Section (Initially Hidden) -->
+      <div
+        id="comments-section-<%= post._id %>"
+        class="col-md-12 mb-3"
+        style="display: none"
+      >
+
+
+        <% post.postComments.forEach(comment => { %>
+          <div class="comment mb-2">
+            <strong class="d-block"><%= comment.petName %></strong>
+            <p class="mb-0"><%= comment.commentText %></p>
+
+            <form
+              action="/posts/comments/<%= post._id %>?_method=DELETE"
+              method="POST"
+              class="col-md-12 d-flex justify-content-end mt-3 ms-auto"
+              >
+              <input type="hidden" name="currentProfile" value="<%= profile._id %>">
+              
+              <% if (currentProfile === comment.profileId) { %>
+                <button type="submit" class="btn btn-outline-dark me-2 ml-auto " id="commentXButton" style="visibility: visible;">X</button>
+              <% } else { %>
+                <button id="commentXButton" style="visibility: hidden;">X</button>
+              <% } %>
+            </form>
+
+          </div>
+        <% }); %>
+
+      </div>
+      <!-- Comment Form (Initially Hidden) -->
+      <div
+        id="comment-form-<%= post._id %>"
+        class="col-md-12"
+        style="display: none"
+      >
+        <form action="/posts/<%= post._id %>/comments" method="POST">
+          <textarea
+            class="form-control mb-2"
+            name="commentText"
+            placeholder="Write a comment..."
+            rows="3"
+          ></textarea>
+          <button type="submit" class="btn btn-success">Submit Comment</button>
+        </form>
+      </div>
+    </div>
+
+      <% } %>
+    </div>
+
+</main>
+
+<%- include('../../partials/side-feed', { profiles }) %>
+
+<script>
+  function toggleComments(postId) {
+    const commentsSection = document.getElementById(
+      "comments-section-" + postId
+    );
+    const commentForm = document.getElementById("comment-form-" + postId);
+    const isHidden = commentsSection.style.display === "none";
+
+    commentsSection.style.display = isHidden ? "block" : "none";
+    commentForm.style.display = isHidden ? "block" : "none";
+  }
+</script>
+
+<%- include('../../partials/footer') %>

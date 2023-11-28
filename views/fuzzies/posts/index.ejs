@@ -1,0 +1,148 @@
+<%- include('../../partials/header') %> <%- include('../../partials/post-form')
+%>
+  
+
+<main class="container col-md-5 py-2 mt-3">
+  <div class="row">
+
+    <% for (post of posts) { %>
+      <div class="col-md-2 d-flex align-items-center">
+        <div class="profile-photo-main-feed mb-1">
+          <div class="row">
+            <a href="/profiles/<%= post.profile._id %>"> 
+            <div class="col-md-2 p-0">
+              <img id="profile-photo"
+              src="<%= post.profilePhoto %>"
+              alt="Profile Image"
+              class="rounded-circle img-fluid"
+              style="width: 70px; height: auto;"
+              />
+            </div>
+            <div class="col-md-10">
+              <p> <%= post.petName %></p>
+            </div>
+          </a>
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-md-stretch mt-3" id="pet-post">
+        <div class="col-md-12">
+          <div class="pet-post mb-3">
+            <div class="p-3 bg-body-tertiary border rounded-3">
+              <p class="fw-bold text-dark mb-2"><%= post.postDescription %></p>
+              <img src="<%= post.postPhotoLink %>" class="img-fluid rounded mb-2" />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 d-flex justify-content-start mb-2">
+          <button class="btn btn-outline-dark me-2">
+            <%= post.likes %> Likes
+          </button>
+          <button class="btn btn-outline-primary" onclick="toggleComments('<%= post._id %>')">
+            <%= post.postComments.length %> Comments
+          </button>
+        </div>
+        
+        <!-- Comments Section (Initially Hidden) -->
+        <div id="comments-section-<%= post._id %>" class="col-md-12 mb-3" style="display: none;">
+          <% post.postComments.forEach(comment => { %>
+            <div class="comment mb-2">
+              <strong class="d-block"><%= comment.petName %></strong>
+              <p class="mb-0"><%= comment.commentText %></p>
+            </div>
+            
+            <form
+              action="/posts/comments/<%= post._id %>?_method=DELETE"
+              method="POST"
+              class="col-md-12 d-flex justify-content-end mt-3 ms-auto"
+              >
+              
+              <!-- hidden input value added to comment.profileId -->
+              <input type="hidden" name="currentProfile" value="<%= comment.profileId %>">
+              
+              <!-- <% if (currentProfile.toString() === comment.profileId) { %>
+                <button type="submit" class="btn btn-outline-dark me-2 ml-auto " id="commentXButton" style="visibility: visible;">X</button>
+              <% } else { %>
+                <button id="commentXButton" style="visibility: hidden;">X</button>
+              <% } %> -->
+            </form>
+
+          <% }); %>
+        </div>
+        <!-- comment.profileId -->
+
+
+        <!-- Comment Form (Initially Hidden) -->
+        <div id="comment-form-<%= post._id %>" class="col-md-12" style="display: none;">
+          <form action="/posts/<%= post._id %>/comments" method="POST">
+            <textarea class="form-control mb-2" name="commentText" placeholder="Write a comment..." rows="3"></textarea>
+            <button type="submit" class="btn btn-success">Submit Comment</button>
+            
+          </form>
+        </div>
+      </div>
+    <% } %>
+
+    <!-- <% for (post of posts) { %>
+    <div class="col-md-2 d-flex align-items-center">
+      <div class="profile-photo-main-feed mb-1">
+        <div class="row">
+          <div class="col-md-12 col-md-5 p-0">
+            <img id="profile-photo"
+            src="<%= post.profilePhoto %>"
+            alt="Profile Image"
+            class="rounded-circle img-fluid"
+            style="width: 70px; height: auto;"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 d-flex align-items-center">
+      <div class="pet-name">
+          <div class="row">
+            <div class="col-md-1 p-0">
+              <h4><%= post.petName %></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    
+        <div class="row align-items-md-stretch mt-3" id="pet-post" style="color: black">
+          <div class="col-md-12">
+            <div class="pet-post mb-2">
+              <div class="h-100 p-2 bg-body-tertiary border rounded-3">
+                <p><%= post.postDescription %></p>
+                <img src="<%= post.postPhotoLink %>">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 mb-4">
+          <button  class="col-md-2 like-btn text-center text-bg-dark rounded-3 " data-like-count="0"><span class="like-count">0 Likes</span></button>
+
+            
+          <button  class="col-md-3 comment-btn text-center text-bg-dark rounded-3" type="submit"  data-comment-count="0"><span class="comment-count">0 Comments</span></button>
+          
+
+        </div>
+        <% } %> -->
+
+</main>
+
+<%- include('../../partials/side-feed', { profiles }) %>
+
+<script>
+  function toggleComments(postId) {
+    const commentsSection = document.getElementById('comments-section-' + postId);
+    const commentForm = document.getElementById('comment-form-' + postId);
+    const isHidden = commentsSection.style.display === 'none';
+    
+    commentsSection.style.display = isHidden ? 'block' : 'none';
+    commentForm.style.display = isHidden ? 'block' : 'none';
+  }
+</script>
+
+
+<%- include('../../partials/footer') %>

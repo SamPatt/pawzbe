@@ -1,0 +1,132 @@
+<%- include('../../partials/header') %>
+
+<!-- {
+  petDetails: {
+    bio: "Hi, I'm Karl!",
+    favoriteToys: [ 'Stuff', 'Things' ],
+    breed: 'Shepard',
+    animalType: 'Dog',
+    dob: 2020-01-01T00:00:00.000Z
+  },
+  _id: new ObjectId('6565293f2242a241f3f00050'),
+  petName: 'Karl',
+  humanNames: [ 'tim' ],
+  images: [ '' ],
+  createdAt: 2023-11-27T23:41:51.519Z,
+  updatedAt: 2023-11-27T23:41:51.519Z,
+  __v: 0
+} -->
+
+
+<h1 class="d-flex justify-content-center">Edit Profile Details</h1>
+<form class="profile-form" action="/profiles/<%= profile._id %>?_method=PUT" method="POST">
+  <div class="form-group">
+
+    <label for="petName">Pet Name</label>
+    <input
+      type="text"
+      name="petName"
+      id="petName"
+      class="petName form-control"
+      value="<%= profile.petName %>"
+      required
+    />
+
+    <label for="animalType">Animal Type</label>
+    <input
+      type="text"
+      name="animalType"
+      id="animalType"
+      class="animalType form-control"
+      value="<%= profile.petDetails.animalType %>"
+      required
+    />
+
+    <label for="breed">Breed</label>
+    <input
+      type="text"
+      name="breed"
+      id="breed"
+      class="breed form-control"
+      value="<%= profile.petDetails.breed %>"
+    />
+
+    <label for="dob">Date of Birth</label>
+    <input
+      type="date"
+      name="dob"
+      id="dob"
+      class="dob form-control"
+      value="<%= profile.petDetails.dob.toISOString().split('T')[0] %>" 
+      required
+    />
+
+    <label for="bio">Bio</label>
+    <textarea
+      name="bio"
+      id="bio"
+      cols="30"
+      rows="5"
+      class="rounded"
+    ><%= profile.petDetails.bio %></textarea>
+
+    <label for="favoriteToys">Favorite Toys</label>
+    <input
+      type="text"
+      name="favoriteToys"
+      id="favoriteToys"
+      class="favoriteToys form-control"
+      value="<%= profile.petDetails.favoriteToys.join(', ') %>"
+    />
+
+    <label for="owners">Owners</label>
+    <input
+      type="text"
+      name="owners"
+      id="owners"
+      class="owners form-control"
+      value="<%= profile.humanNames.join(', ') %>"
+    />
+
+    <label for="banner">Banner</label>
+    <input
+      type="text"
+      name="banner"
+      id="banner"
+      class="banner form-control"
+      value="<%= profile.petPhoto.banner %>"
+    />
+
+    <label for="profilePhoto">Profile Photo</label>
+    <input
+      class="form-control"
+      type="text"
+      name="profilePhoto"
+      id="profilePhoto"
+      value="<%= profile.petPhoto.profilePhoto %>"
+    />
+
+    <button class="btn-primary btn" type="submit">Submit</button>
+  </div>
+</form>
+
+<!-- router.get("/:id/edit", profilesCtrl.edit); -->
+
+<div class="container col-md-6">
+  <h1 class="mt-5 d-flex justify-content-center">Profile Gallery Photos</h1>
+  <% for (let image of profile.images) { %>
+    <div class="image-edit-container container d-flex justify-content-center position-relative my-4">
+      <img class="img-fluid rounded-3 w-100" src=<%= image %>>
+      <div class="close-button-container position-absolute top-0 end-0 mt-3 me-4">
+        <form action="/profiles/<%= profile._id %>?_method=PUT" method="POST">
+          <input type="hidden" name="deleteImage" value="<%= image %>">
+          <button class="btn btn-danger" type="submit">X</button>
+        </form>
+      </div>
+    </div>
+  <% } %>
+</div>
+
+<%- include('../../partials/side-feed', { profiles }) %>
+
+<%- include('../../partials/footer') %>
