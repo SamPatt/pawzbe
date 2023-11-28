@@ -7,6 +7,8 @@ const methodOverride = require("method-override");
 const session = require('express-session')
 const passport = require('passport')
 const Profile = require('./models/profile')
+const fetch = require("node-fetch");
+
 
 require("dotenv").config();
 require("./config/database");
@@ -41,6 +43,8 @@ app.use(passport.session())
 app.use(async function(req, res, next) {
   res.locals.user = req.user
   try {
+    res.locals.dogBreeds = await getDogBreeds()
+    res.locals.catBreeds = await getCatBreeds()
     res.locals.profiles = await Profile.find()
     next()
   } catch (error) {
@@ -48,6 +52,52 @@ app.use(async function(req, res, next) {
     res.locals.profiles = []
     next()
   }
+   async function getDogBreeds(){
+      const URL = `https://api.thedogapi.com/v1/breeds`;
+    
+      const config = {
+        method: "GET",
+        headers: {
+          'x-api-key': process.env.BREED_API_KEY
+        }
+      };
+    
+      try {
+        const apiResponse = await fetch(URL, config);
+        
+        if (apiResponse.status >= 400) {
+          throw Error("API error");
+        }
+        
+        const apiData = await apiResponse.json();
+        return apiData;
+      } catch (err) {
+        console.log(err.message);
+      }
+    }
+    async function getCatBreeds(){
+      const URL = `https://api.thecatapi.com/v1/breeds`;
+    
+      const config = {
+        method: "GET",
+        headers: {
+          'x-api-key': process.env.BREED_API_KEY
+        }
+      };
+    
+      try {
+        const apiResponse = await fetch(URL, config);
+        
+        if (apiResponse.status >= 400) {
+          throw Error("API error");
+        }
+        
+        const apiData = await apiResponse.json();
+        return apiData;
+      } catch (err) {
+        console.log(err.message);
+      }
+    }
 })
 
 app.use("/", indexRouter);
