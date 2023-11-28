@@ -13,19 +13,26 @@ module.exports = {
 
 async function show(req, res) {
   try {
-    const user = await User.findOne({ _id: req.user._id });
-    const profile = await Profile.findById(user.profiles[0]);
-    const posts = await Post.find({ profile: profile._id })
-    
+    console.log("Called show function with ID:", req.params.id);
+    const profile = await Profile.findById(req.params.id);
+    console.log(`Show ${profile}`);
+    if (!profile) {
+      console.log("Profile not found for ID:", req.params.id);
+      // Handle the not-found case here
+      return res.status(404).send('Profile not found');
+    }
+    const posts = await Post.find({ profile: profile._id });
+
     res.render("fuzzies/profiles/show", {
       title: profile.petName + "'s Page",
       profile: profile,
       posts: posts,
     });
   } catch (err) {
-    console.log(err);
+    console.log("Error in show function:", err);
   }
 }
+
 
 async function edit(req, res) {
   try {
