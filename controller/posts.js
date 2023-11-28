@@ -57,13 +57,14 @@ async function show(req, res){
 
 async function addComment(req, res) {
     try{
+       const profile = await Profile.findById(req.user.profiles[0]._id)
+       req.body.petName = profile.petName
        const post = await Post.findById(req.params.id)
+       console.log(post)
+       console.log(req.body)
        post.postComments.push(req.body)
        await post.save()
-       res.render('fuzzies/posts/show', {
-        title: post.petName,
-        post: post,
-    })
+       res.redirect('/posts')
 
     }catch(err){
         console.log(err)
