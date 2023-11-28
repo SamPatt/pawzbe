@@ -13,7 +13,7 @@ module.exports = {
 
 async function show(req, res) {
   try {
-    const user = await User.findOne({ _id: req.user._id });
+    const user = await User.findOne({_id: req.user._id });
     const profile = await Profile.findById(user.profiles[0]);
     const posts = await Post.find({ profile: profile._id })
     

@@ -1,3 +1,4 @@
+const { restart } = require('nodemon');
 const Post = require ('../models/post')
 const Profile = require ('../models/profile')
 
@@ -76,7 +77,17 @@ async function addComment(req, res) {
 async function deletePost(req, res){
     try{
         const post = await Post.deleteOne({_id: req.params.id})
-        res.redirect(`/profile/${post.profile}`)
+        const profile = await Profile.findById(req.user.profiles[0]._id)
+        const posts = await Post.find({profile: profile._id})
+        // //res.send("post deleted")
+        // //profileId = req.user.profiles.populate('_id')
+        // //console.log(profileId)
+        // res.redirect(`/profile/${req.params.id}`)
+        res.render("fuzzies/profiles/show", {
+            title: profile.petName + "'s Page",
+            profile: profile,
+            posts: posts
+          });
     }catch(err){
         console.log(err)
     }
