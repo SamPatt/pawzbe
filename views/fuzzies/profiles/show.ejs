@@ -2,26 +2,29 @@
 %>
 <main>
   <div class="container col-md-6 py-2 mt-3">
-    <div class="bg-body-tertiary rounded-3 mt-4" id="banner">
-      <div class="container-fluid p-0">
-        <img
-          src="<%= profile.petPhoto.banner %>"
-          alt="Kitty"
-          class="img-fluid banner-image"
-        />
-        <div class="profile-container" id="profile-image">
-          <div class="row">
-            <div class="col-md-12">
-              <img
-                src="<%= profile.petPhoto.profilePhoto %>"
-                alt="Profile Image"
-                class="img-fluid rounded-circle"
-              />
+    <div class="container col-md-6 py-2 mt-3">
+      <div class="bg-body-tertiary rounded-3 mt-4" id="banner">
+        <div class="container-fluid p-0">
+          <img
+            src="<%= profile.petPhoto.banner %>"
+            alt="Kitty"
+            class="img-fluid banner-image"
+          />
+          <div class="profile-container" id="profile-image">
+            <div class="row">
+              <div class="col-md-12">
+                <img
+                  src="<%= profile.petPhoto.profilePhoto %>"
+                  alt="Profile Image"
+                  class="img-fluid rounded-circle profile-image"
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    
     <div class="mb-4 row align-items-md-stretch" id="pet-detail-bio">
       <div class="col-md-4">
         <div class="h-1 p-1 mb-3 text-center text-bg-dark rounded-3">
@@ -167,14 +170,26 @@
         class="col-md-12 mb-3"
         style="display: none"
       >
+
+
         <% post.postComments.forEach(comment => { %>
         <div class="comment mb-2">
           <strong class="d-block"><%= comment.petName %></strong>
           <p class="mb-0"><%= comment.commentText %></p>
+          <form
+              action="/posts/<%=post._id%>/comments/<%=post._id%>?_method=DELETE"
+              method="POST"
+              class="col-md-12 d-flex justify-content-end mt-3 ms-auto"
+            >
+              <button type="submit" class="btn btn-outline-dark me-2 ml-auto">
+                X
+              </button>
+            </form>
+          
         </div>
         <% }); %>
-      </div>
 
+      </div>
       <!-- Comment Form (Initially Hidden) -->
       <div
         id="comment-form-<%= post._id %>"
@@ -192,8 +207,9 @@
         </form>
       </div>
     </div>
-    <% } %>
-  </div>
+
+      <% } %>
+    </div>
 
   <%- include('../../partials/side-feed') %> <%-
   include('../../partials/footer') %>
