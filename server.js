@@ -6,6 +6,7 @@ const logger = require("morgan");
 const methodOverride = require("method-override");
 const session = require('express-session')
 const passport = require('passport')
+const Profile = require('./models/profile')
 
 require("dotenv").config();
 require("./config/database");
@@ -37,9 +38,16 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use(function(req, res, next) {
+app.use(async function(req, res, next) {
   res.locals.user = req.user
-  next()
+  try {
+    res.locals.profiles = await Profile.find()
+    next()
+  } catch (error) {
+    console.error(error)
+    res.locals.profiles = []
+    next()
+  }
 })
 
 app.use("/", indexRouter);

@@ -2,23 +2,21 @@
 %>
 <main>
   <div class="container col-md-6 py-2 mt-3">
-    <div class="container col-md-6 py-2 mt-3">
-      <div class="bg-body-tertiary rounded-3 mt-4" id="banner">
-        <div class="container-fluid p-0">
-          <img
-            src="<%= profile.petPhoto.banner %>"
-            alt="Kitty"
-            class="img-fluid banner-image"
-          />
-          <div class="profile-container" id="profile-image">
-            <div class="row">
-              <div class="col-md-12">
-                <img
-                  src="<%= profile.petPhoto.profilePhoto %>"
-                  alt="Profile Image"
-                  class="img-fluid rounded-circle profile-image"
-                />
-              </div>
+    <div class="rounded-3 mt-4" id="banner">
+      <div class="container-fluid bg-transparent p-0">
+        <img
+          src="<%= profile.petPhoto.banner %>"
+          alt="Kitty"
+          class="img-fluid rounded-3 banner-image"
+        />
+        <div class="profile-info" id="profile-image">
+          <div class="row">
+            <div class="col-md-12">
+              <img
+                src="<%= profile.petPhoto.profilePhoto %>"
+                alt="Profile Image"
+                class="img-fluid rounded-circle"
+              />
             </div>
           </div>
         </div>
@@ -26,6 +24,13 @@
     </div>
     
     <div class="mb-4 row align-items-md-stretch" id="pet-detail-bio">
+      
+      <div class="container d-flex justify-content-end m-2">
+        <a href="/profiles/<%= profile._id %>/edit">
+          <button class="btn btn-secondary">Edit Profile</button>
+        </a>
+      </div>
+
       <div class="col-md-4">
         <div class="h-1 p-1 mb-3 text-center text-bg-dark rounded-3">
           <h2><%= profile.petName %></h2>
@@ -50,28 +55,27 @@
 
     <!---------------------------------------------------------------------------------------------------------------- -->
 
-    <div class="container">
+    <div class="container mt-5">
       <h2>Gallery</h2>
       <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
-          <li
-            data-bs-target="#myCarousel"
-            data-bs-slide-to="0"
-            class="active"
-          ></li>
-          <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
-          <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+          <% for (let i = 0; i < profile.images.length; i++) { %>
+            <li
+              data-bs-target="#myCarousel"
+              data-bs-slide-to="<%= i %>"
+              <% if (i === 0) { %>class="active"<% } %>
+            ></li>
+          <% } %>
         </ol>
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
-          <% for (let index in profile.images) { %> <% const isActive = (index
-          == 0) ? 'active' : '' %> <% console.log(index, isActive) %>
+          <% for (let index in profile.images) { %> 
+            <% const isActive = (parseInt(index) == 0) ? 'active' : '' %>
           <div class="carousel-item <%= isActive %>">
             <img
               src="<%= profile.images[index] %>"
-              alt="Los Angeles"
               class="d-block w-100"
             />
             <div class="carousel-caption">
@@ -109,18 +113,25 @@
         action="/profiles/<%= user._id %>?_method=PUT"
         method="POST"
       >
-        <input
-          type="text"
-          name="images"
-          class="form-control m-2"
-          placeholder="Image URL (comma separated)"
-        />
-        <button class="add-images-btn btn btn-primary">+</button>
+        <div class="row w-100">
+          <div class="col-10">
+            <input
+              type="text"
+              name="images"
+              class="form-control m-2"
+              placeholder="Image URL (comma separated)"
+            />
+          </div>
+          <div class="col-2">
+            <button class="add-images-btn btn btn-primary">+</button>
+          </div>
+        </div>
+        
       </form>
     </div>
 
     <!---------------------------------------------------------------------------------------------------------------- -->
-    <div class="col-md-9 d-flex align-items-center">
+    <div class="col-md-9 mt-5 d-flex align-items-center">
       <div class="pet-name">
         <div class="row">
           <div class="col-md-12 p-0">
@@ -211,9 +222,9 @@
       <% } %>
     </div>
 
-  <%- include('../../partials/side-feed') %> <%-
-  include('../../partials/footer') %>
 </main>
+
+<%- include('../../partials/side-feed', { profiles }) %>
 
 <script>
   function toggleComments(postId) {
@@ -227,3 +238,5 @@
     commentForm.style.display = isHidden ? "block" : "none";
   }
 </script>
+
+<%- include('../../partials/footer') %>

@@ -2,197 +2,25 @@
   <div class="feed-header">
     <p>Top Pets</p>
   </div>
-  <div class="row feed-content">
-    <a href="#">
-      <div class="col-12 feed-item rounded">
-        <div class="login-circle feed-pic">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB7kVmwnZoT3tL3LkdfZfbetFHxa47cj0CslFCNDW5JAI70sLqBlkUaPhrlRe583VP9Oc&usqp=CAU"
-            alt="Profile Image"
-            class="img-fluid"
-          />
+  
+  <% for (let profile of profiles) { %>
+    <div class="row feed-content">
+      <a href="/profiles/<%= profile._id %>">
+        <div class="col-12 feed-item rounded">
+          <div class="login-circle feed-pic">
+            <img
+              src="<%= profile.petPhoto.profilePhoto %>"
+              alt="Profile Image"
+              class="img-fluid"
+            />
+          </div>
+          <div class="feed-info">
+            <p><%= profile.petName %></p>
+            <small>Likes: 463</small><small>Posts: 95</small>
+          </div>
         </div>
-        <div class="feed-info">
-          <p>Fluffy</p>
-          <small>Likes: 463</small><small>Posts: 95</small>
-        </div>
-      </div>
-    </a>
+      </a>
+    </div>
+  <% } %>
 
-    <a href="#">
-      <div class="col-12 feed-item rounded">
-        <div class="login-circle feed-pic">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1628COXYCnZOJn3yk_yIyU2rnoNRWfPgaMOKwilcmU1RQ0iNiORfhP83o4xM0_cv5uSM&usqp=CAU"
-            alt="Profile Image"
-            class="img-fluid"
-          />
-        </div>
-        <div class="feed-info">
-          <p>Fluffy</p>
-          <small>Likes: 463</small><small>Posts: 95</small>
-        </div>
-      </div>
-    </a>
-
-    <a href="#">
-      <div class="col-12 feed-item rounded">
-        <div class="login-circle feed-pic">
-          <img
-            src="https://media1.popsugar-assets.com/files/thumbor/yDmG0ifN-I44d2uG4EIDwWg2yfE/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2018/08/21/616/n/24155406/a4387395142b050c_charles-deluvio-550068-unsplash/i/Cute-Photos-Dogs.jpg"
-            alt="Profile Image"
-            class="img-fluid"
-          />
-        </div>
-        <div class="feed-info">
-          <p>Fluffy</p>
-          <small>Likes: 463</small><small>Posts: 95</small>
-        </div>
-      </div>
-    </a>
-
-    <a href="#">
-      <div class="col-12 feed-item rounded">
-        <div class="login-circle feed-pic">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB7kVmwnZoT3tL3LkdfZfbetFHxa47cj0CslFCNDW5JAI70sLqBlkUaPhrlRe583VP9Oc&usqp=CAU"
-            alt="Profile Image"
-            class="img-fluid"
-          />
-        </div>
-        <div class="feed-info">
-          <p>Fluffy</p>
-          <small>Likes: 463</small><small>Posts: 95</small>
-        </div>
-      </div>
-    </a>
-
-    <a href="#">
-      <div class="col-12 feed-item rounded">
-        <div class="login-circle feed-pic">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1628COXYCnZOJn3yk_yIyU2rnoNRWfPgaMOKwilcmU1RQ0iNiORfhP83o4xM0_cv5uSM&usqp=CAU"
-            alt="Profile Image"
-            class="img-fluid"
-          />
-        </div>
-        <div class="feed-info">
-          <p>Fluffy</p>
-          <small>Likes: 463</small><small>Posts: 95</small>
-        </div>
-      </div>
-    </a>
-
-    <a href="#">
-      <div class="col-12 feed-item rounded">
-        <div class="login-circle feed-pic">
-          <img
-            src="https://media1.popsugar-assets.com/files/thumbor/yDmG0ifN-I44d2uG4EIDwWg2yfE/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2018/08/21/616/n/24155406/a4387395142b050c_charles-deluvio-550068-unsplash/i/Cute-Photos-Dogs.jpg"
-            alt="Profile Image"
-            class="img-fluid"
-          />
-        </div>
-        <div class="feed-info">
-          <p>Fluffy</p>
-          <small>Likes: 463</small><small>Posts: 95</small>
-        </div>
-      </div>
-    </a>
-
-    <a href="#">
-      <div class="col-12 feed-item rounded">
-        <div class="login-circle feed-pic">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB7kVmwnZoT3tL3LkdfZfbetFHxa47cj0CslFCNDW5JAI70sLqBlkUaPhrlRe583VP9Oc&usqp=CAU"
-            alt="Profile Image"
-            class="img-fluid"
-          />
-        </div>
-        <div class="feed-info">
-          <p>Fluffy</p>
-          <small>Likes: 463</small><small>Posts: 95</small>
-        </div>
-      </div>
-    </a>
-
-    <a href="#">
-      <div class="col-12 feed-item rounded">
-        <div class="login-circle feed-pic">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1628COXYCnZOJn3yk_yIyU2rnoNRWfPgaMOKwilcmU1RQ0iNiORfhP83o4xM0_cv5uSM&usqp=CAU"
-            alt="Profile Image"
-            class="img-fluid"
-          />
-        </div>
-        <div class="feed-info">
-          <p>Fluffy</p>
-          <small>Likes: 463</small><small>Posts: 95</small>
-        </div>
-      </div>
-    </a>
-
-    <a href="#">
-      <div class="col-12 feed-item rounded">
-        <div class="login-circle feed-pic">
-          <img
-            src="https://media1.popsugar-assets.com/files/thumbor/yDmG0ifN-I44d2uG4EIDwWg2yfE/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2018/08/21/616/n/24155406/a4387395142b050c_charles-deluvio-550068-unsplash/i/Cute-Photos-Dogs.jpg"
-            alt="Profile Image"
-            class="img-fluid"
-          />
-        </div>
-        <div class="feed-info">
-          <p>Fluffy</p>
-          <small>Likes: 463</small><small>Posts: 95</small>
-        </div>
-      </div>
-    </a>
-
-    <a href="#">
-      <div class="col-12 feed-item rounded">
-        <div class="login-circle feed-pic">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB7kVmwnZoT3tL3LkdfZfbetFHxa47cj0CslFCNDW5JAI70sLqBlkUaPhrlRe583VP9Oc&usqp=CAU"
-            alt="Profile Image"
-            class="img-fluid"
-          />
-        </div>
-        <div class="feed-info">
-          <p>Fluffy</p>
-          <small>Likes: 463</small><small>Posts: 95</small>
-        </div>
-      </div>
-    </a>
-
-    <a href="#">
-      <div class="col-12 feed-item rounded">
-        <div class="login-circle feed-pic">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1628COXYCnZOJn3yk_yIyU2rnoNRWfPgaMOKwilcmU1RQ0iNiORfhP83o4xM0_cv5uSM&usqp=CAU"
-            alt="Profile Image"
-            class="img-fluid"
-          />
-        </div>
-        <div class="feed-info">
-          <p>Fluffy</p>
-          <small>Likes: 463</small><small>Posts: 95</small>
-        </div>
-      </div>
-    </a>
-
-    <a href="#">
-      <div class="col-12 feed-item rounded">
-        <div class="login-circle feed-pic">
-          <img
-            src="https://media1.popsugar-assets.com/files/thumbor/yDmG0ifN-I44d2uG4EIDwWg2yfE/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2018/08/21/616/n/24155406/a4387395142b050c_charles-deluvio-550068-unsplash/i/Cute-Photos-Dogs.jpg"
-            alt="Profile Image"
-            class="img-fluid"
-          />
-        </div>
-        <div class="feed-info">
-          <p>Fluffy</p>
-          <small>Likes: 463</small><small>Posts: 95</small>
-        </div>
-      </div>
-    </a>
-  </div>
 </div>

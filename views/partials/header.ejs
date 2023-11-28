@@ -41,7 +41,9 @@
               <% if (user) { %>
                 <small>Welcome, <%= user.name %>!</small>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/profiles/<%= user._id %>">View Profile</a>
+                <% if (user.profiles[0]) { %>
+                  <a class="dropdown-item" href="/profiles/<%= user.profiles[0]._id %>">View Profile</a>
+                <% } %>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/logout">Log Out</a>
                 <a class="dropdown-item" href="/users/<%= user._id %>">User Settings</a>
