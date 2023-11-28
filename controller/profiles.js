@@ -61,35 +61,81 @@ async function update(req, res) {
     const profile = await Profile.findById(user.profiles[0])
     const posts = await Post.find({ profile: profile._id })
     const profiles = res.locals.profiles
-
+    
     if (req.body.images) {
-      
       const links = req.body.images.split(',').map(i => i.trim())
       profile.images.push(...links)
-
-      console.log(profile._id)
 
       await Profile.findOneAndUpdate(
         { _id: profile._id },
         { $set: profile }
-      );
-      
+      )
+
+      res.render('fuzzies/profiles/show', {
+        title: 'Pet Added',
+        profile: profile,
+        posts: posts,
+        profiles,
+      });
+
+    } else if (req.body.deleteImage) {
+      try {
+        const profile = await Profile.findById( req.params.id );
+        profile.images.splice(profile.images.indexOf(req.body.deleteImage), 1)
+        console.log(profile.images)
+        
+        await Profile.findOneAndUpdate(
+          { _id: profile._id },
+          { $set: profile }
+        )
+
+        res.render('fuzzies/profiles/edit', {
+          title: 'Profile Updated!',
+          profile: profile,
+          posts: posts,
+          profiles,
+        });
+
+      } catch (err) {
+        console.log(err);
+      }
     } else {
-      // update profile
+      const updatedProfile = {}
+      let pet = {
+        petPhoto: {},
+        // images:[],
+      }
+      const user = await User.findById(req.user._id)
+      
+      try {
+        with (req.body) {
+          pet.petName = petName
+          pet.humanNames = owners.split(',').map(i => i.trim())
+          pet.petPhoto.banner = banner
+          pet.petPhoto.profilePhoto = profilePhoto
+          pet.petDetails = {
+            bio: bio,
+            favoriteToys: favoriteToys.split(',').map(i => i.trim()),
+            breed: breed,
+            animalType: animalType,
+            dob: dob,
+          }
+          // pet.images = [...images.split(',').map(i => i.trim())]
+        }
 
-      // const profile = await Profile.findOneAndUpdate(
-      //   { _id: req.params.id },
-      //   { $set: req.body }
-      // );
+        await Profile.findOneAndUpdate(
+          { _id: profile._id },
+          { $set: pet }
+        )
+
+        res.redirect(`/profiles/${profile._id}/edit`)
+    } catch (err) {
+      console.log(err);
     }
+  }
 
 
-    res.render('fuzzies/profiles/show', {
-      title: 'Pet Added',
-      profile: profile,
-      posts: posts,
-      profiles,
-    });
+    
 
   } catch (err) {
     console.log(err);
