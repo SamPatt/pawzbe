@@ -47,10 +47,12 @@ async function update(req, res) {
 
 async function show(req, res) {
   const userData = await User.findById(req.params.id).populate('profiles')
+  const profiles = res.locals.profiles
 
   res.render('fuzzies/users/show', { 
     title: 'User Settings', 
     user: userData,
+    profiles,
   })
 }
 

@@ -5,8 +5,8 @@ var profilesCtrl = require("../controller/profiles");
 // router.get("/", profilesCtrl.show);
 router.post("/", profilesCtrl.create);
 
-router.get("/:id", profilesCtrl.show);
 router.get("/new", profilesCtrl.new);
+router.get("/:id", profilesCtrl.show);
 
 router.put("/:id", profilesCtrl.update);
 router.delete("/:id", profilesCtrl.delete);

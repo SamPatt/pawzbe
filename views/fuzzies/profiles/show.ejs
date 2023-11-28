@@ -22,7 +22,15 @@
         </div>
       </div>
     </div>
+    
     <div class="mb-4 row align-items-md-stretch" id="pet-detail-bio">
+      
+      <div class="container d-flex justify-content-end">
+        <a href="/profiles/<%= profile._id %>/edit">
+          <button class="btn btn-secondary">Edit</button>
+        </a>
+      </div>
+
       <div class="col-md-4">
         <div class="h-1 p-1 mb-3 text-center text-bg-dark rounded-3">
           <h2><%= profile.petName %></h2>
@@ -68,7 +76,6 @@
           <div class="carousel-item <%= isActive %>">
             <img
               src="<%= profile.images[index] %>"
-              alt="Los Angeles"
               class="d-block w-100"
             />
             <div class="carousel-caption">
@@ -195,9 +202,9 @@
     <% } %>
   </div>
 
-  <%- include('../../partials/side-feed') %> <%-
-  include('../../partials/footer') %>
 </main>
+
+<%- include('../../partials/side-feed', { profiles }) %>
 
 <script>
   function toggleComments(postId) {
@@ -211,3 +218,5 @@
     commentForm.style.display = isHidden ? "block" : "none";
   }
 </script>
+
+<%- include('../../partials/footer') %>
