@@ -16,76 +16,91 @@
   updatedAt: 2023-11-27T23:41:51.519Z,
   __v: 0
 } -->
-<% console.log(profile.petPhoto) %>
+
 <form class="profile-form" action="/profiles/" method="POST">
   <div class="form-group">
+    <label for="petName">Pet Name</label>
     <input
       type="text"
       name="petName"
+      id="petName"
       class="petName form-control"
-      value="profile.petName"
+      value="<%= profile.petName %>"
       required
     />
 
+    <label for="animalType">Animal Type</label>
     <input
       type="text"
       name="animalType"
+      id="animalType"
       class="animalType form-control"
-      value="profile.petDetails.animalType"
+      value="<%= profile.petDetails.animalType %>"
       required
     />
 
+    <label for="breed">Breed</label>
     <input
       type="text"
       name="breed"
+      id="breed"
       class="breed form-control"
-      value="profile.petDetails.breed"
+      value="<%= profile.petDetails.breed %>"
     />
 
+    <label for="dob">Date of Birth</label>
     <input
       type="date"
       name="dob"
+      id="dob"
       class="dob form-control"
-      value="profile.petDetails.dob"
+      value="<%= profile.petDetails.dob.toISOString().split('T')[0] %>" 
       required
     />
 
+    <label for="bio">Bio</label>
     <textarea
       name="bio"
       id="bio"
-      value="profile.petDetails.bio"
       cols="30"
       rows="5"
       class="rounded"
-    ></textarea>
+    ><%= profile.petDetails.bio %></textarea>
 
+    <label for="favoriteToys">Favorite Toys</label>
     <input
       type="text"
       name="favoriteToys"
+      id="favoriteToys"
       class="favoriteToys form-control"
-      value="profile.favoriteToys"
+      value="<%= profile.petDetails.favoriteToys.join(', ') %>"
     />
 
+    <label for="banner">Banner</label>
     <input
       type="text"
       name="banner"
+      id="banner"
       class="banner form-control"
-      value="profile.banner"
+      value="<%= profile.petPhoto.banner %>"
     />
 
+    <label for="owners">Owners</label>
     <input
       type="text"
       name="owners"
+      id="owners"
       class="owners form-control"
-      value="profile.owners"
+      value="<%= profile.owners %>"
     />
 
+    <label for="profilePhoto">Profile Photo</label>
     <input
       class="form-control"
       type="text"
       name="profilePhoto"
       id="profilePhoto"
-      value="profile.profilePhoto"
+      value="<%= profile.petPhoto.profilePhoto %>"
     />
 
     <button class="btn-primary btn" type="submit">Submit</button>
