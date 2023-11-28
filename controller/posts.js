@@ -72,6 +72,7 @@ async function addComment(req, res) {
   }
 }
 
+
 async function deleteComment(req, res) {
   try {
     const owner = (req.user.profiles[0]._id.toString() === req.params.id) ? true : false

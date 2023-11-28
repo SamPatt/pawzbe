@@ -50,8 +50,13 @@
         <div class="h-100 p-5 bg-body-tertiary border rounded-3">
           <h2>Bio</h2>
           <p><%= profile.petDetails.bio %></p>
+          <% if (breedInfo) { %>
+            <h3>Breed Information</h3>
+            <p><%= breedInfo %></p>
+          <% } %>
         </div>
       </div>
+      
     </div>
 
     <!---------------------------------------------------------------------------------------------------------------- -->

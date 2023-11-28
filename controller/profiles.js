@@ -22,10 +22,33 @@ async function show(req, res) {
 
     if (!profile) {
       console.log("Profile not found for ID:", req.params.id);
-      // Handle the not-found case here
       return res.status(404).send('Profile not found');
     }
-    
+
+    const owner = (req.user._id === req.params.id) ? true : false;
+    const profiles = res.locals.profiles;
+    const dogBreeds = res.locals.dogBreeds;
+    const catBreeds = res.locals.catBreeds;
+
+    let breedInfo = null;
+
+    if (profile.petDetails.breed) {
+      const breedName = profile.petDetails.breed;
+      const animalType = profile.petDetails.animalType;
+
+      if (animalType === "Dog") {
+        const breedData = dogBreeds.find(breed => breed.name === breedName);
+        if (breedData) {
+          breedInfo = breedData.temperament;
+        }
+      } else if (animalType === "Cat") {
+        const breedData = catBreeds.find(breed => breed.name === breedName);
+        if (breedData) {
+          breedInfo = breedData.description;
+        }
+      }
+    }
+
     const posts = await Post.find({ profile: profile._id });
 
     res.render("fuzzies/profiles/show", {
@@ -33,13 +56,16 @@ async function show(req, res) {
       profile: profile,
       posts: posts,
       profiles,
+      breedInfo,
       currentProfile,
       owner,
     });
   } catch (err) {
     console.log("Error in show function:", err);
+    res.status(500).send('Internal Server Error');
   }
 }
+
 
 
 async function edit(req, res) {
@@ -147,9 +173,23 @@ async function update(req, res) {
 }
 
 function newProfile(req, res) {
-  const profiles = res.locals.profiles
-  res.render("fuzzies/profiles/new", { title: "Make Profile", user: req.user, profiles });
+  const profiles = res.locals.profiles;
+  const dogBreeds = res.locals.dogBreeds;
+  const catBreeds = res.locals.catBreeds;
+
+  // Extract only the names of the breeds
+  const dogBreedNames = dogBreeds.map(breed => breed.name);
+  const catBreedNames = catBreeds.map(breed => breed.name);
+
+  res.render("fuzzies/profiles/new", { 
+    title: "Make Profile", 
+    user: req.user, 
+    profiles, 
+    dogBreeds: dogBreedNames, 
+    catBreeds: catBreedNames
+  });
 }
+
 
 
 async function create(req, res) {
@@ -158,6 +198,9 @@ async function create(req, res) {
     // images:[],
   }
   const user = await User.findById(req.user._id)
+  if(req.body.animalTypeOther){
+    req.body.animalType = req.body.animalTypeOther
+  }
   
   try {
     with (req.body) {
