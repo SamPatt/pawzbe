@@ -25,8 +25,6 @@ async function show(req, res) {
       return res.status(404).send('Profile not found');
     }
 
-    const owner = (req.user._id === req.params.id) ? true : false;
-    const profiles = res.locals.profiles;
     const dogBreeds = res.locals.dogBreeds;
     const catBreeds = res.locals.catBreeds;
 
