@@ -12,7 +12,9 @@ module.exports = {
 
 async function show(req, res) {
   try {
+    
     console.log("Called show function with ID:", req.params.id);
+    const currentProfile = req.params.id;
     const profile = await Profile.findById(req.params.id);
 
     const owner = (req.user.profiles[0]._id.toString() === req.params.id) ? true : false
@@ -30,8 +32,9 @@ async function show(req, res) {
       title: profile.petName + "'s Page",
       profile: profile,
       posts: posts,
-      owner: owner,
       profiles,
+      currentProfile,
+      owner,
     });
   } catch (err) {
     console.log("Error in show function:", err);
