@@ -6,7 +6,6 @@
       <div class="container-fluid bg-transparent p-0">
         <img
           src="<%= profile.petPhoto.banner %>"
-          alt="Kitty"
           class="img-fluid rounded-3 banner-image"
         />
         <div class="profile-info" id="profile-image">
@@ -25,13 +24,15 @@
     
     <div class="mb-4 row align-items-md-stretch" id="pet-detail-bio">
       
-      <div class="container d-flex justify-content-end m-2">
-        <a href="/profiles/<%= profile._id %>/edit">
-          <button class="btn btn-secondary">Edit Profile</button>
-        </a>
-      </div>
+      <% if (owner) { %>
+        <div class="container d-flex justify-content-end m-2">
+          <a href="/profiles/<%= profile._id %>/edit">
+            <button class="btn btn-secondary">Edit Profile</button>
+          </a>
+        </div>
+      <% } %>
 
-      <div class="col-md-4">
+      <div class="col-md-4 mt-4">
         <div class="h-1 p-1 mb-3 text-center text-bg-dark rounded-3">
           <h2><%= profile.petName %></h2>
         </div>
@@ -57,55 +58,59 @@
 
     <div class="container mt-5">
       <h2>Gallery</h2>
-      <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <% for (let i = 0; i < profile.images.length; i++) { %>
-            <li
-              data-bs-target="#myCarousel"
-              data-bs-slide-to="<%= i %>"
-              <% if (i === 0) { %>class="active"<% } %>
-            ></li>
-          <% } %>
-        </ol>
+      <% if (profile.images.length > 0) { %>
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <% for (let i = 0; i < profile.images.length; i++) { %>
+              <li
+                data-bs-target="#myCarousel"
+                data-bs-slide-to="<%= i %>"
+                <% if (i === 0) { %>class="active"<% } %>
+              ></li>
+            <% } %>
+          </ol>
 
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-          <% for (let index in profile.images) { %> 
-            <% const isActive = (parseInt(index) == 0) ? 'active' : '' %>
-          <div class="carousel-item <%= isActive %>">
-            <img
-              src="<%= profile.images[index] %>"
-              class="d-block w-100"
-            />
-            <div class="carousel-caption">
-              <!-- add caption here -->
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+            <% for (let index in profile.images) { %> 
+              <% const isActive = (parseInt(index) == 0) ? 'active' : '' %>
+            <div class="carousel-item <%= isActive %>">
+              <img
+                src="<%= profile.images[index] %>"
+                class="d-block w-100"
+              />
+              <div class="carousel-caption">
+                <!-- add caption here -->
+              </div>
             </div>
+            <% } %>
           </div>
-          <% } %>
-        </div>
 
-        <!-- Left and right controls -->
-        <button
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#myCarousel"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#myCarousel"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+          <!-- Left and right controls -->
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#myCarousel"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button  
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#myCarousel"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
       </div>
-    </div>
+    <% } else { %>
+      <p>No photos added yet!</p>
+    <% } %>
 
     <div class="container">
       <form
