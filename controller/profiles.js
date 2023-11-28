@@ -68,6 +68,7 @@ async function show(req, res) {
 
 async function edit(req, res) {
   try {
+
     const user = await User.findById(req.user._id)
     const profile = await Profile.findById(user.profiles[0])
     const profiles = res.locals.profiles
@@ -76,6 +77,7 @@ async function edit(req, res) {
       title: `Editing ${profile.petName}`,
       profile: profile,
       profiles,
+      
     });
   } catch (err) {
     console.log(err);
@@ -85,6 +87,7 @@ async function edit(req, res) {
 async function update(req, res) {
   try {
     
+    const owner = (req.user.profiles[0]._id.toString() === req.params.id) ? true : false
     const user = await User.findById(req.user._id)
     const profile = await Profile.findById(user.profiles[0])
     const posts = await Post.find({ profile: profile._id })
@@ -98,16 +101,39 @@ async function update(req, res) {
         { _id: profile._id },
         { $set: profile }
       )
+      const dogBreeds = res.locals.dogBreeds;
+      const catBreeds = res.locals.catBreeds;
 
+      let breedInfo = null;
+
+      if (profile.petDetails.breed) {
+        const breedName = profile.petDetails.breed;
+        const animalType = profile.petDetails.animalType;
+
+        if (animalType === "Dog") {
+          const breedData = dogBreeds.find((breed) => breed.name === breedName);
+          if (breedData) {
+            breedInfo = breedData.temperament;
+          }
+        } else if (animalType === "Cat") {
+          const breedData = catBreeds.find((breed) => breed.name === breedName);
+          if (breedData) {
+            breedInfo = breedData.description;
+          }
+        }
+      }
       res.render('fuzzies/profiles/show', {
         title: 'Pet Added',
         profile: profile,
         posts: posts,
         profiles,
+        owner,
+        breedInfo
       });
 
     } else if (req.body.deleteImage) {
       try {
+        const owner = (req.user.profiles[0]._id.toString() === req.params.id) ? true : false
         const profile = await Profile.findById( req.params.id );
         profile.images.splice(profile.images.indexOf(req.body.deleteImage), 1)
         console.log(profile.images)
@@ -122,6 +148,7 @@ async function update(req, res) {
           profile: profile,
           posts: posts,
           profiles,
+          owner,
         });
 
       } catch (err) {
