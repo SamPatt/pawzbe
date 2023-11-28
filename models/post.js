@@ -8,6 +8,7 @@ const commentSchema = new Schema(
       required: true,
     },
     commentText: String,
+    profileId: String,
   },
   { timestamps: true }
 );

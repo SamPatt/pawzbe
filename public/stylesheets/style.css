@@ -295,4 +295,7 @@ li {
   #profile-image {
     display: none;
   }
+  #pet-detail-bio {
+    margin-top: 30px;
+  }
 }
