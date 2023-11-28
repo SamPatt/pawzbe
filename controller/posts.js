@@ -21,6 +21,7 @@ async function index(req, res) {
     });
   } catch (err) {
     console.log(err);
+    res.status(500).send("Internal Server Error");
   }
 }
 
@@ -41,6 +42,7 @@ async function create(req, res) {
 
 async function show(req, res) {
   try {
+    const currentProfile = req.user.profiles[0]._id;
     const post = await Post.findById(req.params.id);
     res.render("fuzzies/posts/show", {
       title: post.petName,
@@ -58,11 +60,14 @@ async function addComment(req, res) {
     const post = await Post.findById(req.params.id);
     console.log(post);
     console.log(req.body);
+    //creating profile id key for the form
+    req.body.profileId = req.user.profile[0]._id
     post.postComments.push(req.body);
     await post.save();
     res.redirect("/posts");
   } catch (err) {
     console.log(err);
+    res.status(500).send("Internal Server Error");
   }
 }
 
@@ -72,34 +77,38 @@ async function deleteComment(req, res) {
     req.body.petName = profile.petName;
     const post = await Post.findById(req.params.id);
     console.log("this is my req.params", req.body.currentProfile);
-    console.log("this is id from oauth", req.user.profiles[0]._id);
-    
-    if (req.body.currentProfile === req.user.profiles[0]._id.toString()) {
-        // console.log(req.body)
-        // console.log(post.postComments)
-        // console.log("this is req params id", req.params.id);
-        // console.log("index of ", post.postComments.indexOf(req.params.id));
-        post.postComments.forEach(function(postComment, index){
-            console.log(postComment, index)
-            console.log(post._id.toString())
-            console.log(req.params.id)
-            if (post._id.toString() === req.params.id){
-                post.postComments.splice(index, 1)
-            } 
-        })
-        // post.postComments.splice(
-        await post.save();
-        const posts = await Post.find({profile: req.user.profiles[0]})
-        res.render("fuzzies/profiles/show", {
-            title: profile.petName + "'s Page",
-            profile: profile,
-            posts: posts
+    console.log("this is id from oauth", req.user.profiles[0]._id.toString());
+    //by assigning a variable we can reach
+    //to the input variable current profile for conditional
+    //statement both here and condition in ejs
+    const currentProfile = req.body.currentProfile;
+    console.log(currentProfile);
+    if (currentProfile === req.user.profiles[0]._id.toString()) {
+      console.log(req.body);
+      console.log(post.postComments);
+      console.log("this is req params id", req.params.id);
+      console.log("index of ", post.postComments.indexOf(req.params.id));
+      post.postComments.forEach(function (postComment, index) {
+        console.log(postComment, index);
+        console.log(post._id.toString());
+        console.log(req.params.id);
+        if (post._id.toString() === req.params.id) {
+          post.postComments.splice(index, 1);
+        }
       });
-    } else {
-      res.send("you are not allowed to delete other's comments");
+      
+      await post.save();
+      const posts = await Post.find({ profile: req.user.profiles[0] });
+      res.render("fuzzies/profiles/show", {
+        title: profile.petName + "'s Page",
+        profile: profile,
+        posts: posts,
+        currentProfile: currentProfile,
+      });
     }
   } catch (err) {
     console.log(err);
+    res.status(500).send("Internal Server Error");
   }
 }
 
@@ -115,5 +124,6 @@ async function deletePost(req, res) {
     });
   } catch (err) {
     console.log(err);
+    res.status(500).send("Internal Server Error");
   }
 }

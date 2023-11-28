@@ -188,16 +188,18 @@
           <strong class="d-block"><%= comment.petName %></strong>
           <p class="mb-0"><%= comment.commentText %></p>
 
-          <form
-              action="/posts/comments/<%=post._id%>?_method=DELETE"
-              method="POST"
-              class="col-md-12 d-flex justify-content-end mt-3 ms-auto"
-              >
-              <input type="hidden" name="currentProfile" value="<%= profile._id %>">
-              <button type="submit" class="btn btn-outline-dark me-2 ml-auto">
-                X
-              </button>
-            </form>
+        <form
+          action="/posts/comments/<%= post._id %>?_method=DELETE"
+          method="POST"
+          class="col-md-12 d-flex justify-content-end mt-3 ms-auto"
+          >
+          <input type="hidden" name="currentProfile" value="<%= profile._id %>">
+          <% if (currentProfile === user.profiles[0]._id.toString()) { %>
+            <button type="submit" class="btn btn-outline-dark me-2 ml-auto " id="commentXButton" style="visibility: visible;">X</button>
+          <% } else { %>
+            <button id="commentXButton" style="visibility: hidden;">X</button>
+          <% } %>
+        </form>
 
         </div>
         <% }); %>
