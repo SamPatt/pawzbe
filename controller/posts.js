@@ -71,11 +71,33 @@ async function deleteComment(req, res) {
     const profile = await Profile.findById(req.user.profiles[0]._id);
     req.body.petName = profile.petName;
     const post = await Post.findById(req.params.id);
-    console.log(post);
-    console.log(req.body);
-    post.postComments.splice(req.body, 1);
-    await post.save();
-    res.redirect(`/profiles/${req.user.profiles[0]._id}`);
+    console.log("this is my req.params", req.body.currentProfile);
+    console.log("this is id from oauth", req.user.profiles[0]._id);
+    
+    if (req.body.currentProfile === req.user.profiles[0]._id.toString()) {
+        // console.log(req.body)
+        // console.log(post.postComments)
+        // console.log("this is req params id", req.params.id);
+        // console.log("index of ", post.postComments.indexOf(req.params.id));
+        post.postComments.forEach(function(postComment, index){
+            console.log(postComment, index)
+            console.log(post._id.toString())
+            console.log(req.params.id)
+            if (post._id.toString() === req.params.id){
+                post.postComments.splice(index, 1)
+            } 
+        })
+        // post.postComments.splice(
+        await post.save();
+        const posts = await Post.find({profile: req.user.profiles[0]})
+        res.render("fuzzies/profiles/show", {
+            title: profile.petName + "'s Page",
+            profile: profile,
+            posts: posts
+      });
+    } else {
+      res.send("you are not allowed to delete other's comments");
+    }
   } catch (err) {
     console.log(err);
   }

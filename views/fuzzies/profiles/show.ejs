@@ -187,16 +187,18 @@
         <div class="comment mb-2">
           <strong class="d-block"><%= comment.petName %></strong>
           <p class="mb-0"><%= comment.commentText %></p>
+
           <form
-              action="/posts/<%=post._id%>/comments/<%=post._id%>?_method=DELETE"
+              action="/posts/comments/<%=post._id%>?_method=DELETE"
               method="POST"
               class="col-md-12 d-flex justify-content-end mt-3 ms-auto"
-            >
+              >
+              <input type="hidden" name="currentProfile" value="<%= profile._id %>">
               <button type="submit" class="btn btn-outline-dark me-2 ml-auto">
                 X
               </button>
             </form>
-          
+
         </div>
         <% }); %>
 

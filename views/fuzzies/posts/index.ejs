@@ -9,17 +9,19 @@
       <div class="col-md-2 d-flex align-items-center">
         <div class="profile-photo-main-feed mb-1">
           <div class="row">
+            <a href="/profiles/<%= post.profile._id %>"> 
             <div class="col-md-2 p-0">
-              <a href="/profiles/<%= post.profile._id %>"><img id="profile-photo"
+              <img id="profile-photo"
               src="<%= post.profilePhoto %>"
               alt="Profile Image"
               class="rounded-circle img-fluid"
               style="width: 70px; height: auto;"
-              /></a>
+              />
             </div>
             <div class="col-md-10">
               <p> <%= post.petName %></p>
             </div>
+          </a>
           </div>
         </div>
       </div>
