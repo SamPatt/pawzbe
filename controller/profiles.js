@@ -86,7 +86,7 @@ async function edit(req, res) {
 
 async function update(req, res) {
   try {
-    
+    const currentProfile = req.params.id;
     const owner = (req.user.profiles[0]._id.toString() === req.params.id) ? true : false
     const user = await User.findById(req.user._id)
     const profile = await Profile.findById(user.profiles[0])
@@ -128,7 +128,8 @@ async function update(req, res) {
         posts: posts,
         profiles,
         owner,
-        breedInfo
+        breedInfo, 
+        currentProfile,
       });
 
     } else if (req.body.deleteImage) {
