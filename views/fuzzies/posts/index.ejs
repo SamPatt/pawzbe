@@ -1,10 +1,10 @@
-<%- include('../../partials/header') %>
+<%- include('../../partials/header') %> <%- include('../../partials/post-form')
+%>
   
 
-<main class="container col-md-6 py-2 mt-3">
+<main class="container col-md-5 py-2 mt-3">
   <div class="row">
     <% for (post of posts) { %>
-
     <div class="col-md-2 d-flex align-items-center">
       <div class="profile-photo-main-feed mb-1">
         <div class="row">
@@ -40,8 +40,8 @@
             </div>
           </div>
         </div>
-        <div class="col-md-12">
-          <button  class="col-md-2 like-btn text-center text-bg-dark rounded-3" data-like-count="0"><span class="like-count">0 Likes</span></button>
+        <div class="col-md-12 mb-4">
+          <button  class="col-md-2 like-btn text-center text-bg-dark rounded-3 " data-like-count="0"><span class="like-count">0 Likes</span></button>
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
                   const likeButton = document.querySelector('.like-btn');
@@ -84,5 +84,5 @@
 
 </main>
 
-
+<%- include('../../partials/side-feed') %> 
 <%- include('../../partials/footer') %>

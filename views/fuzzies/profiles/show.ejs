@@ -15,7 +15,7 @@
               <img
                 src="<%= profile.petPhoto.profilePhoto %>"
                 alt="Profile Image"
-                class="img-fluid rounded-circle max-profile-image"
+                class="img-fluid rounded-circle"
               />
             </div>
           </div>
@@ -175,24 +175,25 @@
       >
         <span class="comment-count">0 Comments</span>
       </button>
+      <button  class="col-md-1 delete-btn text-center text-bg-dark rounded-3 "><span >X</span></button>
 
       <!-- <script>
-              document.addEventListener('DOMContentLoaded', function () {
-                const commentButton = document.querySelector('.comment-btn');
+      //         document.addEventListener('DOMContentLoaded', function () {
+      //           const commentButton = document.querySelector('.comment-btn');
             
-                commentButton.addEventListener('click', function () {
-                  let commentCount = parseInt(commentButton.dataset.commentCount) || 0;
-                  commentCount++;
+      //           commentButton.addEventListener('click', function () {
+      //             let commentCount = parseInt(commentButton.dataset.commentCount) || 0;
+      //             commentCount++;
             
-                  // Update the like count in the data attribute
-                  commentButton.dataset.commentCount = commentCount;
+      //             // Update the like count in the data attribute
+      //             commentButton.dataset.commentCount = commentCount;
             
-                  // Update the like count in the UI
-                  const commentCountElement = commentButton.querySelector('.comment-count');
-                  commentCountElement.textContent = `${commentCount} Comments`;
-                });
-              });
-            </script> -->
+      //             // Update the like count in the UI
+      //             const commentCountElement = commentButton.querySelector('.comment-count');
+      //             commentCountElement.textContent = `${commentCount} Comments`;
+      //           });
+      //         });
+      //       </script> -->
     </div>
     <% } %>
   </div>
