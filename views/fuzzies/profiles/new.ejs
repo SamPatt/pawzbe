@@ -10,20 +10,50 @@
       required
     />
 
+    <select name="animalType" id="animalTypeSelect" class="form-control" onchange="toggleAnimalTypeInput()">
+      <option value="Dog">Dog</option>
+      <option value="Cat">Cat</option>
+      <option value="Other">Other (Please specify)</option>
+    </select>
+    
     <input
       type="text"
-      name="animalType"
-      class="animalType form-control"
-      placeholder="Animal Type"
-      required
+      name="animalTypeOther"
+      id="animalTypeOther"
+      class="form-control mt-2"
+      placeholder="Specify Animal Type"
+      style="display: none;"
     />
+    
+<input
+  type="text"
+  name="breed"
+  class="breed form-control"
+  placeholder="Your Pet Breed"
+  list="dogBreedList" // Default to dog breeds
+  id="breedInput"
+/>
 
-    <input
-      type="text"
-      name="breed"
-      class="breed form-control"
-      placeholder="Your Pet Breed"
-    />
+<datalist id="dogBreedList">
+  <option value="Mutt"></option>
+  <option value="Other"></option>
+  <option value="Unknown"></option>
+  <% dogBreeds.forEach(function(breed) { %>
+    <option value="<%= breed %>"></option>
+  <% }); %>
+</datalist>
+
+<datalist id="catBreedList">
+  <option value="Domestic Shorthair"></option>
+  <option value="Domestic Longhair"></option>
+  <option value="Other"></option>
+  <option value="Unknown"></option>
+  <% catBreeds.forEach(function(breed) { %>
+    <option value="<%= breed %>"></option>
+  <% }); %>
+</datalist>
+
+  
 
     <input
       type="date"
@@ -74,6 +104,31 @@
     <button class="btn-primary btn" type="submit">Submit</button>
   </div>
 </form>
+
+<script>
+  function toggleAnimalTypeInput() {
+    var animalTypeSelect = document.getElementById('animalTypeSelect');
+    var animalTypeOther = document.getElementById('animalTypeOther');
+    var breedInput = document.getElementById('breedInput');
+
+    if (animalTypeSelect.value === 'Other') {
+      animalTypeOther.style.display = '';
+      breedInput.removeAttribute('list'); // Remove datalist for 'Other'
+      breedInput.placeholder = 'Specify Animal Type';
+    } else {
+      animalTypeOther.style.display = 'none';
+      // Reset placeholder
+      breedInput.placeholder = 'Your Pet Breed';
+
+      // Switch datalist based on animal type
+      if (animalTypeSelect.value === 'Dog') {
+        breedInput.setAttribute('list', 'dogBreedList');
+      } else if (animalTypeSelect.value === 'Cat') {
+        breedInput.setAttribute('list', 'catBreedList');
+      }
+    }
+  }
+</script>
 
 <%- include('../../partials/side-feed', { profiles }) %>
 

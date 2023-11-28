@@ -97,9 +97,25 @@ async function update(req, res) {
 }
 
 function newProfile(req, res) {
-  const profiles = res.locals.profiles
-  res.render("fuzzies/profiles/new", { title: "Make Profile", user: req.user, profiles });
+  const profiles = res.locals.profiles;
+  const dogBreeds = res.locals.dogBreeds;
+  const catBreeds = res.locals.catBreeds;
+
+  // Extract only the names of the breeds
+  const dogBreedNames = dogBreeds.map(breed => breed.name);
+  const catBreedNames = catBreeds.map(breed => breed.name);
+  console.log(catBreedNames)
+  console.log(dogBreedNames)
+
+  res.render("fuzzies/profiles/new", { 
+    title: "Make Profile", 
+    user: req.user, 
+    profiles, 
+    dogBreeds: dogBreedNames, 
+    catBreeds: catBreedNames
+  });
 }
+
 
 
 async function create(req, res) {
@@ -108,6 +124,9 @@ async function create(req, res) {
     // images:[],
   }
   const user = await User.findById(req.user._id)
+  if(req.body.animalTypeOther){
+    req.body.animalType = req.body.animalTypeOther
+  }
   
   try {
     with (req.body) {
