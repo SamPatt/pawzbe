@@ -1,6 +1,15 @@
 const Profile = require("../models/profile");
 const User = require("../models/user");
 const Post = require("../models/post");
+const cloudinary = require('cloudinary').v2
+const streamifier = require('streamifier')
+
+const { clConfig } = require('../config/cloudinary')
+
+// console.log(clConfig)
+
+cloudinary.config(clConfig)
+
 module.exports = {
   show,
   edit,

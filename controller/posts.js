@@ -2,6 +2,15 @@ const { restart } = require("nodemon");
 const Post = require("../models/post");
 const Profile = require("../models/profile");
 
+const cloudinary = require('cloudinary').v2
+const streamifier = require('streamifier')
+
+const { clConfig } = require('../config/cloudinary')
+
+// console.log(clConfig)
+
+cloudinary.config(clConfig)
+
 module.exports = {
   index,
   show,

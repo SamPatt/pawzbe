@@ -13,6 +13,12 @@ const commentSchema = new Schema(
   { timestamps: true }
 );
 
+const imageSchema = new mongoose.Schema({
+  url: {type: String, required: true},
+  description: { type: String},
+  alt: {type: String, default:""} 
+})
+
 const postSchema = new Schema(
   {
     profile: {
@@ -20,14 +26,15 @@ const postSchema = new Schema(
       ref: "Profile",
     },
     postDescription: String,
-    postPhotoLink: String,
+    postPhotoLink: String, // remove after image upload changes
     likes: {
       type: Number,
       default: 0,
     },
     postComments: [commentSchema],
     petName: String,
-    profilePhoto: String,
+    profilePhoto: String, // remove after image upload changes
+    images: [imageSchema]
   },
   { timestamps: true }
 );
