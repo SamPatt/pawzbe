@@ -1,11 +1,17 @@
+
 <div class="container feed rounded mt-5">
+
   <div class="feed-header">
     <p>Top Pets</p>
+    <% if (typeof disabled !== 'undefined' && disabled) { %>
+      <p>Log In To Browse!</p>
+    <% } %>
   </div>
-  
+
   <% for (let profile of profiles) { %>
+    <% const path = (typeof disabled !== 'undefined' && disabled) ? '#' : `/profiles/${profile._id}` %>
     <div class="row feed-content">
-      <a href="/profiles/<%= profile._id %>">
+      <a href="<%= path %>">
         <div class="col-12 feed-item rounded">
           <div class="login-circle feed-pic">
             <img

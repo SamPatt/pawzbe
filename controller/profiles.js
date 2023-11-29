@@ -87,7 +87,7 @@ async function edit(req, res) {
 async function update(req, res) {
   try {
     const currentProfile = req.params.id;
-    const owner = (req.user.profiles[0]._id.toString() === req.params.id) ? true : false
+    const owner = true
     const user = await User.findById(req.user._id)
     const profile = await Profile.findById(user.profiles[0])
     const posts = await Post.find({ profile: profile._id })
@@ -122,15 +122,18 @@ async function update(req, res) {
           }
         }
       }
-      res.render('fuzzies/profiles/show', {
-        title: 'Pet Added',
-        profile: profile,
-        posts: posts,
-        profiles,
-        owner,
-        breedInfo, 
-        currentProfile,
-      });
+      
+      res.redirect(`/profiles/${profile._id}`)
+
+      // res.render('fuzzies/profiles/show', {
+      //   title: 'Pet Added',
+      //   profile: profile,
+      //   posts: posts,
+      //   profiles,
+      //   owner,
+      //   breedInfo, 
+      //   currentProfile,
+      // });
 
     } else if (req.body.deleteImage) {
       try {

@@ -65,6 +65,7 @@
       <h2>Gallery</h2>
       <% if (profile.images.length > 0) { %>
         <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+          
           <!-- Indicators -->
           <ol class="carousel-indicators">
             <% for (let i = 0; i < profile.images.length; i++) { %>
@@ -117,28 +118,29 @@
       <p>No photos added yet!</p>
     <% } %>
 
-    <div class="container">
-      <form
-        class="profile-form d-flex flex-row"
-        action="/profiles/<%= user._id %>?_method=PUT"
-        method="POST"
-      >
-        <div class="row w-100">
-          <div class="col-10">
-            <input
-              type="text"
-              name="images"
-              class="form-control m-2"
-              placeholder="Image URL (comma separated)"
-            />
+    <% if (owner) { %>
+      <div class="container">
+        <form
+          class="profile-form d-flex flex-row"
+          action="/profiles/<%= user._id %>?_method=PUT"
+          method="POST"
+        >
+          <div class="row w-100">
+            <div class="col-10">
+              <input
+                type="text"
+                name="images"
+                class="form-control m-2"
+                placeholder="Image URL (comma separated)"
+              />
+            </div>
+            <div class="col-2">
+              <button class="add-images-btn btn btn-primary font-weight-bold">+</button>
+            </div>
           </div>
-          <div class="col-2">
-            <button class="add-images-btn btn btn-primary">+</button>
-          </div>
-        </div>
-        
-      </form>
-    </div>
+        </form>
+      </div>
+    <% } %>
 
     <!---------------------------------------------------------------------------------------------------------------- -->
     <div class="col-md-9 mt-5 d-flex align-items-center">

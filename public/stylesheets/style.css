@@ -5,6 +5,7 @@ body {
   height: 100vh;
   margin-top: 100px;
 }
+
 .login-container {
   background: #8da2cc;
 }
@@ -132,7 +133,7 @@ li {
   max-height: 200px;
 }
 
-.disabled {
+.disabled > div > div {
   user-select: none;
   pointer-events: none;
 }
@@ -173,6 +174,7 @@ li {
   overflow: hidden;
   position: relative;
   margin-top: -125px;
+  left: 20px;
 }
 #profile-image img {
   width: 100%;
