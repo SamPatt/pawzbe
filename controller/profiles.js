@@ -8,21 +8,22 @@ module.exports = {
   new: newProfile,
   create,
   delete: deleteProfile,
+  like,
 };
 
 async function show(req, res) {
   try {
-    
     console.log("Called show function with ID:", req.params.id);
     const currentProfile = req.params.id;
     const profile = await Profile.findById(req.params.id);
-    
-    const owner = (req.user.profiles[0]._id.toString() === req.params.id) ? true : false
-    const profiles = res.locals.profiles
+
+    const owner =
+      req.user.profiles[0]._id.toString() === req.params.id ? true : false;
+    const profiles = res.locals.profiles;
 
     if (!profile) {
       console.log("Profile not found for ID:", req.params.id);
-      return res.status(404).send('Profile not found');
+      return res.status(404).send("Profile not found");
     }
 
     const dogBreeds = res.locals.dogBreeds;
@@ -35,12 +36,12 @@ async function show(req, res) {
       const animalType = profile.petDetails.animalType;
 
       if (animalType === "Dog") {
-        const breedData = dogBreeds.find(breed => breed.name === breedName);
+        const breedData = dogBreeds.find((breed) => breed.name === breedName);
         if (breedData) {
           breedInfo = breedData.temperament;
         }
       } else if (animalType === "Cat") {
-        const breedData = catBreeds.find(breed => breed.name === breedName);
+        const breedData = catBreeds.find((breed) => breed.name === breedName);
         if (breedData) {
           breedInfo = breedData.description;
         }
@@ -60,24 +61,20 @@ async function show(req, res) {
     });
   } catch (err) {
     console.log("Error in show function:", err);
-    res.status(500).send('Internal Server Error');
+    res.status(500).send("Internal Server Error");
   }
 }
 
-
-
 async function edit(req, res) {
   try {
-
-    const user = await User.findById(req.user._id)
-    const profile = await Profile.findById(user.profiles[0])
-    const profiles = res.locals.profiles
+    const user = await User.findById(req.user._id);
+    const profile = await Profile.findById(user.profiles[0]);
+    const profiles = res.locals.profiles;
 
     res.render("fuzzies/profiles/edit", {
       title: `Editing ${profile.petName}`,
       profile: profile,
       profiles,
-      
     });
   } catch (err) {
     console.log(err);
@@ -87,20 +84,17 @@ async function edit(req, res) {
 async function update(req, res) {
   try {
     const currentProfile = req.params.id;
-    const owner = true
-    const user = await User.findById(req.user._id)
-    const profile = await Profile.findById(user.profiles[0])
-    const posts = await Post.find({ profile: profile._id })
-    const profiles = res.locals.profiles
-    
-    if (req.body.images) {
-      const links = req.body.images.split(',').map(i => i.trim())
-      profile.images.push(...links)
+    const owner = true;
+    const user = await User.findById(req.user._id);
+    const profile = await Profile.findById(user.profiles[0]);
+    const posts = await Post.find({ profile: profile._id });
+    const profiles = res.locals.profiles;
 
-      await Profile.findOneAndUpdate(
-        { _id: profile._id },
-        { $set: profile }
-      )
+    if (req.body.images) {
+      const links = req.body.images.split(",").map((i) => i.trim());
+      profile.images.push(...links);
+
+      await Profile.findOneAndUpdate({ _id: profile._id }, { $set: profile });
       const dogBreeds = res.locals.dogBreeds;
       const catBreeds = res.locals.catBreeds;
 
@@ -122,8 +116,8 @@ async function update(req, res) {
           }
         }
       }
-      
-      res.redirect(`/profiles/${profile._id}`)
+
+      res.redirect(`/profiles/${profile._id}`);
 
       // res.render('fuzzies/profiles/show', {
       //   title: 'Pet Added',
@@ -131,71 +125,60 @@ async function update(req, res) {
       //   posts: posts,
       //   profiles,
       //   owner,
-      //   breedInfo, 
+      //   breedInfo,
       //   currentProfile,
       // });
-
     } else if (req.body.deleteImage) {
       try {
-        const owner = (req.user.profiles[0]._id.toString() === req.params.id) ? true : false
-        const profile = await Profile.findById( req.params.id );
-        profile.images.splice(profile.images.indexOf(req.body.deleteImage), 1)
-        console.log(profile.images)
-        
-        await Profile.findOneAndUpdate(
-          { _id: profile._id },
-          { $set: profile }
-        )
+        const owner =
+          req.user.profiles[0]._id.toString() === req.params.id ? true : false;
+        const profile = await Profile.findById(req.params.id);
+        profile.images.splice(profile.images.indexOf(req.body.deleteImage), 1);
+        console.log(profile.images);
 
-        res.render('fuzzies/profiles/edit', {
-          title: 'Profile Updated!',
+        await Profile.findOneAndUpdate({ _id: profile._id }, { $set: profile });
+
+        res.render("fuzzies/profiles/edit", {
+          title: "Profile Updated!",
           profile: profile,
           posts: posts,
           profiles,
           owner,
         });
-
       } catch (err) {
         console.log(err);
       }
     } else {
-      const updatedProfile = {}
+      const updatedProfile = {};
       let pet = {
         petPhoto: {},
         // images:[],
-      }
-      const user = await User.findById(req.user._id)
-      
+      };
+      const user = await User.findById(req.user._id);
+
       try {
         with (req.body) {
-          pet.petName = petName
-          pet.humanNames = owners.split(',').map(i => i.trim())
-          pet.petPhoto.banner = banner
-          pet.petPhoto.profilePhoto = profilePhoto
+          pet.petName = petName;
+          pet.humanNames = owners.split(",").map((i) => i.trim());
+          pet.petPhoto.banner = banner;
+          pet.petPhoto.profilePhoto = profilePhoto;
           pet.petDetails = {
             bio: bio,
-            favoriteToys: favoriteToys.split(',').map(i => i.trim()),
+            favoriteToys: favoriteToys.split(",").map((i) => i.trim()),
             breed: breed,
             animalType: animalType,
             dob: dob,
-          }
+          };
           // pet.images = [...images.split(',').map(i => i.trim())]
         }
 
-        await Profile.findOneAndUpdate(
-          { _id: profile._id },
-          { $set: pet }
-        )
+        await Profile.findOneAndUpdate({ _id: profile._id }, { $set: pet });
 
-        res.redirect(`/profiles/${profile._id}/edit`)
-    } catch (err) {
-      console.log(err);
+        res.redirect(`/profiles/${profile._id}/edit`);
+      } catch (err) {
+        console.log(err);
+      }
     }
-  }
-
-
-    
-
   } catch (err) {
     console.log(err);
   }
@@ -207,50 +190,48 @@ function newProfile(req, res) {
   const catBreeds = res.locals.catBreeds;
 
   // Extract only the names of the breeds
-  const dogBreedNames = dogBreeds.map(breed => breed.name);
-  const catBreedNames = catBreeds.map(breed => breed.name);
+  const dogBreedNames = dogBreeds.map((breed) => breed.name);
+  const catBreedNames = catBreeds.map((breed) => breed.name);
 
-  res.render("fuzzies/profiles/new", { 
-    title: "Make Profile", 
-    user: req.user, 
-    profiles, 
-    dogBreeds: dogBreedNames, 
-    catBreeds: catBreedNames
+  res.render("fuzzies/profiles/new", {
+    title: "Make Profile",
+    user: req.user,
+    profiles,
+    dogBreeds: dogBreedNames,
+    catBreeds: catBreedNames,
   });
 }
-
-
 
 async function create(req, res) {
   let pet = {
     petPhoto: {},
     // images:[],
+  };
+  const user = await User.findById(req.user._id);
+  if (req.body.animalTypeOther) {
+    req.body.animalType = req.body.animalTypeOther;
   }
-  const user = await User.findById(req.user._id)
-  if(req.body.animalTypeOther){
-    req.body.animalType = req.body.animalTypeOther
-  }
-  
+
   try {
     with (req.body) {
-      pet.petName = petName
-      pet.humanNames = owners.split(',').map(i => i.trim())
-      pet.petPhoto.banner = banner
-      pet.petPhoto.profilePhoto = profilePhoto
+      pet.petName = petName;
+      pet.humanNames = owners.split(",").map((i) => i.trim());
+      pet.petPhoto.banner = banner;
+      pet.petPhoto.profilePhoto = profilePhoto;
       pet.petDetails = {
         bio: bio,
-        favoriteToys: favoriteToys.split(',').map(i => i.trim()),
+        favoriteToys: favoriteToys.split(",").map((i) => i.trim()),
         breed: breed,
         animalType: animalType,
         dob: dob,
-      }
+      };
       // pet.images = [...images.split(',').map(i => i.trim())]
     }
 
-    const profile = await Profile.create(pet)
-    user.profiles.push(profile._id)
-    await user.save()
-    res.redirect(`/profiles/${profile._id}`)
+    const profile = await Profile.create(pet);
+    user.profiles.push(profile._id);
+    await user.save();
+    res.redirect(`/profiles/${profile._id}`);
   } catch (err) {
     console.log(err);
   }
@@ -262,5 +243,43 @@ async function deleteProfile(req, res) {
     res.redirect("/profiles/new");
   } catch (err) {
     console.log(err);
+  }
+}
+
+async function like(req, res) {
+  //res.send("the request through profile show like received by controller")
+  try {
+    const profile = await Profile.findById(req.params.id);
+    console.log("this is req params id:", req.params.id);
+    console.log(
+      "this is user profile id :",
+      req.user.profiles[0]._id.toString()
+    );
+    //console.log("this is profile._id: ", profile._id) -> null
+    // const post = await Post.find
+    // const postId = post._id
+    // console.log("this is postId:", postId)
+    // console.log("this is all likes:", like)
+    // console.log("this is the liked post:", post)
+    //console.log("my req.user.profiles[0]._id:", req.user.profiles[0]._id.toString())
+    if (
+      post.likingUserProfileId.includes(req.user.profiles[0]._id.toString())
+    ) {
+      post.likes--;
+      //remove ID after unliking
+      post.likingUserProfileId = post.likingUserProfileId.filter(
+        (id) => id !== req.user.profiles[0]._id.toString()
+      );
+    } else {
+      post.likes++;
+      post.likingUserProfileId.push(req.user.profiles[0]._id.toString());
+      req.body.likingUserProfileId = req.user.profiles[0]._id;
+    }
+
+    await post.save();
+    res.redirect(`/profiles/${post.profile._id}`);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 }

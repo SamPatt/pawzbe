@@ -12,5 +12,5 @@ router.put("/:id", profilesCtrl.update);
 router.delete("/:id", profilesCtrl.delete);
 router.get("/:id/edit", profilesCtrl.edit);
 
-
+router.post("/:id/likes", profilesCtrl.like);
 module.exports = router;

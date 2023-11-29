@@ -31,7 +31,7 @@
         <div class="d-flex justify-content-end mt-2">
           <form action="/posts/<%= post._id %>/likes" method="POST">
             <input type="hidden" name="likingUserprofileId" value="<%= post.likingUserprofileId %> ">
-            <button type="submit" class="btn btn-outline-secondary"><span class="like-count"><%= post.likes%> Likes</span>
+            <button type="submit" class="async btn btn-outline-secondary"><span class="like-count"><%= post.likes%> Likes</span>
             </button>
           </form>
           <button class="btn btn-outline-secondary" onclick="toggleComments('<%= post._id %>')">            

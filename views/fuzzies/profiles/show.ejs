@@ -168,10 +168,11 @@
       </div>
       <div class="col-md-12 d-flex justify-content-start mb-2">
         <div>
-          <input type="hidden" name="likeCount" id="likeCount" value="<%= post.likes %>"> 
-          <button class="btn btn-outline-dark me-2" onclick="likePost('<%= post._id %>')" id="like-btn-<%= post._id %>">
-          <%= post.likes %> Likes
-          </button>
+          <form action="/profiles/<%= post._id %>/likes" method="POST">
+            <input type="hidden" name="likingUserprofileId" value="<%= post.likingUserprofileId %> ">
+            <button type="submit" class="async btn btn-outline-secondary"><span class="like-count"><%= post.likes%> Likes</span>
+            </button>
+          </form>
         </div>
         <button
           class="btn btn-outline-primary"
