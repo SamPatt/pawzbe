@@ -29,9 +29,11 @@
         </div>
         
         <div class="d-flex justify-content-end mt-2">
-          <!-- <button class="btn btn-outline-dark me-2">
-            <%= post.likes %> Likes
-          </button> -->
+          <form action="/posts/<%= post._id %>/likes" method="POST">
+            <!-- <input type="hidden" name="likeCount" id="likeCount">  -->
+              <span class="like-count"><%= post.likes %> Likes</span>
+            </button>
+          </form>
           <button class="btn btn-outline-secondary" onclick="toggleComments('<%= post._id %>')">            
               <%= post.postComments.length %> Comments
           </button>
@@ -138,6 +140,30 @@
     commentsSection.style.display = isHidden ? 'block' : 'none';
     commentForm.style.display = isHidden ? 'block' : 'none';
   }
+
+  // function likePost(postId) {
+  //   const likeBtnEl = document.getElementById(
+  //     "like-btn-" + postId)
+  //   likeBtnEl.addEventListener(click, ()=>{
+
+  //   })
+  //   ;
+  // }
+//   document.addEventListener('DOMContentLoaded', function () {
+//     const likeButton = document.querySelector('.like-btn');
+            
+//     likeButton.addEventListener('click', function () {
+//       let likeCount = parseInt(likeButton.dataset.likeCount) || 0;
+//       likeCount++;
+            
+//       // Update the like count in the data attribute
+//       likeButton.dataset.likeCount = likeCount;
+            
+//       // Update the like count in the UI
+//       const likeCountElement = likeButton.querySelector('.like-count');
+//       likeCountElement.textContent = `${likeCount} Likes`;
+//     });
+// });
 </script>
 
 
