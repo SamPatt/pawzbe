@@ -180,6 +180,7 @@
         >
           <%= post.postComments.length %> Comments
         </button>
+        <!-- delete post  -->
         <form
           action="/posts/<%=post._id%>?_method=DELETE"
           method="POST"
