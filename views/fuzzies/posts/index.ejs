@@ -72,7 +72,7 @@
         <div id="comment-form-<%= post._id %>" class="col-md-12" style="display: none;">
           <form action="/posts/<%= post._id %>/comments" method="POST">
             <textarea class="form-control mb-2" name="commentText" placeholder="Write a comment..." rows="3"></textarea>
-            <button type="submit" class="btn btn-success">Submit Comment</button>
+            <button type="submit" class="async btn btn-success">Submit Comment</button>
             
           </form>
         </div>
@@ -140,5 +140,6 @@
   }
 </script>
 
+<%- include('../../partials/loading') %>
 
 <%- include('../../partials/footer') %>

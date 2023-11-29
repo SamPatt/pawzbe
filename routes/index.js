@@ -30,6 +30,7 @@ router.get('/github/oauth2callback',
         // Profile doesn't exist, redirect to new profile page
         return res.redirect('/profiles/new');
       }
+
     } catch (err) {
       // Handle any errors that occur
       console.error(err);
