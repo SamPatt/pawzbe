@@ -198,19 +198,16 @@ async function deletePost(req, res) {
   }
 }
 
-
-
-async function like(req, res)  {
+async function like(req, res) {
   try {
     const post = await Post.findById(req.params.id);
-    post.likes ++;
+    post.likes++;
     await post.save();
-    res.redirect('/posts/')
-    } catch (error) {
+    res.redirect("/posts/");
+  } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: "Internal Server Error" });
   }
-
 }
 
 async function unlike(req, res) {
