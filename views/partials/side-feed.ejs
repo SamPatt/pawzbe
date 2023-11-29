@@ -1,7 +1,13 @@
 
 <div class="container feed rounded mt-5">
-  
+  <div class="feed-header">
+    <% if (typeof disabled !== 'undefined' && disabled) { %>
+      <p>Log In To Browse!</p>
+    <% } %>
+  </div>
+ 
   <% profiles.forEach(profile => { %>
+    <% const path = (typeof disabled !== 'undefined' && disabled) ? '#' : `/profiles/${profile._id}` %>
     <div class="row feed-content">
       <a href="<%= path %>">
         <div class="col-12 feed-item rounded">
