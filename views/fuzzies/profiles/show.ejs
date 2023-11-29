@@ -1,7 +1,7 @@
 <%- include('../../partials/header') %> <%- include('../../partials/post-form')
 %>
 <main>
-  <div class="container col-md-6 py-2 mt-3">
+  <div class="container col-md-5 py-2 mt-3">
     <div class="rounded-3 mt-4" id="banner">
       <div class="container-fluid bg-transparent p-0">
         <img
@@ -33,21 +33,21 @@
       <% } %>
 
       <div class="col-md-4 mt-4">
-        <div class="h-1 p-1 mb-3 text-center text-bg-dark rounded-3">
-          <h2><%= profile.petName %></h2>
+        <div class="h-1 p-1 mb-3 text-center light-background box-shadow rounded-3">
+          <h4><%= profile.petName %></h4>
         </div>
-        <div class="h-20 p-1 mb-3 text-center text-bg-dark rounded-3">
-          <h2><%= profile.petDetails.animalType %></h2>
+        <div class="h-20 p-1 mb-3 text-center light-background box-shadow rounded-3">
+          <h4><%= profile.petDetails.animalType %></h4>
         </div>
-        <div class="h-1 p-1 mb-3 text-center text-bg-dark rounded-3">
-          <h2><%= profile.petDetails.breed %></h2>
+        <div class="h-1 p-1 mb-3 text-center light-background box-shadow rounded-3">
+          <h4><%= profile.petDetails.breed %></h4>
         </div>
-        <div class="h-1 p-1 mb-3 text-center text-bg-dark rounded-3">
-          <h2><%= new Date(profile.petDetails.dob).toDateString() %></h2>
+        <div class="h-1 p-1 mb-3 text-center light-background box-shadow rounded-3">
+          <h4><%= new Date(profile.petDetails.dob).toDateString() %></h4>
         </div>
       </div>
       <div class="col-md-8" id="bio-section" style="color: black">
-        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+        <div class="h-100 p-5 bio border rounded-3">
           <h2>Bio</h2>
           <p><%= profile.petDetails.bio %></p>
           <% if (breedInfo) { %>
