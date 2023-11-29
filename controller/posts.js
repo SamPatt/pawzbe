@@ -18,6 +18,7 @@ module.exports = {
   addComment,
   create,
   deleteComment,
+  addPhoto
 };
 
 async function index(req, res) {
@@ -40,7 +41,19 @@ async function create(req, res) {
     req.body.profile = req.user.profiles[0]._id;
     const profile = await Profile.findById(req.user.profiles[0]._id);
     req.body.petName = profile.petName;
+
     req.body.profilePhoto = profile.petPhoto.profilePhoto;
+    console.log("Calling cloudinary stream")
+    let result = await streamUpload(req)
+    console.log(result)
+
+    const newImage = { url: result.url }
+
+    req.body.images = []
+
+    req.body.images.push(newImage)
+
+
     const post = await Post.create(req.body);
     console.log(post);
 
@@ -203,4 +216,42 @@ async function deletePost(req, res) {
     console.log(err);
     res.status(500).send("Internal Server Error");
   }
+}
+
+async function addPhoto(req,res,next){
+  try {
+      let result = await streamUpload(req)
+
+      //  goal - upload image data to post doc
+      // 1 find the current post
+      // 2. create a new object for passing to the array of images
+      // 3. update the db with save()
+      // 4. redirect
+      
+      const post = await Post.findById(req.params.id)
+      const newImage = { url: result.url,  description: req.body.description, alt: req.body.alt}
+      post.images.push(newImage)
+      await post.save()
+      console.log("testing post", post)
+
+      res.redirect(`/posts/${req.params.id}`)
+  }catch(err){
+      console.log(err)
+      next(err)
+  }
+}
+
+function streamUpload (req){
+  return new Promise(function (resolve, reject){
+      let stream = cloudinary.uploader.upload_stream( function(error, result){
+          if(result){
+              console.log(result)
+              resolve(result)
+          }else{
+              reject(error)
+          }
+      });
+      // streamifier is what chunking and stream data to cloudinary -> pipe process ()
+      streamifier.createReadStream(req.file.buffer).pipe(stream)
+  })
 }
