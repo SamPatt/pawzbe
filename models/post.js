@@ -13,6 +13,7 @@ const commentSchema = new Schema(
   { timestamps: true }
 );
 
+
 const imageSchema = new mongoose.Schema({
   url: {type: String, required: true},
   description: { type: String},
