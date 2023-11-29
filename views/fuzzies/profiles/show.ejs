@@ -167,9 +167,12 @@
         </div>
       </div>
       <div class="col-md-12 d-flex justify-content-start mb-2">
-        <button class="btn btn-outline-dark me-2">
+        <div>
+          <input type="hidden" name="likeCount" id="likeCount" value="<%= post.likes %>"> 
+          <button class="btn btn-outline-dark me-2" onclick="likePost('<%= post._id %>')" id="like-btn-<%= post._id %>">
           <%= post.likes %> Likes
-        </button>
+          </button>
+        </div>
         <button
           class="btn btn-outline-primary"
           onclick="toggleComments('<%= post._id %>')"
@@ -253,6 +256,11 @@
 
     commentsSection.style.display = isHidden ? "block" : "none";
     commentForm.style.display = isHidden ? "block" : "none";
+  }
+  function likePost(postId) {
+    const likeBtnEl = document.getElementById(
+      "like-btn-" + postId
+    );
   }
 </script>
 
