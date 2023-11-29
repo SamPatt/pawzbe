@@ -5,7 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
   try {
-    document.querySelectorAll('button, a').forEach(function(element) {
+    document.querySelectorAll('.async').forEach(function(element) {
         element.addEventListener('click', function() {
             document.querySelector('.spinner').style.display = 'block';
         });

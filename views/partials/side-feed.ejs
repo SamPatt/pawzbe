@@ -9,7 +9,7 @@
   <% profiles.forEach(profile => { %>
     <% const path = (typeof disabled !== 'undefined' && disabled) ? '#' : `/profiles/${profile._id}` %>
     <div class="row feed-content">
-      <a href="<%= path %>">
+      <a href="<%= path %>" class="async">
         <div class="col-12 feed-item rounded">
           <div class="login-circle feed-pic">
             <img

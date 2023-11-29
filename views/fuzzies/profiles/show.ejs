@@ -27,7 +27,7 @@
       <% if (owner) { %>
         <div class="d-flex justify-content-end mb-2">
           <a href="/profiles/<%= profile._id %>/edit">
-            <button class="btn btn-secondary">Edit Profile</button>
+            <button class="async btn btn-secondary">Edit Profile</button>
           </a>
         </div>
       <% } %>
@@ -135,7 +135,7 @@
               />
             </div>
             <div class="col-2">
-              <button class="add-images-btn btn btn-primary font-weight-bold">+</button>
+              <button class="async add-images-btn btn btn-primary font-weight-bold">+</button>
             </div>
           </div>
         </form>
@@ -181,7 +181,7 @@
           method="POST"
           class="ms-auto"
         >
-          <button type="submit" class="btn btn-outline-dark me-2 ml-auto">
+          <button type="submit" class="async btn btn-outline-dark me-2 ml-auto">
             X
           </button>
         </form>
@@ -208,7 +208,7 @@
               <input type="hidden" name="currentProfile" value="<%= profile._id %>">
               
               <% if (currentProfile === comment.profileId) { %>
-                <button type="submit" class="btn btn-outline-dark me-2 ml-auto " id="commentXButton" style="visibility: visible;">X</button>
+                <button type="submit" class="async btn btn-outline-dark me-2 ml-auto " id="commentXButton" style="visibility: visible;">X</button>
               <% } else { %>
                 <button id="commentXButton" style="visibility: hidden;">X</button>
               <% } %>
@@ -231,7 +231,7 @@
             placeholder="Write a comment..."
             rows="3"
           ></textarea>
-          <button type="submit" class="btn btn-success">Submit Comment</button>
+          <button type="submit" class="async btn btn-success">Submit Comment</button>
         </form>
       </div>
     </div>

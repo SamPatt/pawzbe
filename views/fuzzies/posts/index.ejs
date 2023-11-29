@@ -8,7 +8,7 @@
       <div class="col-12 col-md-10 justify-content-center align-items-center mb-4 mt-2">
         <div class="row align-items-center mb-2">
           <div class="col-auto">
-            <a href="/profiles/<%= post.profile._id %>" class="d-block"> 
+            <a href="/profiles/<%= post.profile._id %>" class="async d-block"> 
               <img id="profile-photo"
                 src="<%= post.profilePhoto %>"
                 alt="Profile Image"
@@ -18,7 +18,7 @@
             </a>
           </div>
           <div class="col">
-            <a href="/profiles/<%= post.profile._id %>" class="text-dark text-decoration-none"> 
+            <a href="/profiles/<%= post.profile._id %>" class="async text-dark text-decoration-none"> 
               <p class="m-0"> <%= post.petName %></p>
             </a>
           </div>

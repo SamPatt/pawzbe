@@ -106,7 +106,7 @@
       value="<%= profile.petPhoto.profilePhoto %>"
     />
 
-    <button class="btn-primary btn" type="submit">Submit</button>
+    <button class="async btn-primary btn" type="submit">Submit</button>
   </div>
 </form>
 
@@ -120,7 +120,7 @@
       <div class="close-button-container position-absolute top-0 end-0 mt-3 me-4">
         <form action="/profiles/<%= profile._id %>?_method=PUT" method="POST">
           <input type="hidden" name="deleteImage" value="<%= image %>">
-          <button class="btn btn-danger" type="submit">X</button>
+          <button class="async btn btn-danger" type="submit">X</button>
         </form>
       </div>
     </div>

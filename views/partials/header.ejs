@@ -20,7 +20,7 @@
         </div>
         <% console.log(user) %>
         <% const headerLink = (user && user.profiles.length > 0) ? "/posts" : "/" %>
-        <a class="navbar-brand" href="<%= headerLink %>">&nbsp;&nbsp;&nbsp;Fuzzy Rubber Ducks</a>
+        <a class="async navbar-brand" href="<%= headerLink %>">&nbsp;&nbsp;&nbsp;Fuzzy Rubber Ducks</a>
       </div>
       <div class="navbar-dark" id="navbarSupportedContent">
         <div class="nav-items ms-auto navbar-nav d-flex align-items-center flex-row">
@@ -44,14 +44,14 @@
                 <small>Welcome, <%= user.name %>!</small>
                 <div class="dropdown-divider"></div>
                 <% if (user.profiles[0]) { %>
-                  <a class="dropdown-item" href="/profiles/<%= user.profiles[0]._id %>">View Profile</a>
+                  <a class="async dropdown-item" href="/profiles/<%= user.profiles[0]._id %>">View Profile</a>
                 <% } %>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/logout">Log Out</a>
-                <a class="dropdown-item" href="/users/<%= user._id %>">User Settings</a>
+                <a class="async dropdown-item" href="/logout">Log Out</a>
+                <a class="async dropdown-item" href="/users/<%= user._id %>">User Settings</a>
               <% } else { %>
-                <a class="dropdown-item" href="/auth/google">Log In - Google</a>
-                <a class="dropdown-item" href="/auth/github">Log In - GitHub</a>
+                <a class="async dropdown-item" href="/auth/google">Log In - Google</a>
+                <a class="async dropdown-item" href="/auth/github">Log In - GitHub</a>
               <% } %>
             </div>
           </div>
