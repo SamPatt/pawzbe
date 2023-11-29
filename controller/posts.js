@@ -98,59 +98,77 @@ async function addComment(req, res) {
 
 async function deleteComment(req, res) {
   try {
-    const owner =
-      req.user.profiles[0]._id.toString() === req.params.id ? true : false;
+    // const owner =
+    //   req.user.profiles[0]._id.toString() === req.params.id ? true : false;
     const profile = await Profile.findById(req.user.profiles[0]._id);
 
     req.body.petName = profile.petName;
     const post = await Post.findById(req.params.id);
-
+    const commentIndex = req.body.commentIndex
+    console.log("this is commentIndex from ejs:", commentIndex)
+    console.log("this is array of comments from db:", post.postComments)
+    post.postComments.splice(commentIndex,1)
     //by assigning a variable we can reach
     //to the input variable current profile for conditional
     //statement both here and condition in ejs
-    const currentProfile = req.user.profiles[0]._id;
+    // const currentProfile = req.user.profiles[0]._id;
+    // console.log("this is req params id : ", req.params.id)
+    // console.log("this is req.user.profiles[0]._id : ", req.user.profiles[0]._id.toString())
+    // console.log("this is post._id : ", post._id)
+    // console.log("this is profile._id : ", profile._id)
+    // if (profile._id.toString() === req.user.profiles[0]._id.toString()){
+    //   post.postComments.forEach(function (postComment, index) {
+    //     if (comments.profileId.toString() === req.user.profiles[0]._id) {
+    //       post.postComments.splice(index, 1);
+    //     }
+    //   });
+    // }
+      
+    
+    await post.save(),
+    res.redirect(`/profiles/${req.user.profiles[0]._id}`);
 
-    if (currentProfile === req.user.profiles[0]._id.toString()) {
-      post.postComments.forEach(function (postComment, index) {
-        console.log(postComment, index);
-        console.log(post._id.toString());
-        console.log(req.params.id);
-        if (post._id.toString() === req.params.id) {
-          post.postComments.splice(index, 1);
-        }
-      });
-      const dogBreeds = res.locals.dogBreeds;
-      const catBreeds = res.locals.catBreeds;
+    // if (req.params.id === req.user.profiles[0]._id.toString()) {
+    //   post.postComments.forEach(function (postComment, index) {
+    //     // console.log(postComment, index);
+    //     // console.log(post._id.toString());
+    //     // console.log(req.params.id);
+    //     if (post._id.toString() === req.params.id) {
+    //       post.postComments.splice(index, 1);
+    //     }
+    //   });
+    //   const dogBreeds = res.locals.dogBreeds;
+    //   const catBreeds = res.locals.catBreeds;
 
-      let breedInfo = null;
+    //   let breedInfo = null;
 
-      if (profile.petDetails.breed) {
-        const breedName = profile.petDetails.breed;
-        const animalType = profile.petDetails.animalType;
+    //   if (profile.petDetails.breed) {
+    //     const breedName = profile.petDetails.breed;
+    //     const animalType = profile.petDetails.animalType;
 
-        if (animalType === "Dog") {
-          const breedData = dogBreeds.find((breed) => breed.name === breedName);
-          if (breedData) {
-            breedInfo = breedData.temperament;
-          }
-        } else if (animalType === "Cat") {
-          const breedData = catBreeds.find((breed) => breed.name === breedName);
-          if (breedData) {
-            breedInfo = breedData.description;
-          }
-        }
-      }
-      await post.save();
-      const posts = await Post.find({ profile: req.user.profiles[0] });
-      res.render("fuzzies/profiles/show", {
-        title: profile.petName + "'s Page",
-        profile: profile,
-        posts: posts,
-        currentProfile: currentProfile,
-        owner,
-        breedInfo,
-      });
-    }
+    //     if (animalType === "Dog") {
+    //       const breedData = dogBreeds.find((breed) => breed.name === breedName);
+    //       if (breedData) {
+    //         breedInfo = breedData.temperament;
+    //       }
+    //     } else if (animalType === "Cat") {
+    //       const breedData = catBreeds.find((breed) => breed.name === breedName);
+    //       if (breedData) {
+    //         breedInfo = breedData.description;
+    //       }
+    //     }
+    //   }
+    //   await post.save();
+    //   const posts = await Post.find({ profile: req.user.profiles[0] });
+    //   res.render("fuzzies/profiles/show", {
+    //     title: profile.petName + "'s Page",
+    //     profile: profile,
+    //     posts: posts,
+    //     currentProfile: currentProfile,
+    //     owner,
+    //     breedInfo,
+    //   });
+    // }
   } catch (err) {
     console.log(err);
     res.status(500).send("Internal Server Error");

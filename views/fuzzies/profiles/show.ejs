@@ -198,7 +198,7 @@
         style="display: none"
       >
 
-
+        <% let commentIndex = 0; %>
         <% post.postComments.forEach(comment => { %>
           <div class="comment mb-2">
             <strong class="d-block"><%= comment.petName %></strong>
@@ -210,6 +210,7 @@
               class="col-md-12 d-flex justify-content-end mt-3 ms-auto"
               >
               <input type="hidden" name="currentProfile" value="<%= profile._id %>">
+              <input type="hidden" name="commentIndex" value="<%= commentIndex %>">
               
               <% if (currentProfile === comment.profileId) { %>
                 <button type="submit" class="btn btn-outline-dark me-2 ml-auto " id="commentXButton" style="visibility: visible;">X</button>
@@ -219,6 +220,7 @@
             </form>
 
           </div>
+          <% commentIndex++; %>
         <% }); %>
 
       </div>
