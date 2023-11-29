@@ -4,21 +4,23 @@
 
 <main class="container col-md-5 py-2 mt-3">
   <div class="row justify-content-center mb-3">
-  <% for (post of posts) { %>
-      <div class="col-12 col-md-10 justify-content-center align-items-center">
+    <% for (post of posts) { %>
+      <div class="col-12 col-md-10 justify-content-center align-items-center mb-4 mt-2">
         <div class="row align-items-center mb-2">
           <div class="col-auto">
-            <a href="/profiles/<%= post.profile._id %>"> 
+            <a href="/profiles/<%= post.profile._id %>" class="d-block"> 
               <img id="profile-photo"
                 src="<%= post.profilePhoto %>"
                 alt="Profile Image"
                 class="rounded-circle img-fluid"
-                style="width: 70px; height: auto;"
+                style="width: 50px; height: 50px;" // Make sure the width and height are the same
               />
             </a>
           </div>
           <div class="col">
-            <p> <%= post.petName %></p>
+            <a href="/profiles/<%= post.profile._id %>" class="text-dark text-decoration-none"> 
+              <p class="m-0"> <%= post.petName %></p>
+            </a>
           </div>
         </div>
         <div class="light-background border rounded-3 d-flex flex-column align-items-center p-3">
@@ -26,12 +28,12 @@
           <img src="<%= post.postPhotoLink %>" class="img-fluid rounded mb-2" />
         </div>
         
-        <div class="d-flex justify-content-start mt-2">
-          <button class="btn btn-outline-dark me-2">
+        <div class="d-flex justify-content-end mt-2">
+          <!-- <button class="btn btn-outline-dark me-2">
             <%= post.likes %> Likes
-          </button>
-          <button class="btn btn-outline-primary" onclick="toggleComments('<%= post._id %>')">
-            <%= post.postComments.length %> Comments
+          </button> -->
+          <button class="btn btn-outline-secondary" onclick="toggleComments('<%= post._id %>')">            
+              <%= post.postComments.length %> Comments
           </button>
         </div>
         
@@ -40,7 +42,9 @@
           <% post.postComments.forEach(comment => { %>
             <div class="comment mb-2">
               <strong class="d-block"><%= comment.petName %></strong>
-              <p class="mb-0"><%= comment.commentText %></p>
+              <div>
+                <%= comment.commentText %>
+              </div>
             </div>
             
             <form
