@@ -11,21 +11,17 @@
 </head>
 <body>
 
-  <nav class="navbar navbar-dark bg-dark fixed-top">
+  <nav class="navbar navbar-dark bg-dark fixed-top navbar-custom">
     <div class="container-fluid d-flex align-items-center">
       <div class="header-left">
-        <div class="login-circle header-logo">
-          <img src="/images/ducky.svg" alt="Profile Image" class="img-fluid">
+        <div class="header-logo">
+          <img src="/images/frd_logo_small.png" alt="Profile Image" class="img-fluid">
         </div>
         <% const headerLink = (user) ? "/posts" : "/" %>
         <a class="navbar-brand" href="<%= headerLink %>">&nbsp;&nbsp;&nbsp;Fuzzy Rubber Ducks</a>
       </div>
       <div class="navbar-dark" id="navbarSupportedContent">
         <div class="nav-items ms-auto navbar-nav d-flex align-items-center flex-row">
-          <% if (user) { %>
-            <a class="nav-link" aria-current="page" href="/profiles/new">Add Pet</a>
-            <a class="nav-link" href="#">Add Post</a>
-          <% } %>
 
           <div class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

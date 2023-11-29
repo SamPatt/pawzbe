@@ -1,26 +1,24 @@
 <div class="container feed rounded mt-5">
-  <div class="feed-header">
-    <p>Top Pets</p>
-  </div>
   
-  <% for (let profile of profiles) { %>
+  <% profiles.forEach(profile => { %>
     <div class="row feed-content">
       <a href="/profiles/<%= profile._id %>">
         <div class="col-12 feed-item rounded">
           <div class="login-circle feed-pic">
             <img
               src="<%= profile.petPhoto.profilePhoto %>"
-              alt="Profile Image"
+              alt="<%= profile.petName %> Profile Image"
               class="img-fluid"
             />
           </div>
           <div class="feed-info">
-            <p><%= profile.petName %></p>
-            <small>Likes: 463</small><small>Posts: 95</small>
+            <h6><%= profile.petName %></h6>
+            <small><%= profile.petDetails.animalType %><% if (profile.petDetails.breed) { %>, <%= profile.petDetails.breed %><% } %></small>
+            <small><%= profile.petDetails.bio.split(' ').slice(0, 5).join(' ') %>...</small>
           </div>
         </div>
       </a>
     </div>
-  <% } %>
+  <% }); %>
 
 </div>
