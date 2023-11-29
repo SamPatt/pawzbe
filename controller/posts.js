@@ -10,7 +10,7 @@ module.exports = {
   create,
   deleteComment,
   like,
-  unlike,
+
 };
 
 async function index(req, res) {
@@ -201,7 +201,22 @@ async function deletePost(req, res) {
 async function like(req, res) {
   try {
     const post = await Post.findById(req.params.id);
-    post.likes++;
+    // const postId = post._id
+    // console.log("this is postId:", postId)
+    // console.log("this is all likes:", like)
+    // console.log("this is the liked post:", post)
+    //console.log("my req.user.profiles[0]._id:", req.user.profiles[0]._id.toString())
+    if (post.likingUserProfileId.includes(req.user.profiles[0]._id.toString())){
+      post.likes--;
+      //remove ID after unliking
+      post.likingUserProfileId = post.likingUserProfileId.filter(
+        (id) => id !== req.user.profiles[0]._id.toString())
+    } else{
+      post.likes++;
+      post.likingUserProfileId.push(req.user.profiles[0]._id.toString())
+      req.body.likingUserProfileId = req.user.profiles[0]._id;
+    }
+
     await post.save();
     res.redirect("/posts/");
   } catch (error) {
@@ -210,63 +225,4 @@ async function like(req, res) {
   }
 }
 
-async function unlike(req, res) {
-  try {
-    const owner =
-      req.user.profiles[0]._id.toString() === req.params.id ? true : false;
-    const profile = await Profile.findById(req.user.profiles[0]._id);
 
-    req.body.petName = profile.petName;
-    const post = await Post.findById(req.params.id);
-
-    //by assigning a variable we can reach
-    //to the input variable current profile for conditional
-    //statement both here and condition in ejs
-    const currentProfile = req.user.profiles[0]._id;
-
-    if (currentProfile === req.user.profiles[0]._id.toString()) {
-      post.postComments.forEach(function (postComment, index) {
-        console.log(postComment, index);
-        console.log(post._id.toString());
-        console.log(req.params.id);
-        if (post._id.toString() === req.params.id) {
-          post.postComments.splice(index, 1);
-        }
-      });
-      const dogBreeds = res.locals.dogBreeds;
-      const catBreeds = res.locals.catBreeds;
-
-      let breedInfo = null;
-
-      if (profile.petDetails.breed) {
-        const breedName = profile.petDetails.breed;
-        const animalType = profile.petDetails.animalType;
-
-        if (animalType === "Dog") {
-          const breedData = dogBreeds.find((breed) => breed.name === breedName);
-          if (breedData) {
-            breedInfo = breedData.temperament;
-          }
-        } else if (animalType === "Cat") {
-          const breedData = catBreeds.find((breed) => breed.name === breedName);
-          if (breedData) {
-            breedInfo = breedData.description;
-          }
-        }
-      }
-      await post.save();
-      const posts = await Post.find({ profile: req.user.profiles[0] });
-      res.render("fuzzies/profiles/show", {
-        title: profile.petName + "'s Page",
-        profile: profile,
-        posts: posts,
-        currentProfile: currentProfile,
-        owner,
-        breedInfo,
-      });
-    }
-  } catch (err) {
-    console.log(err);
-    res.status(500).send("Internal Server Error");
-  }
-}
