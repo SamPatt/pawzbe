@@ -1,4 +1,6 @@
-
+<div class="sidebar-button">
+  <p>All Pets</p>
+</div>
 <div class="container feed rounded mt-5">
   <div class="feed-header">
     <% if (typeof disabled !== 'undefined' && disabled) { %>
@@ -6,26 +8,32 @@
     <% } %>
   </div>
  
-  <% profiles.forEach(profile => { %>
-    <% const path = (typeof disabled !== 'undefined' && disabled) ? '#' : `/profiles/${profile._id}` %>
-    <div class="row feed-content">
-      <a href="<%= path %>" class="async">
-        <div class="col-12 feed-item rounded">
-          <div class="login-circle feed-pic">
-            <img
-              src="<%= profile.petPhoto.profilePhoto %>"
-              alt="<%= profile.petName %> Profile Image"
-              class="img-fluid"
-            />
-          </div>
-          <div class="feed-info">
-            <h6><%= profile.petName %></h6>
-            <small><%= profile.petDetails.animalType %><% if (profile.petDetails.breed) { %>, <%= profile.petDetails.breed %><% } %></small>
-            <small><%= profile.petDetails.bio.split(' ').slice(0, 5).join(' ') %>...</small>
-          </div>
+    <% profiles.forEach(profile => { %>
+      <% const path = (typeof disabled !== 'undefined' && disabled) ? '#' : `/profiles/${profile._id}` %>
+      <div class="row feed-content" style="background:transparent;">
+        <div class="col-12 feed-container">
+          <a href="<%= path %>" class="async">
+            <div class="col-12 feed-item rounded ellipsis">
+              <div class="container feed-photo-container">
+                <div class="login-circle feed-pic">
+                  <img
+                    src="<%= profile.petPhoto.profilePhoto %>"
+                    class="img-fluid"
+                  />
+                </div>
+              </div>
+              
+              <div class="feed-info">
+                  <h6><%= profile.petName %></h6>
+                <small><%= profile.petDetails.animalType %><% if (profile.petDetails.breed) { %>, <%= profile.petDetails.breed %><% } %></small>
+                <small><%= profile.petDetails.bio.split('').slice(0, 16).join('') %>...</small>
+              </div>
+            </div>
+          </a>
         </div>
-      </a>
-    </div>
-  <% }); %>
+      </div>
+    <% }); %>
+  
 
 </div>
+

@@ -81,8 +81,8 @@ li {
   width: 75%;
 }
 .header-logo {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   margin: 0;
 }
 .header-left {
@@ -272,7 +272,42 @@ li {
 
 
 
+
 /* Feed Side Bar */
+
+.folded-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 40px 40px 0; /* Adjust these values to change the size of the folded triangle */
+  border-color: transparent #f0f0f0 transparent transparent; /* Adjust this color to match the background color */
+}
+
+.sidebar-button {
+  position: absolute;
+  display: inline;
+  white-space: nowrap;
+  width: 50px;
+  height: 200px;
+  right: calc(22% + 1%);
+  top: 50%;
+  transform: translateY(-50%);
+  border-style: solid;
+  border-width: 40px 40px 40px 0; /* Adjust these values to change the size of the folded triangle */
+  border-color: transparent #f0f0f0 transparent transparent; 
+}
+
+.sidebar-button p {
+  position: relative;
+  top: 25%;
+  left: 150%;
+  transform: rotate(90deg);
+  margin: 0;
+}
 
 .feed {
   display: block;
@@ -282,43 +317,59 @@ li {
   transform: translateY(-50%);
   height: 75%;
   width: 22%;
-  background: #CAD1C9; /* Secondary Color */
+  background: #CAD1C9;
   padding: 2%;
   text-align: center;
   overflow-y: auto;
-  border-radius: 10px; /* Rounded corners */
+  border-radius: 10px;
 }
 
 .feed-item {
   height: 80px;
-  background: #EFF4ED; /* Lighter background for items */
+  background: #EFF4ED;
   margin: 8px 0;
+  padding: 4px;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
-  border-radius: 10px; /* Rounded corners for items */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  transition: background-color 0.3s ease; /* Smooth transition for hover */
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
 }
+.feed-photo-container {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  background: transparent;
+  border-radius: 50%;
+}
+.feed-container {
+  background: transparent;
+  border-radius: 50%;
 
+}
 .feed-pic {
   position: relative;
+  bottom: 0;
+  left: 0;
   width: 60px;
   height: 60px;
   margin: 0;
-  overflow: hidden; /* Hide overflow for rounded pictures */
-  border-radius: 50%; /* Circle shape */
+  overflow: hidden;
+  border-radius: 50%;
+  background: transparent;
 }
 
 .feed-pic img {
-  width: 100%; /* Adjusted to fill the container */
-  height: auto; /* Keep aspect ratio */
+  width: auto; /* Adjusted to fill the container */
+  height: 120%; /* Keep aspect ratio */
 }
 
 .feed-info {
   display: flex;
   flex-direction: column;
-  padding: 10px 0;
+  width: 100%;
 }
 
 .feed-info small,
@@ -364,6 +415,13 @@ li {
 
 .light-background {
   background: #EFF4ED
+}
+
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 

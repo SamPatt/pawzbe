@@ -119,7 +119,7 @@
     <% } %>
 
     <% if (owner) { %>
-      <div class="container">
+      <div class="container mt-20">
         <form
           class="profile-form d-flex flex-row"
           action="/profiles/<%= user._id %>?_method=PUT"
@@ -169,7 +169,7 @@
       <div class="col-md-12 d-flex justify-content-start mb-2">
         <div>
           <input type="hidden" name="likeCount" id="likeCount" value="<%= post.likes %>"> 
-          <button class="btn btn-outline-dark me-2" onclick="likePost('<%= post._id %>')" id="like-btn-<%= post._id %>">
+          <button class="async btn btn-outline-dark me-2" onclick="likePost('<%= post._id %>')" id="like-btn-<%= post._id %>">
           <%= post.likes %> Likes
           </button>
         </div>

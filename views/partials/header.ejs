@@ -16,11 +16,11 @@
     <div class="container-fluid d-flex align-items-center">
       <div class="header-left">
         <div class="header-logo">
-          <img src="/images/frd_logo_small.png" alt="Profile Image" class="img-fluid">
+          <img src="/images/pawzbe-logo.png" alt="Profile Image" class="img-fluid">
         </div>
         <% console.log(user) %>
         <% const headerLink = (user && user.profiles.length > 0) ? "/posts" : "/" %>
-        <a class="async navbar-brand" href="<%= headerLink %>">&nbsp;&nbsp;&nbsp;Fuzzy Rubber Ducks</a>
+        <a class="async navbar-brand" href="<%= headerLink %>">&nbsp;&nbsp;&nbsp;pawzbe</a>
       </div>
       <div class="navbar-dark" id="navbarSupportedContent">
         <div class="nav-items ms-auto navbar-nav d-flex align-items-center flex-row">
@@ -45,8 +45,8 @@
                 <div class="dropdown-divider"></div>
                 <% if (user.profiles[0]) { %>
                   <a class="async dropdown-item" href="/profiles/<%= user.profiles[0]._id %>">View Profile</a>
+                  <div class="dropdown-divider"></div>
                 <% } %>
-                <div class="dropdown-divider"></div>
                 <a class="async dropdown-item" href="/logout">Log Out</a>
                 <a class="async dropdown-item" href="/users/<%= user._id %>">User Settings</a>
               <% } else { %>
