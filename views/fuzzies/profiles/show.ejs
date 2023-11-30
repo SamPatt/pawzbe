@@ -32,19 +32,19 @@
         </div>
       <% } %>
       <div class="row">
-        <div class="col-md-4 mt-4" id="pet-details">
-          <div class="h-1 p-1 mb-3 text-center light-background box-shadow rounded-3">
-            <h4><strong><%= profile.petName %></strong></h4>
+        <div class="truncate-text col-md-4 mt-4" id="pet-details">
+          <div class="truncate-text h-1 p-1 mb-3 text-center light-background box-shadow rounded-3">
+            <h4 class="truncate-text"><strong><%= profile.petName %></strong></h4>
           </div>
           <div class="h-20 p-1 mb-3 text-center light-background box-shadow rounded-3">
-            <h5><%= profile.petDetails.animalType %></h5>
+            <h5 class="truncate-text"><%= profile.petDetails.animalType %></h5>
           </div>
           <div class="h-1 p-1 mb-3 text-center light-background box-shadow rounded-3">
-            <h5><%= profile.petDetails.breed %></h5>
+            <h5 class="truncate-text"><%= profile.petDetails.breed %></h5>
           </div>
           <% if (profile.petDetails.age !== undefined && profile.petDetails.age !== null) { %>
             <div class="h-1 p-1 mb-3 text-center light-background box-shadow rounded-3">
-              <h5>
+              <h5 class="truncate-text">
                 <% if (profile.petDetails.age) { %>
                   <%= profile.petDetails.age %> <%= profile.petDetails.age > 1 ? "Years Old" : "Year Old" %>
                 <% } %>

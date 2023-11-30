@@ -11,7 +11,8 @@ main {
   margin: 0 auto;
   max-width: 1000px;
 }
-a, button {
+a,
+button {
   transition: all 0.3s ease;
 }
 
@@ -47,7 +48,8 @@ input[type="button"]:hover {
   background-color: #065a34;
 }
 
-.container, .login-container {
+.container,
+.login-container {
   background: #e2edce;
   padding: 4px 16px;
   border-radius: 10px;
@@ -191,6 +193,9 @@ li {
   align-items: center;
   margin: 0 0 40px 0;
 }
+#edit-profile-header {
+  color: #184c34;
+}
 .pet-post img {
   max-height: 400px;
 }
@@ -250,6 +255,11 @@ li {
   top: 0;
   left: 0;
 }
+.truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 #myCarousel {
   min-height: 400px;
@@ -267,13 +277,13 @@ li {
 .carousel-control-next {
   font-size: 2em;
   color: #000;
-  background: rgba(0, 0, 0, 0.1)
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .carousel-control-prev-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23184C34' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
- }
- 
+}
+
 .carousel-control-next-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23184C34' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
 }
@@ -509,7 +519,7 @@ li {
   align-items: center;
 }
 .post-img img {
-  max-height: 200px;
+  max-height: 500px;
   width: auto;
 }
 .post-wrapper {
