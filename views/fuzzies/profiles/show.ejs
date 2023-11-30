@@ -170,33 +170,33 @@
             <img src="<%= post.images[0].url %>" class="img-fluid rounded mb-2" />
           </div>
         </div>
-        
-        <div class="col-md-12 d-flex justify-content-start mb-2">
-          <div>
-            <form action="/profiles/<%= post._id %>/likes" method="POST">
-              <input type="hidden" name="likingUserprofileId" value="<%= post.likingUserprofileId %> ">
-              <button type="submit" class="async btn btn-outline-secondary"><span class="like-count"><%= post.likes%> Likes</span>
-              </button>
-            </form>
-          </div>
-          <button
-            class="btn btn-outline-primary"
-            onclick="toggleComments('<%= post._id %>')"
+      </div>
+      <div class="col-md-12 d-flex justify-content-start mb-2">
+        <div>
+          <form action="/profiles/<%= post._id %>/likes" method="POST">
+            <input type="hidden" name="likingUserprofileId" value="<%= post.likingUserprofileId %> ">
+            <button type="submit" class="async btn <%= post.likingUserProfileId.includes(user.profiles[0]._id.toString()) ? 'btn-primary-green' : 'btn-outline-secondary' %>""><span class="like-count"><%= post.likes%> Likes</span>
+            </button>
+          </form>
+        </div>
+        <button
+          class="btn btn-outline-primary"
+          onclick="toggleComments('<%= post._id %>')"
+        >
+          <%= post.postComments.length %> Comments
+        </button>
+        <!-- delete post  -->
+        <% if (owner) { %>
+          <form
+            action="/posts/<%=post._id%>?_method=DELETE"
+            method="POST"
+            class="ms-auto"
           >
-            <%= post.postComments.length %> Comments
-          </button>
-          <!-- delete post  -->
-          <% if (owner) { %>
-            <form
-              action="/posts/<%=post._id%>?_method=DELETE"
-              method="POST"
-              class="ms-auto"
-            >
-              <button type="submit" class="async btn btn-outline-dark me-2 ml-auto">
-                X
-              </button>
-            </form>
-          <% } %>
+            <button type="submit" class="async btn btn-outline-dark me-2 ml-auto">
+              X
+            </button>
+          </form>
+        <% } %>
 
         </div>
 
