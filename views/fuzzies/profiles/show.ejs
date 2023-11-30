@@ -155,14 +155,11 @@
 
     <% for (post of posts) { %>
     <div class="row align-items-md-stretch mt-3" id="pet-post">
-      <div class="col-md-12">
+      <div class="col-md-10">
         <div class="pet-post mb-3">
-          <div class="p-3 bg-body-tertiary border rounded-3">
+          <div class="light-background border rounded-3 d-flex flex-column align-items-center p-3">
             <p class="fw-bold text-dark mb-2"><%= post.postDescription %></p>
-            <img
-              src="<%= post.postPhotoLink %>"
-              class="img-fluid rounded mb-2"
-            />
+            <img src="<%= post.images[0].url %>" class="img-fluid rounded mb-2" />
           </div>
         </div>
       </div>
