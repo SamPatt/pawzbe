@@ -328,12 +328,13 @@ async function like(req, res) {
 async function like(req, res) {
   //res.send("the request through profile show like received by controller")
   try {
-    const profile = await Profile.findById(req.params.id);
-    console.log("this is req params id:", req.params.id);
-    console.log(
-      "this is user profile id :",
-      req.user.profiles[0]._id.toString()
-    );
+    const post = await Post.findById(req.params.id);
+    // const profile = await Profile.findById(req.params.id);
+    // console.log("this is req params id:", req.params.id);
+    // console.log(
+    //   "this is user profile id :",
+    //   req.user.profiles[0]._id.toString()
+    // );
     //console.log("this is profile._id: ", profile._id) -> null
     // const post = await Post.find
     // const postId = post._id
