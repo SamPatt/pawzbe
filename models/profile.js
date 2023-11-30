@@ -26,7 +26,7 @@ const profileSchema = new Schema(
       favoriteToys: [String],
       breed: String,
       animalType: String,
-      dob: Date,
+      age: Number,
     },
     images: []
   },

@@ -111,7 +111,9 @@ li {
 }
 
 .navbar-brand {
-  margin-top: 4px;
+  display: flex;
+  align-content: center;
+  font-size: 2rem;
 }
 
 .navbar-dark {
