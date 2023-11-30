@@ -1,12 +1,12 @@
-# fuzzy-rubber-ducks
+# pawzbe
 
-The Fuzzy Rubber Ducks app is a social media platform for developers to share their pets.
+Pawzbe is a pet social media platform.
 
 
 # Screenshot
 
-MVP login:
-![Prototype Login](https://i.imgur.com/5YlaRjj.png)
+Login Page
+![Login](https://i.imgur.com/KY9N8mg.png)
 
 
 # Technologies Used
@@ -22,12 +22,10 @@ MVP login:
 
 # Getting Started
 
-// Link to be added
+[Pawzbe](https://pawzbe.com/)
 
 # Next Steps
 
 - Allow users to add multiple pets and switch between them
-- Better responsive design
-- Image file uploads instead of links
 - Better link parsing / handling
 - Introduce other third party APIs (toys)
