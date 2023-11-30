@@ -43,7 +43,7 @@
         <div id="comments-section-<%= post._id %>" class="col-md-12 mb-3" style="display: none;">
           <% post.postComments.forEach(comment => { %>
             <div class="col-md-8 col-lg-6 mx-auto">
-              <div class="comment mb-2 p-3 shadow-sm rounded" style="background-color: #f8f9fa;">
+              <div class="comment mb-2 p-3 shadow-sm rounded" style="background-color: #e3e9e2;">
                 <strong class="d-block text-primary mb-2"><%= comment.petName %></strong>
                 <p class="mb-0" style="font-size: 0.9rem;"><%= comment.commentText %></p> 
                 </div>
@@ -73,9 +73,21 @@
         <!-- Comment Form (Initially Hidden) -->
         <div id="comment-form-<%= post._id %>" class="col-md-12" style="display: none;">
           <form action="/posts/<%= post._id %>/comments" method="POST">
-            <textarea class="form-control mb-2" name="commentText" placeholder="Write a comment..." rows="3"></textarea>
-            <button type="submit" class="async btn btn-success">Submit Comment</button>
-            
+            <div class="row">
+              <div class="col-12 col-md-8 col-lg-6 mx-auto">
+                <textarea
+                  class="form-control mb-2"
+                  name="commentText"
+                  placeholder="Write a comment..."
+                  rows="3"
+                ></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col text-center">
+                <button type="submit" class="async btn btn-success">Submit Comment</button>
+              </div>
+            </div>
           </form>
         </div>
       </div>
