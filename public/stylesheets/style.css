@@ -8,7 +8,10 @@ body {
   height: calc(100vh - 100px);
   margin: 100px 20px 0 20px;
 }
-
+main {
+  margin: 0 auto;
+  max-width: 1000px;
+}
 a, button {
   transition: all 0.3s ease;
 }
@@ -265,6 +268,7 @@ li {
   display: none;
   z-index: 3;
 }
+
 .spinner.show {
   display: block;
 }
