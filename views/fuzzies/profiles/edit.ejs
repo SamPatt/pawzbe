@@ -19,7 +19,7 @@
 
 
 <h1 class="d-flex justify-content-center">Edit Profile Details</h1>
-<form class="profile-form" action="/profiles/<%= profile._id %>?_method=PUT" method="POST">
+<form class="profile-form" action="/profiles/<%= profile._id %>?_method=PUT" method="POST" autocomplete="off" enctype="multipart/form-data">
   <div class="form-group">
 
     <label for="petName">Pet Name</label>
@@ -88,23 +88,25 @@
       value="<%= profile.humanNames.join(', ') %>"
     />
 
-    <label for="banner">Banner</label>
-    <input
-      type="text"
-      name="banner"
-      id="banner"
-      class="banner form-control"
-      value="<%= profile.petPhoto.banner %>"
-    />
-
-    <label for="profilePhoto">Profile Photo</label>
-    <input
+    <label for="profilePhoto">Profile Image
+      <input
       class="form-control"
-      type="text"
+      type="file"
       name="profilePhoto"
       id="profilePhoto"
-      value="<%= profile.petPhoto.profilePhoto %>"
-    />
+      placeholder="Add Profile Photo"
+      />
+    </label>
+    <br>
+    <label for="banner-input">Banner Image
+      <input
+        type="file"
+        name="banner"
+        id="banner-input"
+        class="banner form-control"
+        placeholder="Banner URL"
+      />
+    </label>
 
     <button class="async btn-primary btn" type="submit">Submit</button>
   </div>

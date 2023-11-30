@@ -124,15 +124,24 @@
           class="profile-form d-flex flex-row"
           action="/profiles/<%= user._id %>?_method=PUT"
           method="POST"
+          autocomplete="off" 
+          enctype="multipart/form-data"
         >
           <div class="row w-100">
             <div class="col-10">
-              <input
-                type="text"
-                name="images"
-                class="form-control m-2"
-                placeholder="Image URL (comma separated)"
-              />
+              <div class="form-group">
+                <label for="imageUpload">Upload Images</label>
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="imageUpload"
+                  name="images"
+                  multiple
+                  required
+                />
+                <small class="form-text text-muted">You can select multiple images.</small>
+              </div>
+              
             </div>
             <div class="col-2">
               <button class="async add-images-btn btn btn-primary font-weight-bold">+</button>
@@ -155,14 +164,11 @@
 
     <% for (post of posts) { %>
     <div class="row align-items-md-stretch mt-3" id="pet-post">
-      <div class="col-md-12">
+      <div class="col-md-10">
         <div class="pet-post mb-3">
-          <div class="p-3 bg-body-tertiary border rounded-3">
+          <div class="light-background border rounded-3 d-flex flex-column align-items-center p-3">
             <p class="fw-bold text-dark mb-2"><%= post.postDescription %></p>
-            <img
-              src="<%= post.postPhotoLink %>"
-              class="img-fluid rounded mb-2"
-            />
+            <img src="<%= post.images[0].url %>" class="img-fluid rounded mb-2" />
           </div>
         </div>
       </div>

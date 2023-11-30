@@ -1,6 +1,6 @@
 <%- include('../../partials/header') %>
 
-<form class="profile-form" action="/profiles/" method="POST">
+<form class="profile-form" action="/profiles/" method="POST" autocomplete="off" enctype="multipart/form-data">
   <div class="form-group">
     <input
       type="text"
@@ -78,28 +78,34 @@
       class="favoriteToys form-control"
       placeholder="Favorite Toys (comma separated)"
     />
-
+    
     <input
-      type="text"
-      name="banner"
-      class="banner form-control"
-      placeholder="Banner URL"
+    type="text"
+    name="owners"
+    class="owners form-control"
+    placeholder="Pet Owners (comma separated)"
     />
-
-    <input
-      type="text"
-      name="owners"
-      class="owners form-control"
-      placeholder="Pet Owners (comma separated)"
-    />
-
-    <input
+    <label for="profilePhoto">Profile Image
+      <input
       class="form-control"
-      type="text"
+      type="file"
       name="profilePhoto"
       id="profilePhoto"
       placeholder="Add Profile Photo"
-    />
+      required
+      />
+    </label>
+    <br>
+    <label for="banner-input">Banner Image
+      <input
+        type="file"
+        name="banner"
+        id="banner-input"
+        class="banner form-control"
+        placeholder="Banner URL"
+        required
+      />
+    </label>
 
     <button class="async btn-primary btn" type="submit">Submit</button>
   </div>
