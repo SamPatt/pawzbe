@@ -316,7 +316,7 @@ li {
   font-family: 'Montserrat', sans-serif; 
   color: #0f5e34;
   font-weight: bold;
-  background-color: #b5bcb4;
+  background: #b5bcb4;
   clip-path: polygon(0% 15%,100% 0%, 100% 100%, 0% 85%);
   transform: translateY(-50%);
   transition: all .25s;
@@ -329,8 +329,9 @@ li {
 }
 
 .sidebar-button:hover {
-  background: #EFF4ED;
+  background: #0f5e34;
   font-size: 1rem;
+  color: #b5bcb4;
 }
 
 .sidebar-button p {
@@ -446,7 +447,7 @@ li {
   font-family: 'Montserrat', sans-serif; 
   color: #0f5e34;
   font-weight: bold;
-  background-color: #b5bcb4;
+  background: #b5bcb4;
   clip-path: polygon(0% 0%, 100% 15%, 100% 85%, 0% 100%);
   transform: translateY(-50%);
   transition: all .25s;
@@ -459,8 +460,9 @@ li {
 }
 
 .post-button:hover {
-  background: #EFF4ED;
+  background: #0f5e34;
   font-size: 1rem;
+  color: #b5bcb4;
 }
 
 .post-button p {
@@ -491,5 +493,17 @@ li {
     width: 200px;
     height: 200px;
     margin-top: -100px;
+  }
+}
+@media (max-width: 450px) {
+  .post-button,
+  .sidebar-button {
+    width: 30px;
+  }
+  .post-button p {
+    left: 5px;
+  }
+  .sidebar-button p {
+    left: 8px;
   }
 }
