@@ -493,9 +493,6 @@ li {
   text-orientation: upright;
   z-index: 2;
 }
-.post-img {
-  background: #e0e8df !important;
-}
 .post-img img {
   max-height: 200px;
   width: auto;

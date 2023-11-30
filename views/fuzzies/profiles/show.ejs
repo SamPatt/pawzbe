@@ -150,111 +150,108 @@
         </form>
       </div>
     <% } %>
-
+  </div>
     <!---------------------------------------------------------------------------------------------------------------- -->
     <div class="col-md-9 mt-5 d-flex align-items-center">
       <div class="pet-name">
         <div class="row">
           <div class="col-md-12 p-0">
-            <h4><%= profile.petName %>'s Posts</h4>
+            <h4 style="color:black;"><%= profile.petName %>'s Posts</h4>
           </div>
         </div>
       </div>
     </div>
 
     <% for (post of posts) { %>
-    <div class="row align-items-md-stretch mt-3 justify-content-center" id="pet-post">
-      <div class="col-md-10">
-        <div class="pet-post mb-3">
-          <div class="post-img light-background border rounded-3 d-flex flex-column align-items-center p-3">
+      <div class="post-wrapper col-12 col-md-10 justify-content-center align-items-center mb-4 mt-2 py-4">
+        <div class="row align-items-center mb-2">
+          <div class="post-img transparent rounded-3 d-flex flex-column align-items-center">
             <p class="fw-bold text-dark mb-2 left-align"><%= post.postDescription %></p>
             <img src="<%= post.images[0].url %>" class="img-fluid rounded mb-2" />
           </div>
         </div>
-      </div>
-      
-      <div class="col-md-12 d-flex justify-content-start mb-2">
-        <div>
-          <form action="/profiles/<%= post._id %>/likes" method="POST">
-            <input type="hidden" name="likingUserprofileId" value="<%= post.likingUserprofileId %> ">
-            <button type="submit" class="async btn btn-outline-secondary"><span class="like-count"><%= post.likes%> Likes</span>
-            </button>
+        
+        <div class="col-md-12 d-flex justify-content-start mb-2">
+          <div>
+            <form action="/profiles/<%= post._id %>/likes" method="POST">
+              <input type="hidden" name="likingUserprofileId" value="<%= post.likingUserprofileId %> ">
+              <button type="submit" class="async btn btn-outline-secondary"><span class="like-count"><%= post.likes%> Likes</span>
+              </button>
+            </form>
+          </div>
+          <button
+            class="btn btn-outline-primary"
+            onclick="toggleComments('<%= post._id %>')"
+          >
+            <%= post.postComments.length %> Comments
+          </button>
+          <!-- delete post  -->
+          <% if (owner) { %>
+            <form
+              action="/posts/<%=post._id%>?_method=DELETE"
+              method="POST"
+              class="ms-auto"
+            >
+              <button type="submit" class="async btn btn-outline-dark me-2 ml-auto">
+                X
+              </button>
+            </form>
+          <% } %>
+
+        </div>
+
+        <!-- Comments Section (Initially Hidden) -->
+        <div
+          id="comments-section-<%= post._id %>"
+          class="col-md-12 mb-3"
+          style="display: none"
+        >
+
+          <% let commentIndex = 0; %>
+          <% post.postComments.forEach(comment => { %>
+            <div class="comment mb-2">
+              <strong class="d-block"><%= comment.petName %></strong>
+              <p class="mb-0"><%= comment.commentText %></p>
+
+              <form
+                action="/posts/comments/<%= post._id %>?_method=DELETE"
+                method="POST"
+                class="col-md-12 d-flex justify-content-end mt-3 ms-auto"
+                >
+                <input type="hidden" name="currentProfile" value="<%= profile._id %>">
+                <input type="hidden" name="commentIndex" value="<%= commentIndex %>">
+                
+                <% if (currentProfile === comment.profileId) { %>
+                  <button type="submit" class="async btn btn-outline-dark me-2 ml-auto " id="commentXButton" style="visibility: visible;">X</button>
+                <% } else { %>
+                  <button id="commentXButton" style="visibility: hidden;">X</button>
+                <% } %>
+              </form>
+
+            </div>
+            <% commentIndex++; %>
+          <% }); %>
+
+        </div>
+        <!-- Comment Form (Initially Hidden) -->
+        <div
+          id="comment-form-<%= post._id %>"
+          class="col-md-12"
+          style="display: none"
+        >
+          <form action="/posts/<%= post._id %>/comments" method="POST">
+            <textarea
+              class="form-control mb-2"
+              name="commentText"
+              placeholder="Write a comment..."
+              rows="3"
+            ></textarea>
+            <button type="submit" class="async btn btn-success">Submit Comment</button>
           </form>
         </div>
-        <button
-          class="btn btn-outline-primary"
-          onclick="toggleComments('<%= post._id %>')"
-        >
-          <%= post.postComments.length %> Comments
-        </button>
-        <!-- delete post  -->
-        <% if (owner) { %>
-          <form
-            action="/posts/<%=post._id%>?_method=DELETE"
-            method="POST"
-            class="ms-auto"
-          >
-            <button type="submit" class="async btn btn-outline-dark me-2 ml-auto">
-              X
-            </button>
-          </form>
-        <% } %>
-
       </div>
-
-      <!-- Comments Section (Initially Hidden) -->
-      <div
-        id="comments-section-<%= post._id %>"
-        class="col-md-12 mb-3"
-        style="display: none"
-      >
-
-        <% let commentIndex = 0; %>
-        <% post.postComments.forEach(comment => { %>
-          <div class="comment mb-2">
-            <strong class="d-block"><%= comment.petName %></strong>
-            <p class="mb-0"><%= comment.commentText %></p>
-
-            <form
-              action="/posts/comments/<%= post._id %>?_method=DELETE"
-              method="POST"
-              class="col-md-12 d-flex justify-content-end mt-3 ms-auto"
-              >
-              <input type="hidden" name="currentProfile" value="<%= profile._id %>">
-              <input type="hidden" name="commentIndex" value="<%= commentIndex %>">
-              
-              <% if (currentProfile === comment.profileId) { %>
-                <button type="submit" class="async btn btn-outline-dark me-2 ml-auto " id="commentXButton" style="visibility: visible;">X</button>
-              <% } else { %>
-                <button id="commentXButton" style="visibility: hidden;">X</button>
-              <% } %>
-            </form>
-
-          </div>
-          <% commentIndex++; %>
-        <% }); %>
-
-      </div>
-      <!-- Comment Form (Initially Hidden) -->
-      <div
-        id="comment-form-<%= post._id %>"
-        class="col-md-12"
-        style="display: none"
-      >
-        <form action="/posts/<%= post._id %>/comments" method="POST">
-          <textarea
-            class="form-control mb-2"
-            name="commentText"
-            placeholder="Write a comment..."
-            rows="3"
-          ></textarea>
-          <button type="submit" class="async btn btn-success">Submit Comment</button>
-        </form>
-      </div>
-    </div>
-
-      <% } %>
-    </div>
+    <% } %>
+  </div>
 
 </main>
 
