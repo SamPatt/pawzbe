@@ -25,7 +25,7 @@ module.exports = {
 
 async function index(req, res) {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find().sort({ createdAt: -1 });
 
     res.render("fuzzies/posts/index", {
       title: "All Posts",
