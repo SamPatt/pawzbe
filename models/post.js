@@ -25,6 +25,7 @@ const postSchema = new Schema(
       type: Number,
       default: 0,
     },
+    likingUserProfileId: [String],
     postComments: [commentSchema],
     petName: String,
     profilePhoto: String,

@@ -20,6 +20,6 @@ router.delete("/comments/:id", postsCtrl.deleteComment);
 
 
 router.post("/:id/likes", postsCtrl.like);
-// router.delete("/comments/:id", postsCtrl.unlike);
+
 
 module.exports = router;

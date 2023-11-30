@@ -168,10 +168,11 @@
       </div>
       <div class="col-md-12 d-flex justify-content-start mb-2">
         <div>
-          <input type="hidden" name="likeCount" id="likeCount" value="<%= post.likes %>"> 
-          <button class="async btn btn-outline-dark me-2" onclick="likePost('<%= post._id %>')" id="like-btn-<%= post._id %>">
-          <%= post.likes %> Likes
-          </button>
+          <form action="/profiles/<%= post._id %>/likes" method="POST">
+            <input type="hidden" name="likingUserprofileId" value="<%= post.likingUserprofileId %> ">
+            <button type="submit" class="async btn btn-outline-secondary"><span class="like-count"><%= post.likes%> Likes</span>
+            </button>
+          </form>
         </div>
         <button
           class="btn btn-outline-primary"
@@ -179,15 +180,19 @@
         >
           <%= post.postComments.length %> Comments
         </button>
-        <form
-          action="/posts/<%=post._id%>?_method=DELETE"
-          method="POST"
-          class="ms-auto"
-        >
-          <button type="submit" class="async btn btn-outline-dark me-2 ml-auto">
-            X
-          </button>
-        </form>
+        <!-- delete post  -->
+        <% if (owner) { %>
+          <form
+            action="/posts/<%=post._id%>?_method=DELETE"
+            method="POST"
+            class="ms-auto"
+          >
+            <button type="submit" class="async btn btn-outline-dark me-2 ml-auto">
+              X
+            </button>
+          </form>
+        <% } %>
+
       </div>
 
       <!-- Comments Section (Initially Hidden) -->
@@ -197,7 +202,7 @@
         style="display: none"
       >
 
-
+        <% let commentIndex = 0; %>
         <% post.postComments.forEach(comment => { %>
           <div class="comment mb-2">
             <strong class="d-block"><%= comment.petName %></strong>
@@ -209,6 +214,7 @@
               class="col-md-12 d-flex justify-content-end mt-3 ms-auto"
               >
               <input type="hidden" name="currentProfile" value="<%= profile._id %>">
+              <input type="hidden" name="commentIndex" value="<%= commentIndex %>">
               
               <% if (currentProfile === comment.profileId) { %>
                 <button type="submit" class="async btn btn-outline-dark me-2 ml-auto " id="commentXButton" style="visibility: visible;">X</button>
@@ -218,6 +224,7 @@
             </form>
 
           </div>
+          <% commentIndex++; %>
         <% }); %>
 
       </div>
@@ -256,11 +263,6 @@
 
     commentsSection.style.display = isHidden ? "block" : "none";
     commentForm.style.display = isHidden ? "block" : "none";
-  }
-  function likePost(postId) {
-    const likeBtnEl = document.getElementById(
-      "like-btn-" + postId
-    );
   }
 </script>
 
