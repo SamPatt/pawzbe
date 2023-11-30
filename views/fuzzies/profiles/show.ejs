@@ -187,7 +187,7 @@
             method="POST"
             class="ms-auto"
           >
-            <button type="submit" class="btn btn-outline-dark me-2 ml-auto">
+            <button type="submit" class="async btn btn-outline-dark me-2 ml-auto">
               X
             </button>
           </form>
@@ -217,9 +217,9 @@
               <input type="hidden" name="commentIndex" value="<%= commentIndex %>">
               
               <% if (currentProfile === comment.profileId) { %>
-                <button type="submit" class="btn btn-outline-dark me-2 ml-auto " id="commentXButton" style="visibility: visible;">X</button>
+                <button type="submit" class="async btn btn-outline-dark me-2 ml-auto " id="commentXButton" style="visibility: visible;">X</button>
               <% } else { %>
-                <button id="commentXButton" style="visibility: hidden;">X</button>
+                <button id="commentXButton" class="async" style="visibility: hidden;">X</button>
               <% } %>
             </form>
 
