@@ -51,15 +51,20 @@
       value="<%= profile.petDetails.breed %>"
     />
 
-    <label for="dob">Date of Birth</label>
-    <input
-      type="date"
-      name="dob"
-      id="dob"
-      class="dob form-control"
-      value="<%= profile.petDetails.dob.toISOString().split('T')[0] %>" 
-      required
-    />
+<label for="dob">Date of Birth</label>
+<input
+  type="date"
+  name="dob"
+  id="dob"
+  class="dob form-control"
+  <% if (profile.petDetails.dob) { %>
+    value="<%= new Date(profile.petDetails.dob).toISOString().split('T')[0] %>"
+  <% } else { %>
+    value=""
+  <% } %>
+  required
+/>
+
 
     <label for="bio">Bio</label>
     <textarea

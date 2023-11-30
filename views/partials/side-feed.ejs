@@ -21,8 +21,13 @@
           <div class="feed-info">
             <h6><%= profile.petName %></h6>
             <small><%= profile.petDetails.animalType %><% if (profile.petDetails.breed) { %>, <%= profile.petDetails.breed %><% } %></small>
-            <small><%= profile.petDetails.bio.split(' ').slice(0, 5).join(' ') %>...</small>
+            <% if (profile.petDetails.bio && typeof profile.petDetails.bio === 'string') { %>
+              <small><%= profile.petDetails.bio.split(' ').slice(0, 5).join(' ') %>...</small>
+            <% } else { %>
+              <small>No bio available</small>
+            <% } %>
           </div>
+          
         </div>
       </a>
     </div>
