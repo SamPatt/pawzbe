@@ -39,7 +39,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .container, .login-container {
-  background: #CAD1C9;
+  background: #e2edce;
   padding: 4px 16px;
   border-radius: 10px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -493,6 +493,11 @@ li {
   text-orientation: upright;
   z-index: 2;
 }
+.post-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .post-img img {
   max-height: 200px;
   width: auto;
@@ -506,7 +511,7 @@ li {
   font-weight: bold !important;
 }
 .light-background {
-  background: #EFF4ED
+  background: #e3e9e2;
 }
 .ellipsis {
   white-space: nowrap;

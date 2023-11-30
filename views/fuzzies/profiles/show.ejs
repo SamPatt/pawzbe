@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="col-md-8" id="bio-section" style="color: black">
-        <div class="h-100 p-5 bio border rounded-3">
+        <div class="h-100 p-5 bio border light-background rounded-3">
           <h2>Bio</h2>
           <p><%= profile.petDetails.bio %></p>
           <% if (breedInfo) { %>
@@ -161,9 +161,9 @@
         </div>
       </div>
     </div>
-
+  <div class="post-container">
     <% for (post of posts) { %>
-      <div class="post-wrapper col-12 col-md-10 justify-content-center align-items-center mb-4 mt-2 py-4">
+      <div class="post-wrapper col-12 col-md-10 justify-content-center align-items-center mb-4 mt-2 p-4">
         <div class="row align-items-center mb-2">
           <div class="post-img transparent rounded-3 d-flex flex-column align-items-center">
             <p class="fw-bold text-dark mb-2 left-align"><%= post.postDescription %></p>
