@@ -171,17 +171,28 @@ async function update(req, res) {
     } else {
       const updatedProfile = {}
       let pet = {
-        petPhoto: {},
-        // images:[],
+        petPhoto: {
+          profilePhoto: '',
+          banner: '',
+        },
       }
       const user = await User.findById(req.user._id)
       
+
+      if (req.files && req.files.profilePhoto) {
+        let profileImageResult = await streamUpload(req.files.profilePhoto[0]);
+        pet.petPhoto.profilePhoto = profileImageResult.url;
+      }
+    
+      if (req.files && req.files.banner) {
+        let bannerImageResult = await streamUpload(req.files.banner[0]);
+        pet.petPhoto.banner = bannerImageResult.url;
+      }
+    
       try {
         with (req.body) {
           pet.petName = petName
           pet.humanNames = owners.split(',').map(i => i.trim())
-          pet.petPhoto.banner = banner
-          pet.petPhoto.profilePhoto = profilePhoto
           pet.petDetails = {
             bio: bio,
             favoriteToys: favoriteToys.split(',').map(i => i.trim()),
@@ -197,7 +208,7 @@ async function update(req, res) {
           { $set: pet }
         )
 
-        res.redirect(`/profiles/${profile._id}/edit`)
+        res.redirect(`/profiles/${profile._id}`)
     } catch (err) {
       console.log(err);
     }
@@ -233,20 +244,30 @@ function newProfile(req, res) {
 
 async function create(req, res) {
   let pet = {
-    petPhoto: {},
-    // images:[],
+    petPhoto: {
+      profilePhoto: '',
+      banner: '',
+    },
   }
   const user = await User.findById(req.user._id)
   if(req.body.animalTypeOther){
     req.body.animalType = req.body.animalTypeOther
   }
-  
+
+  if (req.files && req.files.profilePhoto) {
+    let profileImageResult = await streamUpload(req.files.profilePhoto[0]);
+    pet.petPhoto.profilePhoto = profileImageResult.url;
+  }
+
+  if (req.files && req.files.banner) {
+    let bannerImageResult = await streamUpload(req.files.banner[0]);
+    pet.petPhoto.banner = bannerImageResult.url;
+  }
+
   try {
     with (req.body) {
       pet.petName = petName
       pet.humanNames = owners.split(',').map(i => i.trim())
-      pet.petPhoto.banner = banner
-      pet.petPhoto.profilePhoto = profilePhoto
       pet.petDetails = {
         bio: bio,
         favoriteToys: favoriteToys.split(',').map(i => i.trim()),
@@ -254,7 +275,6 @@ async function create(req, res) {
         animalType: animalType,
         dob: dob,
       }
-      // pet.images = [...images.split(',').map(i => i.trim())]
     }
 
     const profile = await Profile.create(pet)
@@ -298,17 +318,17 @@ async function addPhoto(req,res,next){
   }
 }
 
-function streamUpload (req){
+function streamUpload (file){
   return new Promise(function (resolve, reject){
-      let stream = cloudinary.uploader.upload_stream( function(error, result){
+      let stream = cloudinary.uploader.upload_stream(function(error, result){
           if(result){
               console.log(result)
               resolve(result)
-          }else{
+          } else {
               reject(error)
           }
       });
-      // streamifier is what chunking and stream data to cloudinary -> pipe process ()
-      streamifier.createReadStream(req.file.buffer).pipe(stream)
+
+      streamifier.createReadStream(file.buffer).pipe(stream)
   })
 }
