@@ -11,16 +11,32 @@ Login Page
 
 # Technologies Used
 
-- Node.js
-- Express
-- HTML
-- CSS
-- Bootstrap
-- Mongoose for MongoDB
-- Passport for Oauth
-- Third party API for breed information
+## Backend Technologies
 
-# Getting Started
+- **Node.js**
+- **Express**
+- **Mongoose for MongoDB**
+- **Passport for OAuth**: We use Passport to handle Google and Github logins.
+  
+## Frontend Technologies
+
+- **HTML**
+- **CSS**
+- **Bootstrap**
+- **EJS**
+
+## Image Handling and Storage
+
+- **Cloudinary**: We use Cloudinary for image storage.
+- **Multer**: We use Multer to handle the image upload feature.
+- **Streamifier**: Used in conjunction with Multer and Cloudinary to efficiently handle the image upload process.
+
+## Third-Party APIs
+
+- **Third-Party API for Breed Information**: We integrate a third-party API to fetch detailed information about different breeds.
+
+
+# Visit pawzbe
 
 [Pawzbe](https://pawzbe.com/)
 
