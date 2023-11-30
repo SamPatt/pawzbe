@@ -226,9 +226,11 @@
 
           <% let commentIndex = 0; %>
           <% post.postComments.forEach(comment => { %>
-            <div class="comment mb-2">
-              <strong class="d-block"><%= comment.petName %></strong>
-              <p class="mb-0"><%= comment.commentText %></p>
+            <div class="col-md-8 col-lg-6 mx-auto">
+              <div class="comment mb-2 p-3 shadow-sm rounded" style="background-color: #f8f9fa;">
+                <strong class="d-block text-primary mb-2"><%= comment.petName %></strong>
+                <p class="mb-0" style="font-size: 0.9rem;"><%= comment.commentText %></p> 
+                </div>
 
               <form
                 action="/posts/comments/<%= post._id %>?_method=DELETE"
