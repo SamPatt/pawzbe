@@ -220,7 +220,7 @@ try {
   console.log("this is post.profile._id : ", post.profile);
 
   // Check if the user is the author of the post
-  if (post.profile===profile._id) {
+  if (post.profile.toString() === profile._id.toString()) {
     await Post.deleteOne({ _id: req.params.id }); 
     res.redirect(`/profiles/${profile._id}`);
   } 
