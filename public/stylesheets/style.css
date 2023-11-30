@@ -501,7 +501,7 @@ li {
   width: auto;
 }
 .post-wrapper {
-  background: #a7cb8e;
+  background: #e2edce;
   border-radius: 20px;
 }
 .post-details {
@@ -521,6 +521,9 @@ li {
   width: 100%;
 }
 
+.transparent {
+  background-color: transparent;
+}
 
 @media (min-width: 750px) {
   #profile-image {
