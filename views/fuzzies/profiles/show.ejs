@@ -43,7 +43,13 @@
           <h4><%= profile.petDetails.breed %></h4>
         </div>
         <div class="h-1 p-1 mb-3 text-center light-background box-shadow rounded-3">
-          <h4><%= new Date(profile.petDetails.dob).toDateString() %></h4>
+          <h4>
+            <% if (profile.petDetails.age > 1) { %>
+              <%= profile.petDetails.age %> Years Old
+            <% } else { %>
+              <%= profile.petDetails.age %> Year Old
+            <% } %>
+          </h4>
         </div>
       </div>
       <div class="col-md-8" id="bio-section" style="color: black">

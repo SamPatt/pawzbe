@@ -1,6 +1,12 @@
 <%- include('../../partials/header') %>
 
-<form class="profile-form" action="/profiles/" method="POST" autocomplete="off" enctype="multipart/form-data">
+<form
+  class="profile-form"
+  action="/profiles/"
+  method="POST"
+  autocomplete="off"
+  enctype="multipart/form-data"
+>
   <div class="form-group">
     <input
       type="text"
@@ -10,56 +16,54 @@
       required
     />
 
-    <select name="animalType" id="animalTypeSelect" class="form-control" onchange="toggleAnimalTypeInput()">
+    <select
+      name="animalType"
+      id="animalTypeSelect"
+      class="form-control"
+      onchange="toggleAnimalTypeInput()"
+    >
       <option value="Dog">Dog</option>
       <option value="Cat">Cat</option>
       <option value="Other">Other (Please specify)</option>
     </select>
-    
+
     <input
       type="text"
       name="animalTypeOther"
       id="animalTypeOther"
       class="form-control mt-2"
       placeholder="Specify Animal Type"
-      style="display: none;"
+      style="display: none"
     />
-    
-<input
-  type="text"
-  name="breed"
-  class="breed form-control"
-  placeholder="Your Pet Breed"
-  list="dogBreedList" // Default to dog breeds
-  id="breedInput"
-/>
 
-<datalist id="dogBreedList">
-  <option value="Mutt"></option>
-  <option value="Other"></option>
-  <option value="Unknown"></option>
-  <% dogBreeds.forEach(function(breed) { %>
-    <option value="<%= breed %>"></option>
-  <% }); %>
-</datalist>
+    <input type="text" name="breed" class="breed form-control" placeholder="Your
+    Pet Breed" list="dogBreedList" // Default to dog breeds id="breedInput" />
 
-<datalist id="catBreedList">
-  <option value="Domestic Shorthair"></option>
-  <option value="Domestic Longhair"></option>
-  <option value="Other"></option>
-  <option value="Unknown"></option>
-  <% catBreeds.forEach(function(breed) { %>
-    <option value="<%= breed %>"></option>
-  <% }); %>
-</datalist>
+    <datalist id="dogBreedList">
+      <option value="Mutt"></option>
+      <option value="Other"></option>
+      <option value="Unknown"></option>
+      <% dogBreeds.forEach(function(breed) { %>
+      <option value="<%= breed %>"></option>
+      <% }); %>
+    </datalist>
 
-  
+    <datalist id="catBreedList">
+      <option value="Domestic Shorthair"></option>
+      <option value="Domestic Longhair"></option>
+      <option value="Other"></option>
+      <option value="Unknown"></option>
+      <% catBreeds.forEach(function(breed) { %>
+      <option value="<%= breed %>"></option>
+      <% }); %>
+    </datalist>
 
     <input
-      type="date"
-      name="dob"
-      class="dob form-control"
-      placeholder="DOB"
+      type="number"
+      name="age"
+      class="age form-control"
+      placeholder="Age"
+      min="0"
       required
     />
 
@@ -78,25 +82,27 @@
       class="favoriteToys form-control"
       placeholder="Favorite Toys (comma separated)"
     />
-    
+
     <input
-    type="text"
-    name="owners"
-    class="owners form-control"
-    placeholder="Pet Owners (comma separated)"
+      type="text"
+      name="owners"
+      class="owners form-control"
+      placeholder="Pet Owners (comma separated)"
     />
-    <label for="profilePhoto">Profile Image
+    <label for="profilePhoto"
+      >Profile Image
       <input
-      class="form-control"
-      type="file"
-      name="profilePhoto"
-      id="profilePhoto"
-      placeholder="Add Profile Photo"
-      required
+        class="form-control"
+        type="file"
+        name="profilePhoto"
+        id="profilePhoto"
+        placeholder="Add Profile Photo"
+        required
       />
     </label>
-    <br>
-    <label for="banner-input">Banner Image
+    <br />
+    <label for="banner-input"
+      >Banner Image
       <input
         type="file"
         name="banner"
@@ -113,31 +119,28 @@
 
 <script>
   function toggleAnimalTypeInput() {
-    var animalTypeSelect = document.getElementById('animalTypeSelect');
-    var animalTypeOther = document.getElementById('animalTypeOther');
-    var breedInput = document.getElementById('breedInput');
+    var animalTypeSelect = document.getElementById("animalTypeSelect");
+    var animalTypeOther = document.getElementById("animalTypeOther");
+    var breedInput = document.getElementById("breedInput");
 
-    if (animalTypeSelect.value === 'Other') {
-      animalTypeOther.style.display = '';
-      breedInput.removeAttribute('list'); // Remove datalist for 'Other'
-      breedInput.placeholder = 'Specify Animal Type';
+    if (animalTypeSelect.value === "Other") {
+      animalTypeOther.style.display = "";
+      breedInput.removeAttribute("list"); // Remove datalist for 'Other'
+      breedInput.placeholder = "Specify Animal Type";
     } else {
-      animalTypeOther.style.display = 'none';
+      animalTypeOther.style.display = "none";
       // Reset placeholder
-      breedInput.placeholder = 'Your Pet Breed';
+      breedInput.placeholder = "Your Pet Breed";
 
       // Switch datalist based on animal type
-      if (animalTypeSelect.value === 'Dog') {
-        breedInput.setAttribute('list', 'dogBreedList');
-      } else if (animalTypeSelect.value === 'Cat') {
-        breedInput.setAttribute('list', 'catBreedList');
+      if (animalTypeSelect.value === "Dog") {
+        breedInput.setAttribute("list", "dogBreedList");
+      } else if (animalTypeSelect.value === "Cat") {
+        breedInput.setAttribute("list", "catBreedList");
       }
     }
   }
 </script>
 
-<%- include('../../partials/side-feed', { profiles }) %>
-
-<%- include('../../partials/loading') %>
-
-<%- include('../../partials/footer') %>
+<%- include('../../partials/side-feed', { profiles }) %> <%-
+include('../../partials/loading') %> <%- include('../../partials/footer') %>

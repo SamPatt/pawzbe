@@ -6,7 +6,7 @@
     favoriteToys: [ 'Stuff', 'Things' ],
     breed: 'Shepard',
     animalType: 'Dog',
-    dob: 2020-01-01T00:00:00.000Z
+    age: 2020-01-01T00:00:00.000Z
   },
   _id: new ObjectId('6565293f2242a241f3f00050'),
   petName: 'Karl',
@@ -51,13 +51,14 @@
       value="<%= profile.petDetails.breed %>"
     />
 
-    <label for="dob">Date of Birth</label>
+    <label for="age">Age</label>
     <input
-      type="date"
-      name="dob"
-      id="dob"
-      class="dob form-control"
-      value="<%= profile.petDetails.dob.toISOString().split('T')[0] %>" 
+      type="number"
+      name="age"
+      id="age"
+      class="age form-control"
+      value="<%= profile.petDetails.age%>" 
+      min="0"
       required
     />
 

@@ -195,7 +195,7 @@ async function update(req, res) {
             favoriteToys: favoriteToys.split(",").map((i) => i.trim()),
             breed: breed,
             animalType: animalType,
-            dob: dob,
+            age: age,
           };
           // pet.images = [...images.split(',').map(i => i.trim())]
         }
@@ -265,7 +265,7 @@ async function create(req, res) {
         favoriteToys: favoriteToys.split(",").map((i) => i.trim()),
         breed: breed,
         animalType: animalType,
-        dob: dob,
+        age: age,
       }
     }
 
