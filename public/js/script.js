@@ -1,10 +1,16 @@
 
 const sidebarButton = document.querySelector('.sidebar-button')
 const sidebarFeed = document.querySelector('.feed')
+const postPartial = document.querySelector('.post-partial')
+const postButton = document.querySelector('.post-button')
 
 sidebarButton.addEventListener('click', () => {
   sidebarButton.classList.toggle('hidden')
   sidebarFeed.classList.toggle('hidden')
+})
+postButton.addEventListener('click', () => {
+  postButton.classList.toggle('hidden')
+  postPartial.classList.toggle('hidden')
 })
 
 

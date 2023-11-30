@@ -15,11 +15,12 @@
   <nav class="navbar navbar-dark bg-dark fixed-top navbar-custom">
     <div class="container-fluid d-flex align-items-center">
       <div class="header-left">
-        <div class="header-logo">
-          <img src="/images/pawzbe-logo.png" alt="Profile Image" class="img-fluid">
-        </div>
-        <% console.log(user) %>
         <% const headerLink = (user && user.profiles.length > 0) ? "/posts" : "/" %>
+        <a class="async" href="<%= headerLink %>">
+          <div class="header-logo">
+            <img src="/images/pawzbe-logo.png" alt="Profile Image" class="img-fluid">
+          </div>
+        </a>
         <a class="async navbar-brand" href="<%= headerLink %>">&nbsp;&nbsp;&nbsp;pawzbe</a>
       </div>
       <div class="navbar-dark" id="navbarSupportedContent">

@@ -6,7 +6,7 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: #719463;
   height: calc(100vh - 100px);
-  margin-top: 100px;
+  margin: 100px 20px 0 20px;
 }
 
 a, button {
@@ -138,7 +138,6 @@ li {
 .nav-item.dropdown .dropdown-toggle::after {
   display: none;
 }
-
 .user-icon {
   width: 40px;
   height: 40px;
@@ -217,14 +216,16 @@ li {
 }
 
 #profile-image {
-  width: 15vmin;
-  height: 15vmin;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   overflow: hidden;
   position: relative;
-  margin-top: -125px;
+  margin-top: -50px;
+  bottom: 0;
   left: 20px;
 }
+
 #profile-image img {
   width: 100%;
   height: 100%;
@@ -262,6 +263,7 @@ li {
   left: 50%;
   transform: translate(-50%, -50%);
   display: none;
+  z-index: 3;
 }
 
 .spinner-border {
@@ -286,7 +288,7 @@ li {
   top: 50%;
   transform: translate(400px, -50%);
   height: 75%;
-  width: 325px;
+  width: 300px;
   background: #CAD1C9;
   padding: 2%;
   text-align: center;
@@ -320,7 +322,7 @@ li {
   z-index: 1;
 }
 .sidebar-button.hidden {
-  right: 325px;
+  right: 300px;
 }
 
 .sidebar-button:hover {
@@ -410,7 +412,7 @@ li {
 .post-partial {
   display: block;
   position: fixed;
-  left: 0;
+  left: -325px;
   top: 50%;
   transform: translateY(-50%);
   width: 325px;
@@ -420,6 +422,11 @@ li {
   overflow-y: auto;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all .25s;
+  z-index: 2;
+}
+.post-partial.hidden {
+  left: 0;
 }
 .post-partial textarea {
   height: 200px;
@@ -431,7 +438,7 @@ li {
   white-space: nowrap;
   width: 40px;
   height: 300px;
-  left: 325px;
+  left: 0;
   top: 50%;
   font-family: 'Montserrat', sans-serif; 
   color: #0f5e34;
@@ -442,10 +449,10 @@ li {
   transition: all .25s;
   overflow: hidden;
   cursor: pointer;
-  z-index: 1;
+  z-index: 2;
 }
 .post-button.hidden {
-  right: 325px;
+  left: 325px;
 }
 
 .post-button:hover {
@@ -475,26 +482,11 @@ li {
 }
 
 
-@media (max-width: 700px) {
-  .center-container {
-    width: 80%;
-  }
-  .navbar-brand {
-    display: none;
-  }
-}
 
-@media (max-width: 767px) {
-  .feed {
-    display: none;
-  }
-  .post-partial {
-    display: none;
-  }
+@media (min-width: 750px) {
   #profile-image {
-    display: none;
-  }
-  #pet-detail-bio {
-    margin-top: 30px;
+    width: 200px;
+    height: 200px;
+    margin-top: -100px;
   }
 }
