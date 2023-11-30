@@ -166,12 +166,13 @@
     <div class="row align-items-md-stretch mt-3 justify-content-center" id="pet-post">
       <div class="col-md-10">
         <div class="pet-post mb-3">
-          <div class="light-background border rounded-3 d-flex flex-column align-items-center p-3">
-            <p class="fw-bold text-dark mb-2"><%= post.postDescription %></p>
+          <div class="post-img light-background border rounded-3 d-flex flex-column align-items-center p-3">
+            <p class="fw-bold text-dark mb-2 left-align"><%= post.postDescription %></p>
             <img src="<%= post.images[0].url %>" class="img-fluid rounded mb-2" />
           </div>
         </div>
       </div>
+      
       <div class="col-md-12 d-flex justify-content-start mb-2">
         <div>
           <form action="/profiles/<%= post._id %>/likes" method="POST">

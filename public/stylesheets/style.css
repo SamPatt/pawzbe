@@ -253,6 +253,20 @@ li {
   object-fit: contain;
 }
 
+.carousel-control-prev,
+.carousel-control-next {
+  font-size: 2em;
+  color: #000;
+  background: rgba(0, 0, 0, 0.1)
+}
+
+.carousel-control-prev-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23184C34' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+ }
+ 
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23184C34' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+}
 
 .bio {
   background: #EFF4ED; /* Lighter background for items */
@@ -479,8 +493,21 @@ li {
   text-orientation: upright;
   z-index: 2;
 }
-
-
+.post-img {
+  background: #e0e8df !important;
+}
+.post-img img {
+  max-height: 200px;
+  width: auto;
+}
+.post-wrapper {
+  background: #a7cb8e;
+  border-radius: 20px;
+}
+.post-details {
+  font-size: 1.5rem !important;
+  font-weight: bold !important;
+}
 .light-background {
   background: #EFF4ED
 }
@@ -489,7 +516,10 @@ li {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
+.left-align {
+  text-align: left !important;
+  width: 100%;
+}
 
 
 @media (min-width: 750px) {
