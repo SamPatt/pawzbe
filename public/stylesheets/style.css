@@ -265,6 +265,9 @@ li {
   display: none;
   z-index: 3;
 }
+.spinner.show {
+  display: block;
+}
 
 .spinner-border {
   width: 3rem;
