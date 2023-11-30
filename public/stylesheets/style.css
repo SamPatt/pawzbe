@@ -255,6 +255,11 @@ li {
   top: 0;
   left: 0;
 }
+.truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 #myCarousel {
   min-height: 400px;
