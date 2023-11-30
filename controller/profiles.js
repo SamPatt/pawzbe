@@ -58,7 +58,7 @@ async function show(req, res) {
       }
     }
 
-    const posts = await Post.find({ profile: profile._id });
+    const posts = await Post.find({ profile: profile._id }).sort({ createdAt: -1 });
 
     res.render("fuzzies/profiles/show", {
       title: profile.petName + "'s Page",
