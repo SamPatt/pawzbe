@@ -1,20 +1,19 @@
-<div class="container post-partial rounded mt-5">
-    <div class="col-md-12">
-          <div class="light-background p-3">
-            <h4>Create Post</h4>
-            <div>
-                <form action="/posts" method="POST">
-                    <div class="form-group mb-2">
-                        <label class="mb-2" for="postDescription">Post Description:</label>
-                        <textarea class="form-control" id="postDescription" name="postDescription" rows="3"></textarea>
-                    </div>
-                    <div class="form-group mb-2">
-                        <label class="mb-2" for="postPhotoLink">Image Link:</label>
-                        <input type="text" class="form-control" id="postPhotoLink" name="postPhotoLink">
-                    </div>
-                    <button type="submit" class="async btn green-background">Post</button>
-                </form>
+<div class="post-button">
+    <p>Create Post</p>
+</div>
+<div class="container post-partial rounded">
+    <div class="post-form-container light-background p-3">
+        <h4>Create Post</h4>
+        <form action="/posts" method="POST">
+            <div class="form-group mb-2">
+                <label class="post-message mb-2" for="postDescription">Post Message:</label>
+                <textarea class="form-control" id="postDescription" name="postDescription"></textarea>
             </div>
-      </div>
+            <div class="form-group mb-2">
+                <label class="mb-2" for="postPhotoLink">Image Link:</label>
+                <input type="text" class="form-control" id="postPhotoLink" name="postPhotoLink">
+            </div>
+            <button type="submit" class="async btn green-background">Post</button>
+        </form>
     </div>
 </div>

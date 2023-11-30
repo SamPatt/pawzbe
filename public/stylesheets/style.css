@@ -5,7 +5,7 @@ body {
   color: #184C34;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: #719463;
-  height: 100vh;
+  height: calc(100vh - 100px);
   margin-top: 100px;
 }
 
@@ -271,6 +271,9 @@ li {
 }
 
 
+.create-post-container {
+  
+}
 
 
 /* Feed Side Bar */
@@ -278,39 +281,46 @@ li {
 
 .feed {
   display: block;
-  position: absolute;
-  right: 3%;
+  position: fixed;
+  right: 0;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translate(400px, -50%);
   height: 75%;
-  width: 400px;
+  width: 325px;
   background: #CAD1C9;
   padding: 2%;
   text-align: center;
   overflow-y: auto;
   overflow-x: visible;
   border-radius: 10px;
+  transition: all .25s;
   z-index: 1;
 }
-
+.feed.hidden {
+  transform: translateY(-50%);
+}
 
 .sidebar-button {
-  position: absolute;
+  position: fixed;
   display: inline;
   white-space: nowrap;
-  width: 30px;
+  width: 40px;
   height: 300px;
-  right: 450px;
+  right: 0px;
   top: 50%;
-  transform: translateY(-50%);
-  z-index: 1;
+  font-family: 'Montserrat', sans-serif; 
+  color: #0f5e34;
+  font-weight: bold;
   background-color: #b5bcb4;
-  clip-path: polygon(0% 20%,100% 0%, 100% 100%, 0% 80%);
+  clip-path: polygon(0% 15%,100% 0%, 100% 100%, 0% 85%);
+  transform: translateY(-50%);
+  transition: all .25s;
   overflow: hidden;
   cursor: pointer;
+  z-index: 1;
 }
 .sidebar-button.hidden {
-  right: 0px;
+  right: 325px;
 }
 
 .sidebar-button:hover {
@@ -321,7 +331,7 @@ li {
 .sidebar-button p {
   position: relative;
   top: 50%;
-  left: 5px;
+  left: 10px;
   transform:  translate(0, -50%);
   margin: 0;
   writing-mode: vertical-lr;
@@ -352,7 +362,6 @@ li {
 .feed-container {
   background: transparent;
   border-radius: 50%;
-
 }
 .feed-pic {
   position: relative;
@@ -365,33 +374,28 @@ li {
   border-radius: 50%;
   background: transparent;
 }
-
 .feed-pic img {
-  width: auto; /* Adjusted to fill the container */
-  height: 120%; /* Keep aspect ratio */
+  width: auto;
+  height: 120%;
 }
-
 .feed-info {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
-
 .feed-info small,
 .feed-info p {
   margin: 4px 0;
-  color: #184C34; /* Accent Color for text */
+  color: #184C34;
 }
-
 .feed a {
   text-decoration: none;
-  color: #184C34; /* Accent Color for links */
+  color: #184C34;
 }
-
 .feed-item:hover {
-  background: #a9ecc9; /* Primary Color for hover */
-  color: #fff; /* White text on hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  background: #a9ecc9;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .banner-image {
@@ -405,24 +409,65 @@ li {
 
 .post-partial {
   display: block;
-  position: absolute;
-  left: 3%;
-  top: 28%;
+  position: fixed;
+  left: 0;
+  top: 50%;
   transform: translateY(-50%);
-  width: 22%;
-  background: #CAD1C9; /* Secondary Color */
-  padding: 2%;
+  width: 325px;
+  background: #CAD1C9;
+  padding: 1%;
   text-align: left;
   overflow-y: auto;
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+.post-partial textarea {
+  height: 200px;
+
+}
+.post-button {
+  position: fixed;
+  display: inline;
+  white-space: nowrap;
+  width: 40px;
+  height: 300px;
+  left: 325px;
+  top: 50%;
+  font-family: 'Montserrat', sans-serif; 
+  color: #0f5e34;
+  font-weight: bold;
+  background-color: #b5bcb4;
+  clip-path: polygon(0% 0%, 100% 15%, 100% 85%, 0% 100%);
+  transform: translateY(-50%);
+  transition: all .25s;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 1;
+}
+.post-button.hidden {
+  right: 325px;
+}
+
+.post-button:hover {
+  background: #EFF4ED;
+  font-size: 1rem;
+}
+
+.post-button p {
+  position: relative;
+  top: 50%;
+  left: 10px;
+  transform:  translate(0, -50%);
+  margin: 0;
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  z-index: 2;
+}
+
 
 .light-background {
   background: #EFF4ED
 }
-
-
 .ellipsis {
   white-space: nowrap;
   overflow: hidden;
@@ -434,7 +479,6 @@ li {
   .center-container {
     width: 80%;
   }
-
   .navbar-brand {
     display: none;
   }

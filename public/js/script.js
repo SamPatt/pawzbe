@@ -1,12 +1,18 @@
-// document.getElementById('google-login').addEventListener('click', function () {
-//   document.querySelector('.spinner').style.display = 'block';
-//   performAuthentication();
-// });
 
-document.addEventListener('DOMContentLoaded', function() {
+const sidebarButton = document.querySelector('.sidebar-button')
+const sidebarFeed = document.querySelector('.feed')
+
+sidebarButton.addEventListener('click', () => {
+  sidebarButton.classList.toggle('hidden')
+  sidebarFeed.classList.toggle('hidden')
+})
+
+
+
+document.addEventListener('DOMContentLoaded',() => {
   try {
-    document.querySelectorAll('.async').forEach(function(element) {
-        element.addEventListener('click', function() {
+    document.querySelectorAll('.async').forEach((element) => {
+        element.addEventListener('click', () => {
             document.querySelector('.spinner').style.display = 'block';
         });
     });
@@ -14,3 +20,4 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log(err)
   }
 });
+
