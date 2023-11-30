@@ -31,38 +31,49 @@
           </a>
         </div>
       <% } %>
-
-      <div class="col-md-4 mt-4">
-        <div class="h-1 p-1 mb-3 text-center light-background box-shadow rounded-3">
-          <h4><%= profile.petName %></h4>
+      <div class="row">
+        <div class="col-md-4 mt-4" id="pet-details">
+          <div class="h-1 p-1 mb-3 text-center light-background box-shadow rounded-3">
+            <h4><%= profile.petName %></h4>
+          </div>
+          <div class="h-20 p-1 mb-3 text-center light-background box-shadow rounded-3">
+            <h4><%= profile.petDetails.animalType %></h4>
+          </div>
+          <div class="h-1 p-1 mb-3 text-center light-background box-shadow rounded-3">
+            <h4><%= profile.petDetails.breed %></h4>
+          </div>
+          <% if (profile.petDetails.age !== undefined && profile.petDetails.age !== null) { %>
+            <div class="h-1 p-1 mb-3 text-center light-background box-shadow rounded-3">
+              <h4>
+                <% if (profile.petDetails.age) { %>
+                  <%= profile.petDetails.age %> <%= profile.petDetails.age > 1 ? "Years Old" : "Year Old" %>
+                <% } %>
+              </h4>
+            </div>
+          <% } %>
         </div>
-        <div class="h-20 p-1 mb-3 text-center light-background box-shadow rounded-3">
-          <h4><%= profile.petDetails.animalType %></h4>
-        </div>
-        <div class="h-1 p-1 mb-3 text-center light-background box-shadow rounded-3">
-          <h4><%= profile.petDetails.breed %></h4>
-        </div>
-        <div class="h-1 p-1 mb-3 text-center light-background box-shadow rounded-3">
-          <h4>
-            <% if (profile.petDetails.age > 1) { %>
-              <%= profile.petDetails.age %> Years Old
-            <% } else { %>
-              <%= profile.petDetails.age %> Year Old
-            <% } %>
-          </h4>
-        </div>
-      </div>
-      <div class="col-md-8" id="bio-section" style="color: black">
-        <div class="h-100 p-5 bio border rounded-3">
-          <h2>Bio</h2>
-          <p><%= profile.petDetails.bio %></p>
-          <% if (breedInfo) { %>
-            <h3>Breed Information</h3>
-            <p><%= breedInfo %></p>
+        <div class="col-md-8" id="bio-section" style="color: black">
+          <% if (profile.petDetails.age !== undefined && profile.petDetails.age !== null) { %>
+            <div class="h-100 p-5 bio border rounded-3">
+              <h2>Bio</h2>
+              <p><%= profile.petDetails.bio %></p>
+              <% if (breedInfo) { %>
+                <h3>Breed Information</h3>
+                <p><%= breedInfo %></p>
+              <% } %>
+            </div>
+          <% } else { %>
+            <div class="h-100 p-5 bio border rounded-3">
+              <h2>Bio</h2>
+              <p><%= profile.petDetails.bio %></p>
+              <% if (breedInfo) { %>
+                <h3>Breed Information</h3>
+                <p><%= breedInfo %></p>
+              <% } %>
+            </div>
           <% } %>
         </div>
       </div>
-      
     </div>
 
     <!---------------------------------------------------------------------------------------------------------------- -->
