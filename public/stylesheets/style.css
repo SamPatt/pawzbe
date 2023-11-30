@@ -1,44 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&display=swap");
 
 body {
-  color: #184C34;
+  color: #184c34;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: #719463;
   height: calc(100vh - 100px);
   margin: 100px 20px 0 20px;
 }
 
-a, button {
+a,
+button {
   transition: all 0.3s ease;
 }
 
-a:hover, button:hover {
+a:hover,
+button:hover {
   opacity: 0.8;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif; 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
   color: #1aa159;
 }
 
-.button, input[type="submit"], input[type="button"] {
-  background-color: #0EBD60; 
+.button,
+input[type="submit"],
+input[type="button"] {
+  background-color: #0ebd60;
   border: none;
-  border-radius: 20px; 
+  border-radius: 20px;
   padding: 10px 20px;
   color: white;
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease;
 }
 
-.button:hover, input[type="submit"]:hover, input[type="button"]:hover {
-  background-color: #065a34; 
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+  background-color: #065a34;
 }
 
-.container, .login-container {
-  background: #CAD1C9;
+.container,
+.login-container {
+  background: #cad1c9;
   padding: 4px 16px;
-  border-radius: 10px; 
+  border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -90,12 +101,12 @@ li {
 }
 
 .green-background {
-  background-color: #0EBD60 !important;
-  color: #FFF
+  background-color: #0ebd60 !important;
+  color: #fff;
 }
 
 .navbar-custom {
-  background-color: #184C34 !important; 
+  background-color: #184c34 !important;
 }
 
 .navbar-brand {
@@ -103,7 +114,7 @@ li {
 }
 
 .navbar-dark {
-  background-color: #184C34 !important;
+  background-color: #184c34 !important;
 }
 
 .navbar-nav {
@@ -232,11 +243,10 @@ li {
   object-fit: cover;
   border: 3px solid #555;
   border-radius: 50%;
-  position: absolute; 
+  position: absolute;
   top: 0;
   left: 0;
 }
-
 
 #myCarousel {
   min-height: 400px;
@@ -250,9 +260,8 @@ li {
   object-fit: contain;
 }
 
-
 .bio {
-  background: #EFF4ED; /* Lighter background for items */
+  background: #eff4ed; /* Lighter background for items */
   border-radius: 10px; /* Rounded corners for items */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
@@ -275,14 +284,15 @@ li {
   border-width: 0.3em;
 }
 
-
-.create-post-container {
-  
+.btn-primary-green {
+  background-color: #719463;
+  color: #cad1c9;
 }
 
+.create-post-container {
+}
 
 /* Feed Side Bar */
-
 
 .feed {
   display: block;
@@ -292,13 +302,13 @@ li {
   transform: translate(400px, -50%);
   height: 75%;
   width: 300px;
-  background: #CAD1C9;
+  background: #cad1c9;
   padding: 2%;
   text-align: center;
   overflow-y: auto;
   overflow-x: visible;
   border-radius: 10px;
-  transition: all .25s;
+  transition: all 0.25s;
   z-index: 1;
 }
 .feed.hidden {
@@ -313,13 +323,13 @@ li {
   height: 300px;
   right: 0px;
   top: 50%;
-  font-family: 'Montserrat', sans-serif; 
+  font-family: "Montserrat", sans-serif;
   color: #0f5e34;
   font-weight: bold;
   background: #b5bcb4;
-  clip-path: polygon(0% 15%,100% 0%, 100% 100%, 0% 85%);
+  clip-path: polygon(0% 15%, 100% 0%, 100% 100%, 0% 85%);
   transform: translateY(-50%);
-  transition: all .25s;
+  transition: all 0.25s;
   overflow: hidden;
   cursor: pointer;
   z-index: 1;
@@ -338,7 +348,7 @@ li {
   position: relative;
   top: 50%;
   left: 10px;
-  transform:  translate(0, -50%);
+  transform: translate(0, -50%);
   margin: 0;
   writing-mode: vertical-lr;
   text-orientation: upright;
@@ -347,7 +357,7 @@ li {
 
 .feed-item {
   height: 80px;
-  background: #EFF4ED;
+  background: #eff4ed;
   margin: 8px 0;
   padding: 4px;
   display: flex;
@@ -392,11 +402,11 @@ li {
 .feed-info small,
 .feed-info p {
   margin: 4px 0;
-  color: #184C34;
+  color: #184c34;
 }
 .feed a {
   text-decoration: none;
-  color: #184C34;
+  color: #184c34;
 }
 .feed-item:hover {
   background: #a9ecc9;
@@ -420,13 +430,13 @@ li {
   top: 50%;
   transform: translateY(-50%);
   width: 325px;
-  background: #CAD1C9;
+  background: #cad1c9;
   padding: 1%;
   text-align: left;
   overflow-y: auto;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: all .25s;
+  transition: all 0.25s;
   z-index: 2;
 }
 .post-partial.hidden {
@@ -434,7 +444,6 @@ li {
 }
 .post-partial textarea {
   height: 200px;
-
 }
 .post-button {
   position: fixed;
@@ -444,13 +453,13 @@ li {
   height: 300px;
   left: 0;
   top: 50%;
-  font-family: 'Montserrat', sans-serif; 
+  font-family: "Montserrat", sans-serif;
   color: #0f5e34;
   font-weight: bold;
   background: #b5bcb4;
   clip-path: polygon(0% 0%, 100% 15%, 100% 85%, 0% 100%);
   transform: translateY(-50%);
-  transition: all .25s;
+  transition: all 0.25s;
   overflow: hidden;
   cursor: pointer;
   z-index: 2;
@@ -469,24 +478,21 @@ li {
   position: relative;
   top: 50%;
   left: 10px;
-  transform:  translate(0, -50%);
+  transform: translate(0, -50%);
   margin: 0;
   writing-mode: vertical-lr;
   text-orientation: upright;
   z-index: 2;
 }
 
-
 .light-background {
-  background: #EFF4ED
+  background: #eff4ed;
 }
 .ellipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-
 
 @media (min-width: 750px) {
   #profile-image {
