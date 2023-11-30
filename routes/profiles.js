@@ -20,8 +20,10 @@ router.get("/:id", profilesCtrl.show);
 
 router.put("/:id", upload.fields([
     { name: 'profilePhoto', maxCount: 1 },
-    { name: 'banner', maxCount: 1 }
+    { name: 'banner', maxCount: 1 },
+    { name: 'images', maxCount: 6 } 
   ]), profilesCtrl.update);
+  
 router.delete("/:id", profilesCtrl.delete);
 router.get("/:id/edit", profilesCtrl.edit);
 

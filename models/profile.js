@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const imageSchema = new mongoose.Schema({
-  url: {type: String, required: true},
-  description: { type: String},
-  alt: {type: String, default:""} 
-})
+// const imageSchema = new mongoose.Schema({
+//   url: {type: String, required: true},
+//   description: { type: String},
+//   alt: {type: String, default:""} 
+// })
 
 const profileSchema = new Schema(
   {
@@ -28,7 +28,7 @@ const profileSchema = new Schema(
       animalType: String,
       dob: Date,
     },
-    images: [imageSchema]
+    images: []
   },
   { timestamps: true }
 );

@@ -124,15 +124,24 @@
           class="profile-form d-flex flex-row"
           action="/profiles/<%= user._id %>?_method=PUT"
           method="POST"
+          autocomplete="off" 
+          enctype="multipart/form-data"
         >
           <div class="row w-100">
             <div class="col-10">
-              <input
-                type="text"
-                name="images"
-                class="form-control m-2"
-                placeholder="Image URL (comma separated)"
-              />
+              <div class="form-group">
+                <label for="imageUpload">Upload Images</label>
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="imageUpload"
+                  name="images"
+                  multiple
+                  required
+                />
+                <small class="form-text text-muted">You can select multiple images.</small>
+              </div>
+              
             </div>
             <div class="col-2">
               <button class="add-images-btn btn btn-primary font-weight-bold">+</button>

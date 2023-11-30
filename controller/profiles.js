@@ -102,24 +102,16 @@ async function update(req, res) {
     const profile = await Profile.findById(user.profiles[0])
     const posts = await Post.find({ profile: profile._id })
     const profiles = res.locals.profiles
+
+    const dogBreeds = res.locals.dogBreeds;
+    const catBreeds = res.locals.catBreeds;
     
-    if (req.body.images) {
-      const links = req.body.images.split(',').map(i => i.trim())
-      profile.images.push(...links)
-
-      await Profile.findOneAndUpdate(
-        { _id: profile._id },
-        { $set: profile }
-      )
-      const dogBreeds = res.locals.dogBreeds;
-      const catBreeds = res.locals.catBreeds;
-
       let breedInfo = null;
-
+      
       if (profile.petDetails.breed) {
         const breedName = profile.petDetails.breed;
         const animalType = profile.petDetails.animalType;
-
+        
         if (animalType === "Dog") {
           const breedData = dogBreeds.find((breed) => breed.name === breedName);
           if (breedData) {
@@ -132,38 +124,42 @@ async function update(req, res) {
           }
         }
       }
+
+      if (req.files && req.files.images){
+        for (const file of req.files.images) {
+  
+          let result = await streamUpload(file);
+          profile.images.push(result.url);
+        }
+        await Profile.findOneAndUpdate(
+          { _id: profile._id },
+          { $set: profile }
+        )
+        
+        res.redirect(`/profiles/${profile._id}`)
+      }
+  
       
-      res.redirect(`/profiles/${profile._id}`)
 
-      // res.render('fuzzies/profiles/show', {
-      //   title: 'Pet Added',
-      //   profile: profile,
-      //   posts: posts,
-      //   profiles,
-      //   owner,
-      //   breedInfo, 
-      //   currentProfile,
-      // });
 
-    } else if (req.body.deleteImage) {
+    if (req.body.deleteImage) {
       try {
         const owner = (req.user.profiles[0]._id.toString() === req.params.id) ? true : false
         const profile = await Profile.findById( req.params.id );
         profile.images.splice(profile.images.indexOf(req.body.deleteImage), 1)
-        console.log(profile.images)
         
         await Profile.findOneAndUpdate(
           { _id: profile._id },
           { $set: profile }
         )
 
-        res.render('fuzzies/profiles/edit', {
-          title: 'Profile Updated!',
-          profile: profile,
-          posts: posts,
-          profiles,
-          owner,
-        });
+        // res.render('fuzzies/profiles/edit', {
+        //   title: 'Profile Updated!',
+        //   profile: profile,
+        //   posts: posts,
+        //   profiles,
+        //   owner,
+        // });
 
       } catch (err) {
         console.log(err);
@@ -172,7 +168,7 @@ async function update(req, res) {
       const updatedProfile = {}
       let pet = {
         petPhoto: {
-          profilePhoto: '',
+          profilePhoto: '', 
           banner: '',
         },
       }
@@ -182,11 +178,15 @@ async function update(req, res) {
       if (req.files && req.files.profilePhoto) {
         let profileImageResult = await streamUpload(req.files.profilePhoto[0]);
         pet.petPhoto.profilePhoto = profileImageResult.url;
+      } else {
+        pet.petPhoto.profilePhoto = profile.petPhoto.profilePhoto
       }
     
       if (req.files && req.files.banner) {
         let bannerImageResult = await streamUpload(req.files.banner[0]);
         pet.petPhoto.banner = bannerImageResult.url;
+      } else {
+        pet.petPhoto.banner = profile.petPhoto.banner;
       }
     
       try {
@@ -322,7 +322,6 @@ function streamUpload (file){
   return new Promise(function (resolve, reject){
       let stream = cloudinary.uploader.upload_stream(function(error, result){
           if(result){
-              console.log(result)
               resolve(result)
           } else {
               reject(error)
