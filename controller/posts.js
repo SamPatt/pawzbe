@@ -154,31 +154,9 @@ async function like(req, res) {
 }
 
 async function deletePost(req, res) {
-  //   try {
-
-  //     const profile = await Profile.findById(req.user.profiles[0]._id);
-  //     const post = await Post.findById(req.params.id);
-  //     console.log("this is profile._id : ", profile._id)
-  //     console.log("this is post.profile._id : ", post.profile._id)
-  //     console.log("this is req.user.profiles[0]._id : ", req.user.profiles[0]._id)
-  //     if (post.profile._id === req.user.profiles[0]._id){
-  //       await post.deleteOne();
-  //     }
-
-  //     res.redirect(`/profiles/${post.profile}`);
-
-  //     }catch (err) {
-  //     console.log(err);
-  //     res.status(500).send("Internal Server Error");
-  //     }
-  // }
   try {
     const profile = await Profile.findById(req.user.profiles[0]._id);
     const post = await Post.findById(req.params.id);
-
-    console.log("this is profile._id : ", profile._id);
-    console.log("this is post.profile._id : ", post.profile);
-
     // Check if the user is the author of the post
     if (post.profile.toString() === profile._id.toString()) {
       await Post.deleteOne({ _id: req.params.id });
