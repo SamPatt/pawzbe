@@ -42,7 +42,6 @@ async function create(req, res) {
     req.body.petName = profile.petName;
 
     req.body.profilePhoto = profile.petPhoto.profilePhoto;
-    console.log("Calling cloudinary stream");
     let result = await streamUpload(req);
 
     const newImage = { url: result.url };
@@ -112,30 +111,13 @@ async function addComment(req, res) {
 
 async function deleteComment(req, res) {
   try {
-    // const owner =
-    //   req.user.profiles[0]._id.toString() === req.params.id ? true : false;
     const profile = await Profile.findById(req.user.profiles[0]._id);
 
     req.body.petName = profile.petName;
     const post = await Post.findById(req.params.id);
     const commentIndex = req.body.commentIndex;
-    console.log("this is commentIndex from ejs:", commentIndex);
-    console.log("this is array of comments from db:", post.postComments);
+
     if (profile._id.toString() === req.body.currentProfile) {
-      console.log(
-        "this is req.body.current profile : ",
-        req.body.currentProfile
-      );
-      console.log("this is post.profile._id : ", post.profile._id);
-      console.log(
-        "this is post.postComments[commentIndex].profileId : ",
-        post.postComments[commentIndex].profileId
-      );
-      console.log("this is profile._id : ", profile._id);
-      console.log(
-        "this is req.user.profiles[0]._id : ",
-        req.user.profiles[0]._id.toString()
-      );
       post.postComments.splice(commentIndex, 1);
     }
 
