@@ -3,7 +3,6 @@ var router = express.Router();
 var usersCtrl = require('../controller/users')
 
 
-// router.get('/', usersCtrl.index)
 router.post('/', usersCtrl.create)
 router.put('/:id', usersCtrl.update)
 router.delete('/', usersCtrl.delete)
