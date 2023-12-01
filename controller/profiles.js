@@ -1,12 +1,12 @@
 const Profile = require("../models/profile");
 const User = require("../models/user");
 const Post = require("../models/post");
-const cloudinary = require('cloudinary').v2
-const streamifier = require('streamifier')
+const cloudinary = require("cloudinary").v2;
+const streamifier = require("streamifier");
 
-const { clConfig } = require('../config/cloudinary')
+const { clConfig } = require("../config/cloudinary");
 
-cloudinary.config(clConfig)
+cloudinary.config(clConfig);
 
 module.exports = {
   show,
@@ -53,7 +53,9 @@ async function show(req, res) {
       }
     }
 
-    const posts = await Post.find({ profile: profile._id }).sort({ createdAt: -1 });
+    const posts = await Post.find({ profile: profile._id }).sort({
+      createdAt: -1,
+    });
 
     res.render("fuzzies/profiles/show", {
       title: profile.petName + "'s Page",
@@ -89,61 +91,52 @@ async function edit(req, res) {
 async function update(req, res) {
   try {
     const currentProfile = req.params.id;
-    const owner = true
-    const user = await User.findById(req.user._id)
-    const profile = await Profile.findById(user.profiles[0])
-    const posts = await Post.find({ profile: profile._id })
-    const profiles = res.locals.profiles
+    const owner = true;
+    const user = await User.findById(req.user._id);
+    const profile = await Profile.findById(user.profiles[0]);
+    const posts = await Post.find({ profile: profile._id });
+    const profiles = res.locals.profiles;
 
     const dogBreeds = res.locals.dogBreeds;
     const catBreeds = res.locals.catBreeds;
-    
-      let breedInfo = null;
-      
-      if (profile.petDetails.breed) {
-        const breedName = profile.petDetails.breed;
-        const animalType = profile.petDetails.animalType;
-        
-        if (animalType === "Dog") {
-          const breedData = dogBreeds.find((breed) => breed.name === breedName);
-          if (breedData) {
-            breedInfo = breedData.temperament;
-          }
-        } else if (animalType === "Cat") {
-          const breedData = catBreeds.find((breed) => breed.name === breedName);
-          if (breedData) {
-            breedInfo = breedData.description;
-          }
+
+    let breedInfo = null;
+
+    if (profile.petDetails.breed) {
+      const breedName = profile.petDetails.breed;
+      const animalType = profile.petDetails.animalType;
+
+      if (animalType === "Dog") {
+        const breedData = dogBreeds.find((breed) => breed.name === breedName);
+        if (breedData) {
+          breedInfo = breedData.temperament;
+        }
+      } else if (animalType === "Cat") {
+        const breedData = catBreeds.find((breed) => breed.name === breedName);
+        if (breedData) {
+          breedInfo = breedData.description;
         }
       }
+    }
 
-      if (req.files && req.files.images){
-        for (const file of req.files.images) {
-  
-          let result = await streamUpload(file);
-          profile.images.push(result.url);
-        }
-        await Profile.findOneAndUpdate(
-          { _id: profile._id },
-          { $set: profile }
-        )
-        
-        res.redirect(`/profiles/${profile._id}`)
+    if (req.files && req.files.images) {
+      for (const file of req.files.images) {
+        let result = await streamUpload(file);
+        profile.images.push(result.url);
       }
-  
-      
+      await Profile.findOneAndUpdate({ _id: profile._id }, { $set: profile });
 
+      res.redirect(`/profiles/${profile._id}`);
+    }
 
     if (req.body.deleteImage) {
       try {
-        const owner = (req.user.profiles[0]._id.toString() === req.params.id) ? true : false
-        const profile = await Profile.findById( req.params.id );
-        profile.images.splice(profile.images.indexOf(req.body.deleteImage), 1)
-        
-        await Profile.findOneAndUpdate(
-          { _id: profile._id },
-          { $set: profile }
-        )
+        const owner =
+          req.user.profiles[0]._id.toString() === req.params.id ? true : false;
+        const profile = await Profile.findById(req.params.id);
+        profile.images.splice(profile.images.indexOf(req.body.deleteImage), 1);
+
+        await Profile.findOneAndUpdate({ _id: profile._id }, { $set: profile });
       } catch (err) {
         console.log(err);
       }
@@ -151,31 +144,30 @@ async function update(req, res) {
       const updatedProfile = {};
       let pet = {
         petPhoto: {
-          profilePhoto: '', 
-          banner: '',
+          profilePhoto: "",
+          banner: "",
         },
-      }
-      const user = await User.findById(req.user._id)
-      
+      };
+      const user = await User.findById(req.user._id);
 
       if (req.files && req.files.profilePhoto) {
         let profileImageResult = await streamUpload(req.files.profilePhoto[0]);
         pet.petPhoto.profilePhoto = profileImageResult.url;
       } else {
-        pet.petPhoto.profilePhoto = profile.petPhoto.profilePhoto
+        pet.petPhoto.profilePhoto = profile.petPhoto.profilePhoto;
       }
-    
+
       if (req.files && req.files.banner) {
         let bannerImageResult = await streamUpload(req.files.banner[0]);
         pet.petPhoto.banner = bannerImageResult.url;
       } else {
         pet.petPhoto.banner = profile.petPhoto.banner;
       }
-    
+
       try {
         with (req.body) {
-          pet.petName = petName
-          pet.humanNames = owners.split(',').map(i => i.trim())
+          pet.petName = petName;
+          pet.humanNames = owners.split(",").map((i) => i.trim());
           pet.petDetails = {
             bio: bio,
             favoriteToys: favoriteToys.split(",").map((i) => i.trim()),
@@ -187,15 +179,11 @@ async function update(req, res) {
 
         await Profile.findOneAndUpdate({ _id: profile._id }, { $set: pet });
 
-        res.redirect(`/profiles/${profile._id}`)
-    } catch (err) {
-      console.log(err);
+        res.redirect(`/profiles/${profile._id}`);
+      } catch (err) {
+        console.log(err);
+      }
     }
-  }
-
-
-    
-
   } catch (err) {
     console.log(err);
   }
@@ -222,13 +210,13 @@ function newProfile(req, res) {
 async function create(req, res) {
   let pet = {
     petPhoto: {
-      profilePhoto: '',
-      banner: '',
+      profilePhoto: "",
+      banner: "",
     },
-  }
-  const user = await User.findById(req.user._id)
-  if(req.body.animalTypeOther){
-    req.body.animalType = req.body.animalTypeOther
+  };
+  const user = await User.findById(req.user._id);
+  if (req.body.animalTypeOther) {
+    req.body.animalType = req.body.animalTypeOther;
   }
 
   if (req.files && req.files.profilePhoto) {
@@ -243,15 +231,15 @@ async function create(req, res) {
 
   try {
     with (req.body) {
-      pet.petName = petName
-      pet.humanNames = owners.split(',').map(i => i.trim())
+      pet.petName = petName;
+      pet.humanNames = owners.split(",").map((i) => i.trim());
       pet.petDetails = {
         bio: bio,
         favoriteToys: favoriteToys.split(",").map((i) => i.trim()),
         breed: breed,
         animalType: animalType,
         age: age,
-      }
+      };
     }
 
     const profile = await Profile.create(pet);
@@ -297,16 +285,16 @@ async function like(req, res) {
   }
 }
 
-function streamUpload (file){
-  return new Promise(function (resolve, reject){
-      let stream = cloudinary.uploader.upload_stream(function(error, result){
-          if(result){
-              resolve(result)
-          } else {
-              reject(error)
-          }
-      });
+function streamUpload(file) {
+  return new Promise(function (resolve, reject) {
+    let stream = cloudinary.uploader.upload_stream(function (error, result) {
+      if (result) {
+        resolve(result);
+      } else {
+        reject(error);
+      }
+    });
 
-      streamifier.createReadStream(file.buffer).pipe(stream)
-  })
+    streamifier.createReadStream(file.buffer).pipe(stream);
+  });
 }

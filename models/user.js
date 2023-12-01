@@ -4,22 +4,23 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema(
   {
     name: String,
-    authId : {
+    authId: {
       type: String,
       required: true,
       unique: true,
     },
     email: String,
     avatar: String,
-    profiles: [{
-      type: Schema.Types.ObjectId,
-      ref: "Profile"
-    }],
+    profiles: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Profile",
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
 
-
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model("User", userSchema);

@@ -22,10 +22,9 @@ const profileSchema = new Schema(
       animalType: String,
       age: Number,
     },
-    images: []
+    images: [],
   },
   { timestamps: true }
 );
-
 
 module.exports = mongoose.model("Profile", profileSchema);
