@@ -54,7 +54,6 @@ async function create(req, res) {
     req.body.images.push(newImage);
 
     const post = await Post.create(req.body);
-    console.log(post);
 
     res.redirect("/posts/");
   } catch (err) {
