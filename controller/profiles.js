@@ -283,60 +283,8 @@ async function deleteProfile(req, res) {
 }
 
 async function like(req, res) {
-  //res.send("the request through profile show like received by controller")
-  try {
-    const profile = await Profile.findById(req.params.id);
-    console.log("this is req params id:", req.params.id);
-    console.log(
-      "this is user profile id :",
-      req.user.profiles[0]._id.toString()
-    );
-    //console.log("this is profile._id: ", profile._id) -> null
-    // const post = await Post.find
-    // const postId = post._id
-    // console.log("this is postId:", postId)
-    // console.log("this is all likes:", like)
-    // console.log("this is the liked post:", post)
-    //console.log("my req.user.profiles[0]._id:", req.user.profiles[0]._id.toString())
-    if (
-      post.likingUserProfileId.includes(req.user.profiles[0]._id.toString())
-    ) {
-      post.likes--;
-      //remove ID after unliking
-      post.likingUserProfileId = post.likingUserProfileId.filter(
-        (id) => id !== req.user.profiles[0]._id.toString()
-      );
-    } else {
-      post.likes++;
-      post.likingUserProfileId.push(req.user.profiles[0]._id.toString());
-      req.body.likingUserProfileId = req.user.profiles[0]._id;
-    }
-
-    await post.save();
-    res.redirect(`/profiles/${post.profile._id}`);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-}
-
-async function like(req, res) {
-  //res.send("the request through profile show like received by controller")
   try {
     const post = await Post.findById(req.params.id);
-    // const profile = await Profile.findById(req.params.id);
-    // console.log("this is req params id:", req.params.id);
-    // console.log(
-    //   "this is user profile id :",
-    //   req.user.profiles[0]._id.toString()
-    // );
-    //console.log("this is profile._id: ", profile._id) -> null
-    // const post = await Post.find
-    // const postId = post._id
-    // console.log("this is postId:", postId)
-    // console.log("this is all likes:", like)
-    // console.log("this is the liked post:", post)
-    //console.log("my req.user.profiles[0]._id:", req.user.profiles[0]._id.toString())
     if (
       post.likingUserProfileId.includes(req.user.profiles[0]._id.toString())
     ) {
