@@ -25,26 +25,6 @@ async function update(req, res) {
   }
 }
 
-// [
-//   {
-//     petPhoto: { images: [] },
-//     petDetails: {
-//       bio: '123',
-//       favoriteToys: [Array],
-//       breed: 'Shepard',
-//       animalType: 'Dog',
-//       dob: 2022-01-01T00:00:00.000Z
-//     },
-//     _id: new ObjectId('6562bbe881bc46424233f1f4'),
-//     petName: 'Karl',
-//     humanNames: [ 'Tim', 'Steph' ],
-//     images: [ '' ],
-//     createdAt: 2023-11-26T03:30:48.108Z,
-//     updatedAt: 2023-11-26T03:30:48.108Z,
-//     __v: 0
-//   }
-// ]
-
 async function show(req, res) {
   const userData = await User.findById(req.params.id).populate('profiles')
   const profiles = res.locals.profiles
