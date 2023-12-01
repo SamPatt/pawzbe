@@ -1,9 +1,8 @@
 # pawzbe Code Highlights
 ![Login](https://i.imgur.com/KY9N8mg.png)
-
-# Profile Model
 <br>
 
+# Profile Model
 - The profile model contains the profile associated to a specific user, referenced by the user.
 ```js
 [model/user.js]
@@ -15,7 +14,7 @@ profiles: [{
 ```
 <br>
 
-- The model holds profile information and files within the main object and separates the pet specific details into it's own sub-object
+- The model holds profile information and file references within the main object and separates the pet specific details into it's own sub-object
 - The `images` property contains Cloudinary references
 
 ```js
@@ -48,12 +47,11 @@ const profileSchema = new Schema(
 );
 
 ```
-# EJS Highlights
 <br>
 
+# EJS Highlights
 ### Like Button
 - A variable is created in EJS to provide the proper Bootstrap class based on if the user has liked a specific comment
-
 ```js
 profiles/show.ejs, posts/index.ejs
 
