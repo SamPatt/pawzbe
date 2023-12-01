@@ -176,7 +176,6 @@ function streamUpload(req) {
         reject(error);
       }
     });
-    // streamifier is what chunking and stream data to cloudinary -> pipe process ()
     streamifier.createReadStream(req.file.buffer).pipe(stream);
   });
 }

@@ -27,7 +27,7 @@ const postSchema = new Schema(
       ref: "Profile",
     },
     postDescription: String,
-    postPhotoLink: String, // remove after image upload changes
+    postPhotoLink: String, 
     likes: {
       type: Number,
       default: 0,
@@ -35,7 +35,7 @@ const postSchema = new Schema(
     likingUserProfileId: [String],
     postComments: [commentSchema],
     petName: String,
-    profilePhoto: String, // remove after image upload changes
+    profilePhoto: String,
     images: [imageSchema]
   },
   { timestamps: true }

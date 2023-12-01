@@ -1,22 +1,5 @@
 <%- include('../../partials/header') %>
 
-<!-- {
-  petDetails: {
-    bio: "Hi, I'm Karl!",
-    favoriteToys: [ 'Stuff', 'Things' ],
-    breed: 'Shepard',
-    animalType: 'Dog',
-    age: 2020-01-01T00:00:00.000Z
-  },
-  _id: new ObjectId('6565293f2242a241f3f00050'),
-  petName: 'Karl',
-  humanNames: [ 'tim' ],
-  images: [ '' ],
-  createdAt: 2023-11-27T23:41:51.519Z,
-  updatedAt: 2023-11-27T23:41:51.519Z,
-  __v: 0
-} -->
-
 
 <h1 class="d-flex justify-content-center" id="edit-profile-header">Edit Profile Details</h1>
 <form class="profile-form" action="/profiles/<%= profile._id %>?_method=PUT" method="POST" autocomplete="off" enctype="multipart/form-data">
