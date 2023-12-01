@@ -46,7 +46,6 @@ async function create(req, res) {
     req.body.profilePhoto = profile.petPhoto.profilePhoto;
     console.log("Calling cloudinary stream");
     let result = await streamUpload(req);
-    console.log(result);
 
     const newImage = { url: result.url };
 
