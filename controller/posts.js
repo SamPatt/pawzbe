@@ -131,11 +131,6 @@ async function deleteComment(req, res) {
 async function like(req, res) {
   try {
     const post = await Post.findById(req.params.id);
-    // const postId = post._id
-    // console.log("this is postId:", postId)
-    // console.log("this is all likes:", like)
-    // console.log("this is the liked post:", post)
-    //console.log("my req.user.profiles[0]._id:", req.user.profiles[0]._id.toString())
     if (
       post.likingUserProfileId.includes(req.user.profiles[0]._id.toString())
     ) {
