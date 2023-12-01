@@ -1,12 +1,14 @@
 # pawzbe
 
-Pawzbe is a pet social media platform.
+Pawzbe is a pet social media platform. User can create accounts using either Google or Github logins, and share photos and updates about their pets with their friends.
 
 
 # Screenshot
 
 Login Page
 ![Login](https://i.imgur.com/KY9N8mg.png)
+Post feed
+![Post](https://i.imgur.com/KK47mzW.png)
 
 
 # Technologies Used
@@ -15,13 +17,14 @@ Login Page
 
 - **Node.js**
 - **Express**
-- **Mongoose for MongoDB**
-- **Passport for OAuth**: We use Passport to handle Google and Github logins.
+- **MongoDB**: We manage our MongoDB connection using Mongoose.
+- **OAuth**: We manage Oauth using Passport.
   
 ## Frontend Technologies
 
 - **HTML**
 - **CSS**
+- **Javascript**
 - **Bootstrap**
 - **EJS**
 
@@ -43,5 +46,6 @@ Login Page
 # Next Steps
 
 - Allow users to add multiple pets and switch between them
+- Further improve styling
 - Better link parsing / handling
 - Introduce other third party APIs (toys)
