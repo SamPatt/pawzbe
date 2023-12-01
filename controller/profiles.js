@@ -15,7 +15,6 @@ module.exports = {
   new: newProfile,
   create,
   delete: deleteProfile,
-  addPhoto,
   like,
 };
 
@@ -359,29 +358,6 @@ async function like(req, res) {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
-  }
-}
-
-async function addPhoto(req,res,next){
-  try {
-      let result = await streamUpload(req)
-
-      //  goal - upload image data to post doc
-      // 1 find the current post
-      // 2. create a new object for passing to the array of images
-      // 3. update the db with save()
-      // 4. redirect
-      
-      const post = await Post.findById(req.params.id)
-      const newImage = { url: result.url,  description: req.body.description, alt: req.body.alt}
-      post.images.push(newImage)
-      await post.save()
-      console.log("testing post", post)
-
-      res.redirect(`/posts/${req.params.id}`)
-  }catch(err){
-      console.log(err)
-      next(err)
   }
 }
 
