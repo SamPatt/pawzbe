@@ -45,6 +45,7 @@
                 <small>Welcome, <%= user.name %>!</small>
                 <div class="dropdown-divider"></div>
                 <% if (user.profiles[0]) { %>
+                  <a class="async dropdown-item" href="/posts/">View All Posts</a>
                   <a class="async dropdown-item" href="/profiles/<%= user.profiles[0]._id %>">View Profile</a>
                   <div class="dropdown-divider"></div>
                 <% } %>
