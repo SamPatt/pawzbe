@@ -180,16 +180,20 @@
     <div class="posts-container row justify-content-center mb-3">
       <% for (post of posts) { %>
         <div class="post-wrapper col-12 col-md-10 justify-content-center align-items-center mb-4 mt-2 py-4">
-          
           <div class="post-img transparent rounded-3 d-flex flex-column align-items-center">
             <p class="fw-bold text-dark mb-2 left-align"><%= post.postDescription %></p>
             <img src="<%= post.images[0].url %>" class="img-fluid rounded mb-2" />
           </div>
           
+          <% const userHasLiked = post.likingUserProfileId.includes(user.profiles[0]._id.toString()) ? 'btn-primary-green' : 'btn-outline-secondary'; %>
           <div class="d-flex justify-content-end mt-2">
             <form action="/posts/<%= post._id %>/likes" method="POST">
               <input type="hidden" name="likingUserprofileId" value="<%= post.likingUserprofileId %> ">
-              <button type="submit" class="async btn <%= post.likingUserProfileId.includes(user.profiles[0]._id.toString()) ? 'btn-primary-green' : 'btn-outline-secondary' %>"><span class="like-count"><%= post.likes%> Likes</span>
+              <button type="submit" 
+                      class="async btn <%= userHasLiked %>">
+                <span class="like-count">
+                  <%= post.likes%> Likes
+                </span>
               </button>
             </form>
             <button class="btn btn-outline-secondary" onclick="toggleComments('<%= post._id %>')">            
