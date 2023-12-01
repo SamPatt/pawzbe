@@ -102,8 +102,6 @@ async function addComment(req, res) {
     const profile = await Profile.findById(req.user.profiles[0]._id);
     req.body.petName = profile.petName;
     const post = await Post.findById(req.params.id);
-    console.log(post);
-    console.log(req.body);
     //creating profile id key for the form
     req.body.profileId = req.user.profiles[0]._id;
     post.postComments.push(req.body);
