@@ -20,7 +20,6 @@ module.exports = {
 
 async function show(req, res) {
   try {
-    console.log("Called show function with ID:", req.params.id);
     const currentProfile = req.params.id;
     const profile = await Profile.findById(req.params.id);
 
@@ -29,7 +28,6 @@ async function show(req, res) {
     const profiles = res.locals.profiles;
 
     if (!profile) {
-      console.log("Profile not found for ID:", req.params.id);
       return res.status(404).send("Profile not found");
     }
 
