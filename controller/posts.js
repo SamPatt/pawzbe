@@ -7,8 +7,6 @@ const streamifier = require("streamifier");
 
 const { clConfig } = require("../config/cloudinary");
 
-// console.log(clConfig)
-
 cloudinary.config(clConfig);
 
 module.exports = {
