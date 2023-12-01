@@ -288,7 +288,6 @@ function streamUpload(req) {
   return new Promise(function (resolve, reject) {
     let stream = cloudinary.uploader.upload_stream(function (error, result) {
       if (result) {
-        console.log(result);
         resolve(result);
       } else {
         reject(error);
