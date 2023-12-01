@@ -144,15 +144,6 @@ async function update(req, res) {
           { _id: profile._id },
           { $set: profile }
         )
-
-        // res.render('fuzzies/profiles/edit', {
-        //   title: 'Profile Updated!',
-        //   profile: profile,
-        //   posts: posts,
-        //   profiles,
-        //   owner,
-        // });
-
       } catch (err) {
         console.log(err);
       }
@@ -192,7 +183,6 @@ async function update(req, res) {
             animalType: animalType,
             age: age,
           };
-          // pet.images = [...images.split(',').map(i => i.trim())]
         }
 
         await Profile.findOneAndUpdate({ _id: profile._id }, { $set: pet });
