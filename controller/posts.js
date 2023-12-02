@@ -19,6 +19,7 @@ module.exports = {
   like,
 };
 
+// fetch all posts, sort by date, render index page
 async function index(req, res) {
   try {
     const posts = await Post.find().sort({ createdAt: -1 });
@@ -34,6 +35,7 @@ async function index(req, res) {
   }
 }
 
+// create a new post
 async function create(req, res) {
   try {
     req.body.profile = req.user.profiles[0]._id;
@@ -57,6 +59,7 @@ async function create(req, res) {
   }
 }
 
+// render post show page
 async function show(req, res) {
   try {
     const currentProfile = req.user.profiles[0]._id;
@@ -92,6 +95,7 @@ async function show(req, res) {
   }
 }
 
+// add comments to a specific post
 async function addComment(req, res) {
   try {
     const profile = await Profile.findById(req.user.profiles[0]._id);
@@ -108,6 +112,7 @@ async function addComment(req, res) {
   }
 }
 
+// delete comments from a specific post
 async function deleteComment(req, res) {
   try {
     const profile = await Profile.findById(req.user.profiles[0]._id);
@@ -127,6 +132,7 @@ async function deleteComment(req, res) {
   }
 }
 
+// like/unlike a post, based on logged in user
 async function like(req, res) {
   try {
     const post = await Post.findById(req.params.id);
@@ -152,10 +158,12 @@ async function like(req, res) {
   }
 }
 
+// handle post deletion
 async function deletePost(req, res) {
   try {
     const profile = await Profile.findById(req.user.profiles[0]._id);
     const post = await Post.findById(req.params.id);
+
     // Check if the user is the author of the post
     if (post.profile.toString() === profile._id.toString()) {
       await Post.deleteOne({ _id: req.params.id });
@@ -167,6 +175,7 @@ async function deletePost(req, res) {
   }
 }
 
+// handle file uploading
 function streamUpload(req) {
   return new Promise(function (resolve, reject) {
     let stream = cloudinary.uploader.upload_stream(function (error, result) {

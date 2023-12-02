@@ -1,5 +1,6 @@
-<%- include('../../partials/header') %> <%- include('../../partials/post-form')
-%>
+<%- include('../../partials/header') %> 
+<%- include('../../partials/post-form') %>
+
 <main>
   <div class="container col-sm-10 py-2 mt-3">
     <div class="rounded-3 mt-2" id="banner">
@@ -211,16 +212,11 @@
                 action="/posts/comments/<%= post._id %>?_method=DELETE"
                 method="POST"
                 class="col-md-12 d-flex justify-content-end mt-3 ms-auto"
-                >
-                
-                <!-- hidden input value added to comment.profileId -->
+              >
                 <input type="hidden" name="currentProfile" value="<%= comment.profileId %>">
-
               </form>
             <% }); %>
-          </div>
-          <!-- comment.profileId -->
-  
+          </div>  
   
           <!-- Comment Form (Initially Hidden) -->
           <div id="comment-form-<%= post._id %>" class="col-md-12" style="display: none;">
@@ -246,9 +242,9 @@
       <% } %>
     </div>
       
-
 <%- include('../../partials/side-feed', { profiles }) %>
 
+<!-- handle comment toggling -->
 <script>
   function toggleComments(postId) {
     const commentsSection = document.getElementById(

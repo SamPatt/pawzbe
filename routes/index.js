@@ -8,6 +8,7 @@ router.get("/", function (req, res, next) {
   res.render("index", { title: "Welcome", disabled: true });
 });
 
+// GET initiate GitHub authentication
 router.get(
   "/auth/github",
   passport.authenticate("github", {
@@ -15,6 +16,7 @@ router.get(
   })
 );
 
+// GET GitHub authentication callback
 router.get(
   "/github/oauth2callback",
   passport.authenticate("github", { failureRedirect: "/" }),
@@ -38,6 +40,7 @@ router.get(
   }
 );
 
+// GET initiate Google authentication
 router.get(
   "/auth/google",
   passport.authenticate("google", {
@@ -45,6 +48,7 @@ router.get(
   })
 );
 
+// GET Google authentication callback
 router.get(
   "/google/oauth2callback",
   passport.authenticate("google", { failureRedirect: "/" }),
@@ -68,6 +72,7 @@ router.get(
   }
 );
 
+// GET handle logging out
 router.get("/logout", function (req, res) {
   req.logout(function () {
     res.redirect("/");

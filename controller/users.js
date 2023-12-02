@@ -7,6 +7,7 @@ module.exports = {
   update,
 };
 
+// update user info based on form data
 async function update(req, res) {
   try {
     const updatedData = {};
@@ -22,6 +23,7 @@ async function update(req, res) {
   }
 }
 
+// render user details/editing page
 async function show(req, res) {
   const userData = await User.findById(req.params.id).populate("profiles");
   const profiles = res.locals.profiles;
@@ -33,6 +35,7 @@ async function show(req, res) {
   });
 }
 
+// handle user deletion
 async function deleteUser(req, res) {
   try {
     const output = await User.findByIdAndDelete(req.user._id);
@@ -44,6 +47,7 @@ async function deleteUser(req, res) {
   }
 }
 
+// handle user creation
 async function create(req, res) {
   try {
     const user = await User.create(req.body);

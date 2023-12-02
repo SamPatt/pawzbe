@@ -3,7 +3,6 @@ const User = require("../models/user");
 const Post = require("../models/post");
 const cloudinary = require("cloudinary").v2;
 const streamifier = require("streamifier");
-
 const { clConfig } = require("../config/cloudinary");
 
 cloudinary.config(clConfig);
@@ -18,6 +17,7 @@ module.exports = {
   like,
 };
 
+// render user profile page
 async function show(req, res) {
   try {
     const currentProfile = req.params.id;
@@ -31,6 +31,7 @@ async function show(req, res) {
       return res.status(404).send("Profile not found");
     }
 
+    // handle API breed information
     const dogBreeds = res.locals.dogBreeds;
     const catBreeds = res.locals.catBreeds;
 
@@ -53,6 +54,7 @@ async function show(req, res) {
       }
     }
 
+    // render profile show view
     const posts = await Post.find({ profile: profile._id }).sort({
       createdAt: -1,
     });
@@ -72,6 +74,7 @@ async function show(req, res) {
   }
 }
 
+// render profile edit page
 async function edit(req, res) {
   try {
     const user = await User.findById(req.user._id);
@@ -88,6 +91,8 @@ async function edit(req, res) {
   }
 }
 
+// save various profile updates including,
+// image uploads, deletion, and profile changes
 async function update(req, res) {
   try {
     const currentProfile = req.params.id;
@@ -102,6 +107,7 @@ async function update(req, res) {
 
     let breedInfo = null;
 
+    // get breed info based on pet type
     if (profile.petDetails.breed) {
       const breedName = profile.petDetails.breed;
       const animalType = profile.petDetails.animalType;
@@ -119,6 +125,7 @@ async function update(req, res) {
       }
     }
 
+    // handle image uploads
     if (req.files && req.files.images) {
       for (const file of req.files.images) {
         let result = await streamUpload(file);
@@ -129,6 +136,7 @@ async function update(req, res) {
       res.redirect(`/profiles/${profile._id}`);
     }
 
+    // handle image deletion
     if (req.body.deleteImage) {
       try {
         const owner =
@@ -150,6 +158,7 @@ async function update(req, res) {
       };
       const user = await User.findById(req.user._id);
 
+      // handle profile photo and banner uploads
       if (req.files && req.files.profilePhoto) {
         let profileImageResult = await streamUpload(req.files.profilePhoto[0]);
         pet.petPhoto.profilePhoto = profileImageResult.url;
@@ -165,6 +174,7 @@ async function update(req, res) {
       }
 
       try {
+        // update pet info based on form data
         with (req.body) {
           pet.petName = petName;
           pet.humanNames = owners.split(",").map((i) => i.trim());
@@ -177,6 +187,7 @@ async function update(req, res) {
           };
         }
 
+        // render profile show view
         await Profile.findOneAndUpdate({ _id: profile._id }, { $set: pet });
 
         res.redirect(`/profiles/${profile._id}`);
@@ -189,6 +200,7 @@ async function update(req, res) {
   }
 }
 
+// render new profile view
 function newProfile(req, res) {
   const profiles = res.locals.profiles;
   const dogBreeds = res.locals.dogBreeds;
@@ -207,6 +219,7 @@ function newProfile(req, res) {
   });
 }
 
+// create new profile based on form data
 async function create(req, res) {
   let pet = {
     petPhoto: {
@@ -251,6 +264,7 @@ async function create(req, res) {
   }
 }
 
+// delete user profile
 async function deleteProfile(req, res) {
   try {
     const profile = await Profile.deleteOne({ _id: req.params.id });
@@ -260,6 +274,7 @@ async function deleteProfile(req, res) {
   }
 }
 
+// handle like/unlike on profile view
 async function like(req, res) {
   try {
     const post = await Post.findById(req.params.id);
@@ -285,6 +300,7 @@ async function like(req, res) {
   }
 }
 
+// handle image uploads
 function streamUpload(file) {
   return new Promise(function (resolve, reject) {
     let stream = cloudinary.uploader.upload_stream(function (error, result) {
