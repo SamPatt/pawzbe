@@ -69,7 +69,6 @@ Structure
       header.ejs
       footer.ejs
       pet-profiles.ejs
-      add-comment.ejs
 
   
   users/pets/posts are own model

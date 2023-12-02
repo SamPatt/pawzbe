@@ -1,12 +1,14 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var usersCtrl = require('../controller/users')
+var usersCtrl = require("../controller/users");
 
-
-// router.get('/', usersCtrl.index)
-router.post('/', usersCtrl.create)
-router.put('/:id', usersCtrl.update)
-router.delete('/', usersCtrl.delete)
-router.get('/:id', usersCtrl.show)
+// POST create new user
+router.post("/", usersCtrl.create);
+// PUT update user details
+router.put("/:id", usersCtrl.update);
+// DELETE delete user
+router.delete("/", usersCtrl.delete);
+// GET render user view
+router.get("/:id", usersCtrl.show);
 
 module.exports = router;
